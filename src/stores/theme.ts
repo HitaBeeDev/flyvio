@@ -11,6 +11,7 @@ type ThemeState = {
 
 const applyTheme = (theme: Theme) => {
   document.documentElement.classList.toggle('dark', theme === 'dark')
+  document.documentElement.style.colorScheme = theme
 }
 
 const getPreferredTheme = (): Theme => {

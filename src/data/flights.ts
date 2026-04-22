@@ -1,18 +1,74 @@
-import { airlines } from '@/data/airlines'
-import { airports, airportsByCode } from '@/data/airports'
-import type { Airline, Airport, CabinClass, Flight } from '@/types/travel'
+import { airlines, airlinesByCode } from '@/data/airlines'
+import { airports, airportsByCode, getRegionFromTimezone, type AirportRecord } from '@/data/airports'
+import type { Airline, Airport, CabinClass, Flight, FlightSegment, Region } from '@/types'
 
-const aircraftByHaul = {
-  short: ['Airbus A220-300', 'Airbus A320neo', 'Boeing 737 MAX 8', 'Embraer E195-E2'],
-  medium: ['Airbus A321neo', 'Boeing 737-900ER', 'Airbus A330-200', 'Boeing 787-8'],
-  long: ['Airbus A350-900', 'Boeing 787-9', 'Boeing 777-300ER', 'Airbus A330-900neo'],
-} as const
+type RouteCategory = 'intra' | 'regional' | 'transatlantic' | 'long-haul' | 'ultra-long'
 
-interface GenerateFlightsForRouteOptions {
-  origin: string | Airport
-  destination: string | Airport
-  departureDate: string
-  limit?: number
+const aircraftByCategory: Record<RouteCategory, string[]> = {
+  intra: ['Airbus A220-300', 'Airbus A320neo', 'Boeing 737 MAX 8', 'Embraer E195-E2'],
+  regional: ['Airbus A321neo', 'Boeing 737-900ER', 'Airbus A330-300', 'Boeing 787-8'],
+  'transatlantic': ['Airbus A330-900neo', 'Boeing 787-9', 'Airbus A350-900', 'Boeing 777-200ER'],
+  'long-haul': ['Airbus A350-900', 'Boeing 787-9', 'Boeing 777-300ER', 'Airbus A330-900neo'],
+  'ultra-long': ['Airbus A350-1000', 'Boeing 787-10', 'Boeing 777-300ER', 'Airbus A380-800'],
+}
+
+const categoryProfiles: Record<
+  RouteCategory,
+  {
+    directMinutes: [number, number]
+    baseFare: [number, number]
+  }
+> = {
+  intra: { directMinutes: [65, 145], baseFare: [85, 220] },
+  regional: { directMinutes: [120, 260], baseFare: [160, 420] },
+  'transatlantic': { directMinutes: [410, 565], baseFare: [520, 980] },
+  'long-haul': { directMinutes: [520, 840], baseFare: [640, 1350] },
+  'ultra-long': { directMinutes: [860, 1140], baseFare: [980, 1850] },
+}
+
+const baggageAllowanceByCabin: Record<CabinClass, string> = {
+  Economy: '1 checked bag',
+  'Premium Economy': '2 checked bags',
+  Business: '2 checked bags + priority',
+  First: '3 checked bags + priority',
+}
+
+const cabinPriceMultiplier: Record<CabinClass, number> = {
+  Economy: 1,
+  'Premium Economy': 1.45,
+  Business: 2.35,
+  First: 3.8,
+}
+
+const airlinesByRegion: Record<Region, string[]> = {
+  'North America': ['AA', 'DL', 'UA', 'WN', 'B6', 'AS', 'AC', 'WS', 'AM', 'CM'],
+  'South America': ['LA', 'AV', 'AR', 'H2', 'AD', 'LP'],
+  Europe: ['IB', 'UX', 'BA', 'AF', 'KL', 'LH', 'LX', 'OS', 'TP', 'AY', 'SK', 'LO', 'AZ', 'TK', 'JU', 'A3', 'RO'],
+  Africa: ['MS', 'ET', 'KQ', 'SA', 'AT', 'HM'],
+  'Middle East': ['QR', 'EK', 'EY', 'GF', 'SV', 'RJ', 'ME', 'WY', 'KU'],
+  Asia: ['PK', 'AI', '6E', 'UK', 'SQ', 'TR', 'MH', 'GA', 'TG', 'VN', 'CX', 'JL', 'NH', 'KE', 'OZ', 'CA', 'MU', 'CZ', 'HU', 'MF', 'BI', 'PR', 'CI'],
+  Oceania: ['QF', 'JQ', 'VA', 'NZ', 'FJ', 'PX', 'TN', 'SB', 'NF'],
+}
+
+const pairAirlinePreferences: Record<string, string[]> = {
+  'Asia|Middle East': ['EK', 'QR', 'EY', 'WY', 'GF', 'SV', 'SQ', 'MH', 'TG', 'CX', 'GA', 'AI', '6E'],
+  'Europe|North America': ['BA', 'AF', 'KL', 'LH', 'IB', 'TP', 'AC', 'AA', 'DL', 'UA', 'WS'],
+  'Europe|Asia': ['TK', 'AY', 'BA', 'AF', 'KL', 'LH', 'SQ', 'CX', 'JL', 'NH', 'EK', 'QR'],
+  'North America|Asia': ['AA', 'DL', 'UA', 'AC', 'JL', 'NH', 'KE', 'OZ', 'CA', 'MU', 'CZ', 'CI', 'SQ'],
+  'Oceania|Asia': ['QF', 'JQ', 'VA', 'NZ', 'SQ', 'MH', 'GA', 'TG', 'CX', 'PR', 'CI'],
+  'Europe|Oceania': ['QF', 'EK', 'QR', 'SQ', 'MH', 'BA', 'TK'],
+  'Africa|Europe': ['ET', 'MS', 'KQ', 'AT', 'SA', 'BA', 'AF', 'KL', 'LH', 'TK'],
+  'North America|South America': ['LA', 'AV', 'CM', 'AM', 'AA', 'DL', 'UA'],
+}
+
+const hubsByRegion: Record<Region, string[]> = {
+  'North America': ['ATL', 'JFK', 'ORD', 'DFW', 'LAX', 'SFO', 'YYZ', 'YVR', 'MEX', 'MIA'],
+  'South America': ['BOG', 'LIM', 'GRU', 'GIG', 'SCL', 'EZE', 'UIO', 'MDE'],
+  Europe: ['LHR', 'CDG', 'AMS', 'FRA', 'MAD', 'ZRH', 'VIE', 'HEL', 'BCN', 'IST'],
+  Africa: ['CAI', 'ADD', 'NBO', 'JNB', 'CPT', 'CMN', 'LOS'],
+  'Middle East': ['DXB', 'DOH', 'AUH', 'RUH', 'JED', 'MCT', 'AMM'],
+  Asia: ['SIN', 'HKG', 'BKK', 'KUL', 'TPE', 'ICN', 'NRT', 'HND', 'DEL', 'BOM', 'PVG', 'PEK'],
+  Oceania: ['SYD', 'MEL', 'AKL', 'BNE', 'PER', 'NAN'],
 }
 
 function xmur3(value: string) {
@@ -47,232 +103,316 @@ function pickRandom<T>(random: () => number, values: T[]) {
   return values[Math.floor(random() * values.length)]!
 }
 
-function toRadians(value: number) {
-  return (value * Math.PI) / 180
-}
+function sampleWithoutReplacement<T>(random: () => number, values: T[], count: number) {
+  const pool = [...values]
+  const sampled: T[] = []
 
-function getDistanceKm(origin: Airport, destination: Airport) {
-  const earthRadiusKm = 6371
-  const latitudeDelta = toRadians(destination.latitude - origin.latitude)
-  const longitudeDelta = toRadians(destination.longitude - origin.longitude)
-  const latitudeA = toRadians(origin.latitude)
-  const latitudeB = toRadians(destination.latitude)
-  const root =
-    Math.sin(latitudeDelta / 2) ** 2 +
-    Math.cos(latitudeA) * Math.cos(latitudeB) * Math.sin(longitudeDelta / 2) ** 2
+  while (pool.length > 0 && sampled.length < count) {
+    sampled.push(pool.splice(randomInt(random, 0, pool.length - 1), 1)[0]!)
+  }
 
-  return Math.round(earthRadiusKm * 2 * Math.atan2(Math.sqrt(root), Math.sqrt(1 - root)))
+  return sampled
 }
 
 function resolveAirport(airport: string | Airport) {
   if (typeof airport !== 'string') {
-    return airport
+    const resolved = airportsByCode.get(airport.iata)
+    return resolved ?? { ...airport, region: getRegionFromTimezone(airport.timezone) }
   }
 
-  const resolvedAirport = airportsByCode.get(airport.toUpperCase())
+  const resolved = airportsByCode.get(airport.toUpperCase())
 
-  if (!resolvedAirport) {
+  if (!resolved) {
     throw new Error(`Unknown airport code: ${airport}`)
   }
 
-  return resolvedAirport
+  return resolved
 }
 
-function getStops(random: () => number, distanceKm: number) {
-  if (distanceKm < 1200) {
-    return random() < 0.88 ? 0 : 1
-  }
-
-  if (distanceKm < 4500) {
-    return random() < 0.62 ? 0 : 1
-  }
-
-  return random() < 0.4 ? 0 : random() < 0.9 ? 1 : 2
+function getPairKey(left: Region, right: Region) {
+  return [left, right].sort((a, b) => a.localeCompare(b)).join('|')
 }
 
-function getAirlineWeight(airline: Airline, origin: Airport, destination: Airport) {
-  if (airline.country === origin.country || airline.country === destination.country) {
-    return 6
+function getRouteCategory(origin: AirportRecord, destination: AirportRecord): RouteCategory {
+  if (origin.country === destination.country) {
+    return 'intra'
   }
 
-  if (airline.region === origin.region || airline.region === destination.region) {
-    return 3
+  if (origin.region === destination.region) {
+    return 'regional'
   }
 
-  return airline.region === 'global' ? 2 : 1
+  const pairKey = getPairKey(origin.region, destination.region)
+
+  if (pairKey === 'Europe|North America') {
+    return 'transatlantic'
+  }
+
+  if (
+    pairKey === 'Europe|Oceania' ||
+    pairKey === 'North America|Oceania' ||
+    pairKey === 'Asia|South America'
+  ) {
+    return 'ultra-long'
+  }
+
+  return 'long-haul'
 }
 
-function buildAirlinePool(origin: Airport, destination: Airport) {
-  const prioritized = airlines.filter(
-    (airline) =>
-      airline.country === origin.country ||
-      airline.country === destination.country ||
-      airline.region === origin.region ||
-      airline.region === destination.region,
-  )
+function getAirlinePool(origin: AirportRecord, destination: AirportRecord) {
+  const pairKey = getPairKey(origin.region, destination.region)
+  const preferredCodes = [
+    ...(pairAirlinePreferences[pairKey] ?? []),
+    ...airlinesByRegion[origin.region],
+    ...airlinesByRegion[destination.region],
+  ]
 
-  return (prioritized.length > 0 ? prioritized : airlines).map((airline) => ({
-    airline,
-    weight: getAirlineWeight(airline, origin, destination),
-  }))
+  const pool = preferredCodes
+    .map((code) => airlinesByCode.get(code))
+    .filter((airline): airline is Airline => Boolean(airline))
+
+  return pool.length > 0 ? pool : airlines
 }
 
-function pickWeightedAirline(
+function getHubRegionsForRoute(originRegion: Region, destinationRegion: Region): Region[] {
+  const pairKey = getPairKey(originRegion, destinationRegion)
+
+  if (pairKey === 'Europe|Oceania') {
+    return ['Middle East', 'Asia']
+  }
+
+  if (pairKey === 'North America|Oceania') {
+    return ['Asia', 'North America']
+  }
+
+  if (pairKey === 'Asia|South America') {
+    return ['North America', 'Europe']
+  }
+
+  if (pairKey === 'Africa|Oceania') {
+    return ['Middle East', 'Asia']
+  }
+
+  if (pairKey === 'Asia|Middle East') {
+    return ['Middle East', 'Asia']
+  }
+
+  if (pairKey === 'Europe|North America') {
+    return ['Europe', 'North America']
+  }
+
+  return [originRegion, destinationRegion]
+}
+
+function resolveHub(code: string) {
+  return airportsByCode.get(code)
+}
+
+function getLayoverAirports(
   random: () => number,
-  pool: Array<{ airline: Airline; weight: number }>,
-  usedAirlineCodes: Set<string>,
+  origin: AirportRecord,
+  destination: AirportRecord,
+  stops: number,
 ) {
-  const available = pool.filter(({ airline }) => !usedAirlineCodes.has(airline.code))
-  const candidatePool = available.length > 0 ? available : pool
-  const totalWeight = candidatePool.reduce((sum, entry) => sum + entry.weight, 0)
-  let target = random() * totalWeight
+  const hubRegions = getHubRegionsForRoute(origin.region, destination.region)
+  const candidateCodes = hubRegions.flatMap((region) => hubsByRegion[region])
+  const candidates = candidateCodes
+    .map(resolveHub)
+    .filter((airport): airport is AirportRecord => Boolean(airport))
+    .filter(
+      (airport) => airport.iata !== origin.iata && airport.iata !== destination.iata,
+    )
 
-  for (const entry of candidatePool) {
-    target -= entry.weight
-
-    if (target <= 0) {
-      return entry.airline
-    }
-  }
-
-  return candidatePool[candidatePool.length - 1]!.airline
+  return sampleWithoutReplacement(random, candidates, stops)
 }
 
-function getHaul(distanceKm: number) {
-  if (distanceKm < 1500) {
-    return 'short'
-  }
+function getDirectDurationMinutes(
+  random: () => number,
+  category: RouteCategory,
+  origin: AirportRecord,
+  destination: AirportRecord,
+) {
+  const [minMinutes, maxMinutes] = categoryProfiles[category].directMinutes
+  const timezoneDelta = Math.abs(origin.timezone.localeCompare(destination.timezone)) % 35
+  const duration = minMinutes + Math.round((maxMinutes - minMinutes) * random()) + timezoneDelta
 
-  if (distanceKm < 5000) {
-    return 'medium'
-  }
-
-  return 'long'
+  return Math.max(minMinutes, Math.min(duration, maxMinutes + 35))
 }
 
-function getTiming(distanceKm: number, stops: number, random: () => number) {
-  const cruiseSpeedKmh = distanceKm < 1500 ? 690 : distanceKm < 5000 ? 790 : 860
-  const airborneMinutes = (distanceKm / cruiseSpeedKmh) * 60
-  const bufferMinutes = 35 + randomInt(random, 10, 35)
-  const layoverMinutes = stops === 0 ? 0 : stops * randomInt(random, 55, 105)
-
-  return {
-    durationMinutes: Math.round(airborneMinutes + bufferMinutes + layoverMinutes),
-    layoverMinutes,
+function buildSegmentDurations(
+  random: () => number,
+  totalFlightMinutes: number,
+  segmentCount: number,
+) {
+  if (segmentCount === 1) {
+    return [totalFlightMinutes]
   }
+
+  const weights = Array.from({ length: segmentCount }, () => 0.8 + random() * 0.7)
+  const weightTotal = weights.reduce((sum, weight) => sum + weight, 0)
+  const rawDurations = weights.map((weight) => Math.round((weight / weightTotal) * totalFlightMinutes))
+  const normalized = [...rawDurations]
+  const currentTotal = normalized.reduce((sum, minutes) => sum + minutes, 0)
+  normalized[normalized.length - 1] = Math.max(55, normalized[normalized.length - 1]! + (totalFlightMinutes - currentTotal))
+
+  return normalized
 }
 
-function getPriceMultiplier(cabinClass: CabinClass) {
-  switch (cabinClass) {
-    case 'economy':
-      return 1
-    case 'premium-economy':
-      return 1.55
-    case 'business':
-      return 2.7
-    case 'first':
-      return 4.4
-  }
-}
-
-function buildPriceMap(distanceKm: number, stops: number, random: () => number): Flight['prices'] {
-  const distanceFactor = Math.max(69, distanceKm * 0.115)
-  const stopFactor = stops === 0 ? 1.12 : 0.94
-  const demandFactor = 0.92 + random() * 0.28
-  const basePrice = Math.round(distanceFactor * stopFactor * demandFactor)
-  const cabins: CabinClass[] = ['economy', 'premium-economy', 'business', 'first']
-
-  return cabins.reduce(
-    (prices, cabinClass) => ({
-      ...prices,
-      [cabinClass]: Math.round(basePrice * getPriceMultiplier(cabinClass)),
-    }),
-    {
-      economy: 0,
-      'premium-economy': 0,
-      business: 0,
-      first: 0,
-    },
-  )
-}
-
-function buildSchedule(
+function buildSegments(
+  random: () => number,
   departureDate: string,
-  index: number,
-  durationMinutes: number,
-  random: () => number,
+  airportsInOrder: AirportRecord[],
+  airline: Airline,
+  category: RouteCategory,
+  itineraryIndex: number,
+  direction: 'outbound' | 'inbound',
 ) {
-  const departure = new Date(`${departureDate}T00:00:00Z`)
-  const departureHour = 5 + index * 2 + randomInt(random, 0, 2)
-  const departureMinute = pickRandom(random, [0, 10, 20, 30, 40, 50])
+  const segmentCount = airportsInOrder.length - 1
+  const baseDirectMinutes = getDirectDurationMinutes(
+    random,
+    category,
+    airportsInOrder[0]!,
+    airportsInOrder[airportsInOrder.length - 1]!,
+  )
+  const detourMinutes = segmentCount === 1 ? 0 : segmentCount * randomInt(random, 30, 75)
+  const totalFlightMinutes = baseDirectMinutes + detourMinutes
+  const flightMinutes = buildSegmentDurations(random, totalFlightMinutes, segmentCount)
+  const layovers = Array.from({ length: Math.max(0, segmentCount - 1) }, () =>
+    randomInt(random, 65, category === 'intra' ? 95 : 165),
+  )
 
-  departure.setUTCHours(departureHour, departureMinute, 0, 0)
+  const start = new Date(`${departureDate}T00:00:00.000Z`)
+  const departureHourOffset = direction === 'outbound' ? 5 : 8
+  start.setUTCHours(
+    departureHourOffset + itineraryIndex * 1 + randomInt(random, 0, 5),
+    pickRandom(random, [0, 10, 20, 30, 40, 50]),
+    0,
+    0,
+  )
 
-  const arrival = new Date(departure.getTime() + durationMinutes * 60_000)
+  let cursor = start.getTime()
 
-  return {
-    departureTime: departure.toISOString(),
-    arrivalTime: arrival.toISOString(),
-  }
+  return flightMinutes.map((duration, index) => {
+    const departureAirport = airportsInOrder[index]!
+    const arrivalAirport = airportsInOrder[index + 1]!
+    const departureTime = new Date(cursor).toISOString()
+    const arrivalTime = new Date(cursor + duration * 60_000).toISOString()
+    const flightNumber = `${airline.code}${randomInt(random, 101, 4899)}`
+    const aircraft = pickRandom(random, aircraftByCategory[category])
+
+    cursor += duration * 60_000
+
+    if (index < layovers.length) {
+      cursor += layovers[index]! * 60_000
+    }
+
+    return {
+      departureAirport,
+      arrivalAirport,
+      departureTime,
+      arrivalTime,
+      duration,
+      flightNumber,
+      aircraft,
+    } satisfies FlightSegment
+  })
 }
 
-export function generateFlightsForRoute({
-  origin,
-  destination,
-  departureDate,
-  limit = 8,
-}: GenerateFlightsForRouteOptions): Flight[] {
+function getItineraryDuration(segments: FlightSegment[]) {
+  if (segments.length === 0) {
+    return 0
+  }
+
+  const departure = new Date(segments[0]!.departureTime).getTime()
+  const arrival = new Date(segments[segments.length - 1]!.arrivalTime).getTime()
+  return Math.round((arrival - departure) / 60_000)
+}
+
+function buildPrice(random: () => number, category: RouteCategory, cabin: CabinClass, isRoundTrip: boolean) {
+  const [minFare, maxFare] = categoryProfiles[category].baseFare
+  const base = minFare + Math.round((maxFare - minFare) * random())
+  const cabinAdjusted = Math.round(base * cabinPriceMultiplier[cabin])
+  const roundTripMultiplier = isRoundTrip ? 1.78 : 1
+  const demandDelta = 0.92 + random() * 0.24
+
+  return Math.round(cabinAdjusted * roundTripMultiplier * demandDelta)
+}
+
+function buildItinerary(
+  random: () => number,
+  origin: AirportRecord,
+  destination: AirportRecord,
+  date: string,
+  cabin: CabinClass,
+  isRoundTrip: boolean,
+  stops: number,
+  index: number,
+) {
+  const category = getRouteCategory(origin, destination)
+  const airline = pickRandom(random, getAirlinePool(origin, destination))
+  const layovers = getLayoverAirports(random, origin, destination, stops)
+  const outboundAirports = [origin, ...layovers, destination]
+  const outbound = buildSegments(random, date, outboundAirports, airline, category, index, 'outbound')
+
+  let inbound: FlightSegment[] | undefined
+
+  if (isRoundTrip) {
+    const returnDate = new Date(`${date}T00:00:00.000Z`)
+    returnDate.setUTCDate(returnDate.getUTCDate() + 4 + (index % 6))
+    const inboundAirports = [destination, ...[...layovers].reverse(), origin]
+
+    inbound = buildSegments(
+      random,
+      returnDate.toISOString().slice(0, 10),
+      inboundAirports,
+      airline,
+      category,
+      index,
+      'inbound',
+    )
+  }
+
+  return {
+    id: `${origin.iata}-${destination.iata}-${date}-${index + 1}`,
+    outbound,
+    inbound,
+    stops,
+    totalDuration: getItineraryDuration(outbound) + (inbound ? getItineraryDuration(inbound) : 0),
+    price: buildPrice(random, category, cabin, isRoundTrip),
+    airline,
+    cabinClass: cabin,
+    baggageAllowance: baggageAllowanceByCabin[cabin],
+    isRoundTrip,
+  } satisfies Flight
+}
+
+export function generateFlightsForRoute(
+  origin: string | Airport,
+  destination: string | Airport,
+  date: string,
+  cabin: CabinClass,
+  isRoundTrip: boolean,
+) {
   const resolvedOrigin = resolveAirport(origin)
   const resolvedDestination = resolveAirport(destination)
 
-  if (resolvedOrigin.code === resolvedDestination.code) {
+  if (resolvedOrigin.iata === resolvedDestination.iata) {
     return []
   }
 
   const seed = xmur3(
-    `${resolvedOrigin.code}:${resolvedDestination.code}:${departureDate}:${limit}`,
+    `${resolvedOrigin.iata}:${resolvedDestination.iata}:${date}:${cabin}:${isRoundTrip}`,
   )()
   const random = mulberry32(seed)
-  const distanceKm = getDistanceKm(resolvedOrigin, resolvedDestination)
-  const haul = getHaul(distanceKm)
-  const airlinePool = buildAirlinePool(resolvedOrigin, resolvedDestination)
-  const usedAirlineCodes = new Set<string>()
+  const stopPattern = [
+    ...Array.from({ length: 5 }, () => 0),
+    ...Array.from({ length: 10 }, () => 1),
+    ...Array.from({ length: 5 }, () => 2),
+  ]
 
-  return Array.from({ length: limit }, (_, index) => {
-    const stops = getStops(random, distanceKm)
-    const timing = getTiming(distanceKm, stops, random)
-    const airline = pickWeightedAirline(random, airlinePool, usedAirlineCodes)
-    const aircraft = pickRandom(random, [...aircraftByHaul[haul]])
-    const schedule = buildSchedule(departureDate, index, timing.durationMinutes, random)
-    const flightNumber = `${airline.code}${randomInt(random, 101, 4899)}`
-
-    usedAirlineCodes.add(airline.code)
-
-    return {
-      id: `${resolvedOrigin.code}-${resolvedDestination.code}-${departureDate}-${index + 1}`,
-      flightNumber,
-      airline,
-      origin: resolvedOrigin,
-      destination: resolvedDestination,
-      departureTime: schedule.departureTime,
-      arrivalTime: schedule.arrivalTime,
-      durationMinutes: timing.durationMinutes,
-      distanceKm,
-      stops,
-      layoverMinutes: timing.layoverMinutes,
-      aircraft,
-      prices: buildPriceMap(distanceKm, stops, random),
-      currency: 'USD',
-    }
-  })
+  return stopPattern.map((stops, index) =>
+    buildItinerary(random, resolvedOrigin, resolvedDestination, date, cabin, isRoundTrip, stops, index),
+  )
 }
 
-export const featuredRoutes = [
-  ['JFK', 'LHR'],
-  ['SFO', 'HND'],
-  ['BER', 'IST'],
-  ['DXB', 'SIN'],
-  ['SYD', 'LAX'],
-] as const satisfies ReadonlyArray<readonly [string, string]>
-
-export const flightSeedAirports = airports
+export const sampleAirportPool = airports

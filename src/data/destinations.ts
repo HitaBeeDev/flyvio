@@ -1,125 +1,108 @@
 import { airportsByCode } from '@/data/airports'
-import type { Destination } from '@/types/travel'
+import type { Destination } from '@/types'
 
-function getAirport(code: string) {
-  const airport = airportsByCode.get(code)
-
-  if (!airport) {
-    throw new Error(`Missing destination airport: ${code}`)
-  }
-
-  return airport
-}
-
-const destinationConfigs = [
+const curatedDestinations = [
   {
-    airportCode: 'BER',
-    headline: 'Berlin for brutalist galleries and late-night listening bars',
-    description:
-      'A sharp mix of club culture, modern design, and walkable neighborhoods that rewards spontaneous weekends.',
+    iataCode: 'BER',
     imageUrl:
-      'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 249,
+    tagline: 'Brutalist galleries, vinyl bars, and cold-lake weekends.',
   },
   {
-    airportCode: 'IST',
-    headline: 'Istanbul where ferry rides split the day between continents',
-    description:
-      'Markets, waterfront tea, and layered history make it one of the easiest cities to fill with memorable small moments.',
+    iataCode: 'IST',
     imageUrl:
-      'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 389,
+    tagline: 'Ferries, spice markets, and skyline-heavy stopovers.',
   },
   {
-    airportCode: 'CDG',
-    headline: 'Paris for long museum mornings and compact hotel bars',
-    description:
-      'Dense with landmarks but still best enjoyed through side streets, late dinners, and one more pastry stop.',
+    iataCode: 'CDG',
     imageUrl:
-      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 319,
+    tagline: 'Museum mornings and dense, late-night bistro blocks.',
   },
   {
-    airportCode: 'HND',
-    headline: 'Tokyo for precision shopping and all-night ramen counters',
-    description:
-      'High-speed transit and neighborhood-scale detail make it ideal for travelers who want structure without routine.',
+    iataCode: 'HND',
     imageUrl:
-      'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 689,
+    tagline: 'Precision transit, ramen counters, and neon after-hours.',
   },
   {
-    airportCode: 'JFK',
-    headline: 'New York for skyline drama and impossible restaurant density',
-    description:
-      'Best approached with a short list and extra room for detours, whether that means jazz, galleries, or a midnight slice.',
+    iataCode: 'JFK',
     imageUrl:
-      'https://images.unsplash.com/photo-1496588152823-e5c8d4c0a0de?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1496588152823-e5c8d4c0a0de?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 429,
+    tagline: 'Skyline drama and impossible restaurant density.',
   },
   {
-    airportCode: 'SFO',
-    headline: 'San Francisco for hills, fog, and compact weekend escapes',
-    description:
-      'A good fit for design-forward travelers who want strong coffee, strong views, and quick access to the coast.',
+    iataCode: 'SFO',
     imageUrl:
-      'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 458,
+    tagline: 'Fog, hills, and design-forward coast escapes.',
   },
   {
-    airportCode: 'DXB',
-    headline: 'Dubai for polished stays and high-contrast desert day trips',
-    description:
-      'An efficient stop for luxury travelers who want modern hotels, winter sun, and ambitious dining in one place.',
+    iataCode: 'DXB',
     imageUrl:
-      'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 512,
+    tagline: 'Polished stays, winter sun, and ambitious dining.',
   },
   {
-    airportCode: 'SIN',
-    headline: 'Singapore for hawker centers and seamless urban downtime',
-    description:
-      'Comfortable, green, and hyper-functional, with enough food and architecture to fill even a short layover.',
+    iataCode: 'SIN',
     imageUrl:
-      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 544,
+    tagline: 'Hawker centers, gardens, and frictionless city breaks.',
   },
   {
-    airportCode: 'CPT',
-    headline: 'Cape Town for mountain views and ocean-heavy itineraries',
-    description:
-      'One of the strongest combinations of city energy, scenery, and nearby wine-country drives.',
+    iataCode: 'CPT',
     imageUrl:
-      'https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 607,
+    tagline: 'Mountain views, Atlantic light, and wine-country day trips.',
   },
   {
-    airportCode: 'SYD',
-    headline: 'Sydney for harbor swims and bright winter work trips',
-    description:
-      'Useful when the brief is equal parts polished business travel and genuinely good outdoor recovery time.',
+    iataCode: 'SYD',
     imageUrl:
-      'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 734,
+    tagline: 'Harbor swims and polished work-trip recovery time.',
   },
   {
-    airportCode: 'GIG',
-    headline: 'Rio de Janeiro for beach mornings and high-contrast city nights',
-    description:
-      'A visually loud, high-energy destination that suits shorter trips with a flexible schedule.',
+    iataCode: 'GIG',
     imageUrl:
-      'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 566,
+    tagline: 'Beach mornings and high-contrast city nights.',
   },
   {
-    airportCode: 'BCN',
-    headline: 'Barcelona for architecture-heavy days and slower coastal evenings',
-    description:
-      'Easy to sell for mixed groups because the food, transit, and seaside pacing all work in its favor.',
+    iataCode: 'BCN',
     imageUrl:
-      'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1400&q=80',
+    startingPrice: 286,
+    tagline: 'Architecture-heavy days with slower coastal evenings.',
   },
 ] as const
 
-export const destinations: Destination[] = destinationConfigs.map((destination) => {
-  const airport = getAirport(destination.airportCode)
+export const destinations: Destination[] = curatedDestinations.map((destination) => {
+  const airport = airportsByCode.get(destination.iataCode)
+
+  if (!airport) {
+    throw new Error(`Missing destination airport: ${destination.iataCode}`)
+  }
 
   return {
-    id: destination.airportCode.toLowerCase(),
-    airportCode: airport.code,
+    id: destination.iataCode.toLowerCase(),
     city: airport.city,
     country: airport.country,
-    headline: destination.headline,
-    description: destination.description,
+    region: airport.region,
     imageUrl: destination.imageUrl,
+    startingPrice: destination.startingPrice,
+    iataCode: destination.iataCode,
+    tagline: destination.tagline,
   }
 })

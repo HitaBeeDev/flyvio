@@ -9,3 +9,18 @@
   --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
   --spacing: 0.25rem;
 }
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-accent: #5eead4;
+  --color-surface: #0f172a;
+  --color-border: #334155;
+}
+
+body {
+  background-color: var(--color-surface);
+}
