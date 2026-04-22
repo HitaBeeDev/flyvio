@@ -3,6 +3,7 @@ export interface Airport {
   city: string
   country: string
   name: string
+  timezone: string
 }
 
 export interface Airline {

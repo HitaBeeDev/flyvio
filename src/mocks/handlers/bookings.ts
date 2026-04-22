@@ -1,13 +1,24 @@
 import { http, HttpResponse } from 'msw'
 import type { Booking } from '@/types'
+import { bookings } from '@/mocks/data/bookings'
 import { flights } from '@/mocks/data/flights'
 
 export const bookingHandlers = [
+  http.get('/api/bookings/:bookingId', ({ params }) => {
+    const booking = bookings.find((entry) => entry.id === params.bookingId)
+
+    if (!booking) {
+      return new HttpResponse(null, { status: 404 })
+    }
+
+    return HttpResponse.json(booking)
+  }),
   http.post('/api/bookings', async () => {
+    const flight = flights[0]!
     const booking: Booking = {
-      id: 'booking-001',
-      confirmationCode: 'SQX9L2',
-      flight: flights[0],
+      id: 'booking-006',
+      confirmationCode: 'NEW7Q4',
+      flight,
       passengers: [
         {
           firstName: 'Avery',
@@ -21,7 +32,7 @@ export const bookingHandlers = [
         extraBaggage: 0,
         selectedSeats: [],
       },
-      totalPrice: 624,
+      totalPrice: flight.price,
       status: 'confirmed',
       createdAt: '2026-04-22T09:30:00.000Z',
     }
