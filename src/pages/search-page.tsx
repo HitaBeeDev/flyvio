@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Plane } from 'lucide-react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FilterPanel } from '@/components/features/results/FilterPanel'
 import { FlightCard } from '@/components/features/results/FlightCard'
 import { FlightCardSkeleton } from '@/components/features/results/FlightCardSkeleton'
@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/drawer'
 import { EmptyState } from '@/components/ui/empty-state'
 import { useFlights } from '@/hooks/useFlights'
+import { useBookingStore } from '@/stores/bookingStore'
 import { DEFAULT_FILTERS, useSearchStore } from '@/stores/searchStore'
 import type { SearchParams, SortOption } from '@/types'
 
@@ -63,6 +64,7 @@ const resultsListVariants = {
 }
 
 export function SearchPage() {
+  const navigate = useNavigate()
   const [urlParams, setUrlParams] = useSearchParams()
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const storedParams = useSearchStore((state) => state.params)
@@ -71,6 +73,7 @@ export function SearchPage() {
   const setFilters = useSearchStore((state) => state.setFilters)
   const setSort = useSearchStore((state) => state.setSort)
   const resetFilters = useSearchStore((state) => state.resetFilters)
+  const setFlight = useBookingStore((state) => state.setFlight)
   const resolvedParams = useMemo(
     () => getSearchParamsFromUrl(urlParams) ?? storedParams,
     [storedParams, urlParams],
@@ -204,7 +207,14 @@ export function SearchPage() {
                 className="space-y-4"
               >
                 {visibleFlights.map((flight) => (
-                  <FlightCard key={flight.id} flight={flight} />
+                  <FlightCard
+                    key={flight.id}
+                    flight={flight}
+                    onSelect={(selectedFlight) => {
+                      setFlight(selectedFlight.id)
+                      navigate(`/flights/${selectedFlight.id}`)
+                    }}
+                  />
                 ))}
               </motion.div>
             ) : (
