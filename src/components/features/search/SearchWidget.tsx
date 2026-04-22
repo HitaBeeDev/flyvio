@@ -17,7 +17,7 @@ import { formatSearchSummary } from './search-utils'
 
 type SearchWidgetProps = {
   variant?: 'default' | 'compact'
-  initialParams?: SearchParams | null
+  initialParams?: Partial<SearchParams> | null
 }
 
 const defaultValues: SearchFormValues = {
@@ -34,19 +34,19 @@ const defaultValues: SearchFormValues = {
   isRoundTrip: true,
 }
 
-function toFormValues(params?: SearchParams | null): SearchFormValues {
+function toFormValues(params?: Partial<SearchParams> | null): SearchFormValues {
   if (!params) {
     return defaultValues
   }
 
   return {
-    origin: params.origin,
-    destination: params.destination,
-    departureDate: params.departureDate,
+    origin: params.origin ?? '',
+    destination: params.destination ?? '',
+    departureDate: params.departureDate ?? '',
     returnDate: params.returnDate,
-    passengers: params.passengers,
-    cabinClass: params.cabinClass,
-    isRoundTrip: params.isRoundTrip,
+    passengers: params.passengers ?? defaultValues.passengers,
+    cabinClass: params.cabinClass ?? defaultValues.cabinClass,
+    isRoundTrip: params.isRoundTrip ?? defaultValues.isRoundTrip,
   }
 }
 

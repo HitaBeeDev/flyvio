@@ -1,17 +1,21 @@
 import type { ReactNode } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { fadeIn, ZERO_DURATION } from '@/lib/motion'
 
 type PageTransitionProps = {
   children: ReactNode
 }
 
 export function PageTransition({ children }: PageTransitionProps) {
+  const shouldReduceMotion = useReducedMotion()
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -14 }}
-      transition={{ duration: 0.28, ease: 'easeOut' }}
+      variants={fadeIn}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      transition={shouldReduceMotion ? ZERO_DURATION : undefined}
     >
       {children}
     </motion.div>

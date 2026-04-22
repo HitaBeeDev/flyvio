@@ -1,6 +1,13 @@
-import { requestJson } from '@/api/client'
+import { destinations } from '@/data/destinations'
 import type { Destination } from '@/types'
 
+function delay(ms: number) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms)
+  })
+}
+
 export async function getDestinations(): Promise<Destination[]> {
-  return (await requestJson<Destination[]>('/api/destinations')) ?? []
+  await delay(220)
+  return destinations
 }

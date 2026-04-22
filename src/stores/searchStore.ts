@@ -4,11 +4,13 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 import type { SortOption } from '@/types/flight'
 import type { FilterState, SearchParams } from '@/types/search'
 
+export type SearchDraft = Partial<SearchParams>
+
 type SearchStore = {
-  params: SearchParams | null
+  params: SearchDraft | null
   filters: FilterState
   sort: SortOption
-  setParams: (params: SearchParams | null) => void
+  setParams: (params: SearchDraft | null) => void
   setFilters: (filters: FilterState) => void
   setSort: (sort: SortOption) => void
   resetFilters: () => void

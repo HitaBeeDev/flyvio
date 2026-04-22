@@ -25,8 +25,8 @@ export function useCreateBooking() {
     mutationFn: (data: CreateBookingPayload) => createBooking(data),
     onSuccess: (booking) => {
       const bookingStore = useBookingStore.getState()
-      bookingStore.setStep(2)
-      navigate(`/confirmation?bookingId=${booking.id}`)
+      bookingStore.reset()
+      navigate(`/booking/confirmation/${booking.id}`)
     },
     onError: (error) => {
       toast.error(getErrorMessage(error))

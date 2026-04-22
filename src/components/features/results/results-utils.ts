@@ -71,15 +71,31 @@ export function getAirlineInitials(name: string) {
     .join('')
 }
 
-export function formatRouteTitle(params: SearchParams) {
-  const origin = airportsByCode.get(params.origin)
-  const destination = airportsByCode.get(params.destination)
+export function formatRouteTitle(params: Partial<SearchParams>) {
+  const originCode = params.origin
+  const destinationCode = params.destination
+  const origin = originCode ? airportsByCode.get(originCode) : null
+  const destination = destinationCode ? airportsByCode.get(destinationCode) : null
 
-  return `${origin?.city ?? params.origin} (${params.origin}) → ${destination?.city ?? params.destination} (${params.destination})`
+  if (!originCode && destinationCode) {
+    return `${destination?.city ?? destinationCode} (${destinationCode})`
+  }
+
+  if (!originCode || !destinationCode) {
+    return 'Search flights'
+  }
+
+  return `${origin?.city ?? originCode} (${originCode}) → ${destination?.city ?? destinationCode} (${destinationCode})`
 }
 
-export function formatResultsMeta(params: SearchParams) {
-  const departure = format(new Date(params.departureDate), 'EEE, d MMM')
+export function formatResultsMeta(params: Partial<SearchParams>) {
+  if (!params.passengers || !params.cabinClass) {
+    return 'Choose route details to unlock results.'
+  }
+
+  const departure = params.departureDate
+    ? format(new Date(params.departureDate), 'EEE, d MMM')
+    : 'Pick travel date'
   const travelers = [
     params.passengers.adults ? `${params.passengers.adults} Adult${params.passengers.adults > 1 ? 's' : ''}` : null,
     params.passengers.children ? `${params.passengers.children} Child${params.passengers.children > 1 ? 'ren' : ''}` : null,
@@ -89,6 +105,14 @@ export function formatResultsMeta(params: SearchParams) {
     .join(', ')
 
   return `${departure} · ${travelers} · ${params.cabinClass}`
+}
+
+export function formatSearchPageTitle(params: SearchParams) {
+  const departure = format(new Date(params.departureDate), 'EEE d MMM')
+  const origin = params.origin.toUpperCase()
+  const destination = params.destination.toUpperCase()
+
+  return `${origin} → ${destination} · ${departure} — SkyQuest`
 }
 
 export function getPriceBounds(flights: Flight[]): [number, number] {

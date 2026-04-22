@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Plane } from 'lucide-react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { FilterPanel } from '@/components/features/results/FilterPanel'
 import { FlightCard } from '@/components/features/results/FlightCard'
 import { FlightCardSkeleton } from '@/components/features/results/FlightCardSkeleton'
@@ -13,6 +13,7 @@ import {
   getDurationBounds,
   getPriceBounds,
   parseFilters,
+  formatSearchPageTitle,
   serializeFilters,
   serializeSort,
   sortFlights,
@@ -30,20 +31,21 @@ import { useFlights } from '@/hooks/useFlights'
 import { useBookingStore } from '@/stores/bookingStore'
 import { DEFAULT_FILTERS, useSearchStore } from '@/stores/searchStore'
 import type { SearchParams, SortOption } from '@/types'
+import { staggerContainer, ZERO_DURATION } from '@/lib/motion'
 
-function getSearchParamsFromUrl(searchParams: URLSearchParams): SearchParams | null {
+function getSearchParamsFromUrl(searchParams: URLSearchParams): Partial<SearchParams> | null {
   const origin = searchParams.get('origin')
   const destination = searchParams.get('destination')
   const departureDate = searchParams.get('departureDate')
 
-  if (!origin || !destination || !departureDate) {
+  if (!origin && !destination && !departureDate) {
     return null
   }
 
   return {
-    origin,
-    destination,
-    departureDate,
+    origin: origin ?? undefined,
+    destination: destination ?? undefined,
+    departureDate: departureDate ?? undefined,
     returnDate: searchParams.get('returnDate') ?? undefined,
     passengers: {
       adults: Number(searchParams.get('adults') ?? '1'),
@@ -55,29 +57,34 @@ function getSearchParamsFromUrl(searchParams: URLSearchParams): SearchParams | n
   }
 }
 
-const resultsListVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.08 },
-  },
-}
-
 export function SearchPage() {
   const navigate = useNavigate()
   const [urlParams, setUrlParams] = useSearchParams()
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const storedParams = useSearchStore((state) => state.params)
+  const [visibleState, setVisibleState] = useState({ key: '', count: 20 })
   const filters = useSearchStore((state) => state.filters)
   const sort = useSearchStore((state) => state.sort)
   const setFilters = useSearchStore((state) => state.setFilters)
   const setSort = useSearchStore((state) => state.setSort)
   const resetFilters = useSearchStore((state) => state.resetFilters)
   const setFlight = useBookingStore((state) => state.setFlight)
-  const resolvedParams = useMemo(
-    () => getSearchParamsFromUrl(urlParams) ?? storedParams,
-    [storedParams, urlParams],
-  )
+  const hasUrlParams = urlParams.toString().length > 0
+  const resolvedParams = useMemo(() => getSearchParamsFromUrl(urlParams), [urlParams])
+  const summaryParams = resolvedParams ?? {}
+  const validSearchParams = useMemo(() => {
+    if (
+      !resolvedParams?.origin ||
+      !resolvedParams.destination ||
+      !resolvedParams.departureDate ||
+      !resolvedParams.passengers ||
+      !resolvedParams.cabinClass ||
+      typeof resolvedParams.isRoundTrip !== 'boolean'
+    ) {
+      return null
+    }
+
+    return resolvedParams as SearchParams
+  }, [resolvedParams])
 
   const parsedFilters = useMemo(
     () => parseFilters(urlParams, DEFAULT_FILTERS),
@@ -124,7 +131,9 @@ export function SearchPage() {
     )
   }, [filters, setUrlParams, sort])
 
-  const { data: flights = [], isLoading } = useFlights(resolvedParams)
+  const shouldReduceMotion = useReducedMotion()
+  const motionTransition = shouldReduceMotion ? ZERO_DURATION : undefined
+  const { data: flights = [], isLoading } = useFlights(validSearchParams)
 
   const airlineOptions = useMemo(
     () =>
@@ -153,25 +162,39 @@ export function SearchPage() {
     () => sortFlights(filterFlights(flights, filters), sort),
     [filters, flights, sort],
   )
+  const resultsStateKey = useMemo(
+    () =>
+      JSON.stringify({
+        params: validSearchParams,
+        filters,
+        sort,
+      }),
+    [filters, sort, validSearchParams],
+  )
+  const visibleCount =
+    visibleState.key === resultsStateKey ? visibleState.count : 20
+  const paginatedFlights = useMemo(
+    () => visibleFlights.slice(0, visibleCount),
+    [visibleCount, visibleFlights],
+  )
 
-  if (!resolvedParams) {
-    return (
-      <AppShell>
-        <EmptyState
-          title="Start with a route"
-          description="Choose an origin, destination, and travel dates to see available flights."
-          icon={<Plane className="size-12" />}
-        />
-      </AppShell>
-    )
+  useEffect(() => {
+    document.title =
+      validSearchParams == null
+        ? 'Search Flights — SkyQuest'
+        : formatSearchPageTitle(validSearchParams)
+  }, [validSearchParams])
+
+  if (!hasUrlParams) {
+    return <Navigate to="/" replace />
   }
 
   return (
     <AppShell>
       <div className="space-y-6">
-        <ResultsSummary params={resolvedParams} />
+        <ResultsSummary params={summaryParams} />
 
-        <div className="grid gap-6 xl:grid-cols-[320px_minmax(0,1fr)]">
+        <div className="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
           <aside className="hidden xl:block">
             <div className="sticky top-28">
               <FilterPanel
@@ -193,30 +216,56 @@ export function SearchPage() {
               onOpenFilters={() => setMobileFiltersOpen(true)}
             />
 
-            {isLoading ? (
+            {validSearchParams == null ? (
+              <EmptyState
+                title="Finish your search"
+                description="Choose an origin and departure date to see live route options for this destination."
+                icon={<Plane className="size-12" />}
+              />
+            ) : isLoading ? (
               <div className="space-y-4">
-                {Array.from({ length: 5 }, (_, index) => (
+                {Array.from({ length: 3 }, (_, index) => (
                   <FlightCardSkeleton key={index} />
                 ))}
               </div>
             ) : visibleFlights.length > 0 ? (
-              <motion.div
-                variants={resultsListVariants}
-                initial="hidden"
-                animate="visible"
-                className="space-y-4"
-              >
-                {visibleFlights.map((flight) => (
-                  <FlightCard
-                    key={flight.id}
-                    flight={flight}
-                    onSelect={(selectedFlight) => {
-                      setFlight(selectedFlight.id)
-                      navigate(`/flights/${selectedFlight.id}`)
-                    }}
-                  />
-                ))}
-              </motion.div>
+              <div className="space-y-5">
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  transition={motionTransition}
+                  className="space-y-4"
+                >
+                  {paginatedFlights.map((flight) => (
+                    <FlightCard
+                      key={flight.id}
+                      flight={flight}
+                      onSelect={(selectedFlight) => {
+                        setFlight(selectedFlight.id)
+                        navigate(`/flights/${selectedFlight.id}`)
+                      }}
+                    />
+                  ))}
+                </motion.div>
+
+                {visibleCount < visibleFlights.length ? (
+                  <div className="flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setVisibleState({
+                          key: resultsStateKey,
+                          count: visibleCount + 20,
+                        })
+                      }
+                      className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-accent hover:text-accent dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200"
+                    >
+                      Load more
+                    </button>
+                  </div>
+                ) : null}
+              </div>
             ) : (
               <EmptyState
                 title="No flights match these filters"

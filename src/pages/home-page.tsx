@@ -1,136 +1,123 @@
-import { useQuery } from '@tanstack/react-query'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { useEffect } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { SearchWidget } from '@/components/features/search/SearchWidget'
+import { DestinationCard } from '@/components/features/explore/DestinationCard'
 import { AppShell } from '@/components/layout/AppShell'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Progress } from '@/components/ui/progress'
-import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useDestinations } from '@/hooks/useDestinations'
+import { slideUp, staggerContainer, ZERO_DURATION } from '@/lib/motion'
 
-const scaffoldChecks = [
-  'Vite + React + TypeScript baseline',
-  'Tailwind CSS v4 via the Vite plugin',
-  'Zustand dark mode toggling `html.dark`',
-  'React Router and TanStack Query providers',
-  'shadcn/ui primitives ready for feature work',
-] as const
-
-function loadScaffoldSummary() {
-  return Promise.resolve({
-    label: 'Phase 1 foundation ready',
-    completion: 100,
-  })
+function DestinationCardSkeleton() {
+  return (
+    <div className="min-w-[18.5rem] overflow-hidden rounded-[1.9rem] border border-slate-200/80 bg-white/85 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-slate-800/80 dark:bg-slate-950/75 md:min-w-0">
+      <Skeleton className="aspect-[16/9] w-full rounded-none" />
+      <div className="space-y-3 p-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="space-y-2">
+            <Skeleton className="h-7 w-28" />
+            <Skeleton variant="text" className="w-20" />
+          </div>
+          <Skeleton className="h-7 w-20 rounded-full" />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export function HomePage() {
-  const summaryQuery = useQuery({
-    queryKey: ['scaffold-summary'],
-    queryFn: loadScaffoldSummary,
-    staleTime: Number.POSITIVE_INFINITY,
-  })
+  const destinationsQuery = useDestinations()
+  const shouldReduceMotion = useReducedMotion()
+  const transition = shouldReduceMotion ? ZERO_DURATION : undefined
+
+  useEffect(() => {
+    document.title = 'SkyQuest — Find Your Next Flight'
+  }, [])
 
   return (
     <AppShell>
-      <div className="space-y-6">
-        <SearchWidget />
-
-        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-        <motion.section
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="rounded-[2rem] border border-border/80 bg-surface/85 p-6 shadow-[0_30px_120px_rgba(15,23,42,0.10)] backdrop-blur dark:bg-slate-950/70"
-        >
-          <Badge className="bg-accent text-white hover:bg-accent">Scaffold Reset</Badge>
-          <h2 className="mt-5 max-w-2xl font-serif text-5xl leading-none text-slate-950 dark:text-stone-50 sm:text-6xl">
-            The project is back to a clean starter state.
-          </h2>
-          <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300">
-            Old feature code has been removed. What remains is a strict TypeScript
-            React app with Tailwind v4, shadcn/ui, routing, query state, and theme
-            state ready for the next phase.
-          </p>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {scaffoldChecks.map((item, index) => (
-              <Card
-                key={item}
-                className="border-border/80 bg-white/75 dark:bg-slate-900/75"
-              >
-                <CardHeader>
-                  <CardDescription>Checkpoint {index + 1}</CardDescription>
-                  <CardTitle className="flex items-start gap-3 text-lg">
-                    <CheckCircle2 className="mt-0.5 size-5 text-accent" />
-                    <span>{item}</span>
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            ))}
+      <div className="space-y-8">
+        <section className="relative flex min-h-[calc(100vh-10rem)] items-center justify-center overflow-hidden rounded-[2.4rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top,_rgba(20,184,166,0.16),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.92)_0%,_rgba(244,239,230,0.9)_52%,_rgba(227,242,239,0.9)_100%)] px-6 py-16 shadow-[0_40px_140px_rgba(15,23,42,0.12)] dark:border-slate-800/70 dark:bg-[radial-gradient(circle_at_top,_rgba(45,212,191,0.18),_transparent_28%),linear-gradient(135deg,_rgba(2,6,23,0.94)_0%,_rgba(15,23,42,0.96)_56%,_rgba(10,35,38,0.92)_100%)] sm:px-10">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 overflow-hidden"
+          >
+            <div
+              className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(20,184,166,0.22)_0%,_rgba(20,184,166,0.02)_68%,_transparent_74%)] blur-2xl"
+              style={{ animation: 'skyquest-mesh-drift 16s ease-in-out infinite alternate' }}
+            />
+            <div
+              className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(14,165,233,0.18)_0%,_rgba(14,165,233,0.03)_66%,_transparent_74%)] blur-2xl"
+              style={{ animation: 'skyquest-mesh-drift 20s ease-in-out infinite alternate-reverse' }}
+            />
+            <div
+              className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(245,158,11,0.16)_0%,_rgba(245,158,11,0.03)_64%,_transparent_74%)] blur-2xl"
+              style={{ animation: 'skyquest-mesh-drift 18s ease-in-out infinite alternate' }}
+            />
           </div>
-        </motion.section>
 
-        <motion.aside
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
-          className="flex flex-col gap-6"
-        >
-          <Card className="border-border/80 bg-white/80 dark:bg-slate-950/75">
-            <CardHeader>
-              <CardDescription>Query Wiring</CardDescription>
-              <CardTitle>{summaryQuery.data?.label ?? 'Loading scaffold status'}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Progress value={summaryQuery.data?.completion ?? 0} />
-              <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
-                QueryClient is mounted at the app root and ready for real data hooks.
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            transition={transition}
+            className="relative mx-auto flex w-full max-w-4xl flex-col items-center text-center"
+          >
+            <motion.div variants={slideUp} transition={transition}>
+              <Badge className="border-white/30 bg-white/55 px-4 py-1.5 text-slate-800 backdrop-blur hover:bg-white/55 dark:border-slate-700/60 dark:bg-slate-900/55 dark:text-stone-100 dark:hover:bg-slate-900/55">
+                Search smarter
+              </Badge>
+            </motion.div>
+            <motion.h1
+              variants={slideUp}
+              transition={transition}
+              className="mt-6 max-w-3xl text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl md:text-7xl dark:text-stone-50"
+            >
+              Find your next flight
+            </motion.h1>
+            <motion.p
+              variants={slideUp}
+              transition={transition}
+              className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300"
+            >
+              Search hundreds of routes. No fees. No noise.
+            </motion.p>
+            <motion.div
+              variants={slideUp}
+              transition={transition}
+              className="mt-10 w-full max-w-4xl"
+            >
+              <SearchWidget />
+            </motion.div>
+          </motion.div>
+        </section>
+
+        <section className="space-y-5">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
+                Explore
               </p>
-            </CardContent>
-          </Card>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+                Popular destinations
+              </h2>
+            </div>
+          </div>
 
-          <Card className="border-border/80 bg-white/80 dark:bg-slate-950/75">
-            <CardHeader>
-              <CardDescription>UI Baseline</CardDescription>
-              <CardTitle>shadcn/ui is installed and usable</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="w-full justify-between bg-accent text-white hover:bg-accent/90">
-                    Open starter dialog
-                    <ArrowRight className="size-4" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Starter shell is working</DialogTitle>
-                    <DialogDescription>
-                      This confirms the baseline app can render shadcn components on top of Tailwind v4.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-3">
-                    <Input readOnly value="Ready for Phase 2 feature work" />
-                    <Separator />
-                    <p className="text-sm text-slate-600 dark:text-slate-300">
-                      Keep new styling in TSX class strings. `src/index.css` stays token-only.
-                    </p>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </CardContent>
-          </Card>
-        </motion.aside>
-        </div>
+          {destinationsQuery.isLoading ? (
+            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
+              {Array.from({ length: 6 }, (_, index) => (
+                <DestinationCardSkeleton key={index} />
+              ))}
+            </div>
+          ) : (
+            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
+              {(destinationsQuery.data ?? []).slice(0, 6).map((destination) => (
+                <DestinationCard key={destination.id} destination={destination} />
+              ))}
+            </div>
+          )}
+        </section>
       </div>
     </AppShell>
   )

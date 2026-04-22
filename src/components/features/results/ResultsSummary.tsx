@@ -3,7 +3,7 @@ import type { SearchParams } from '@/types'
 import { formatResultsMeta, formatRouteTitle } from './results-utils'
 
 type ResultsSummaryProps = {
-  params: SearchParams
+  params: Partial<SearchParams>
 }
 
 export function ResultsSummary({ params }: ResultsSummaryProps) {

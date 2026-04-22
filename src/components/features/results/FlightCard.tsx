@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Bookmark, BookmarkCheck, Luggage, PlaneTakeoff } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -10,15 +10,7 @@ import { useUiStore } from '@/stores/uiStore'
 import type { Flight, FlightSegment } from '@/types'
 import { formatDuration } from '@/lib/formatters'
 import { getAirlineInitials, getJourneyDuration, getStopBadge } from './results-utils'
-
-const flightCardVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.36 },
-  },
-}
+import { cardItem } from '@/lib/motion'
 
 function AirlineMark({ name, logoUrl }: { name: string; logoUrl: string }) {
   const [imageFailed, setImageFailed] = useState(false)
@@ -105,7 +97,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
   const isSaved = savedFlightIds.includes(flight.id)
 
   return (
-    <motion.div variants={flightCardVariants}>
+    <motion.div variants={cardItem}>
       <BaseFlightCard
         className={cn(
           'gap-0 border-slate-200/90 bg-white/95 py-0 transition duration-300 hover:scale-[1.01] hover:border-accent/60 hover:shadow-[0_24px_70px_rgba(15,118,110,0.14)] dark:border-slate-800/90 dark:bg-slate-950/90',

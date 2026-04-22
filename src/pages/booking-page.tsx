@@ -1,4 +1,6 @@
-import { Navigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { Navigate, useParams } from 'react-router-dom'
 import { BookingReview } from '@/components/features/booking/BookingReview'
 import { ExtrasForm } from '@/components/features/booking/ExtrasForm'
 import { PassengerForm } from '@/components/features/booking/PassengerForm'
@@ -9,33 +11,95 @@ import {
   createEmptyPassengers,
 } from '@/components/features/booking/booking-utils'
 import { AppShell } from '@/components/layout/AppShell'
-import { EmptyState } from '@/components/ui/empty-state'
 import { Spinner } from '@/components/ui/spinner'
 import { useFlight } from '@/hooks/useFlight'
 import { useBookingStore } from '@/stores/bookingStore'
 import { useSearchStore } from '@/stores/searchStore'
 
+type StepDirection = 'forward' | 'backward'
+
 export function BookingPage() {
+  const { flightId: routeFlightId } = useParams<{ flightId: string }>()
+  const shouldReduceMotion = useReducedMotion()
+  const [stepDirection, setStepDirection] = useState<StepDirection>('forward')
   const flightId = useBookingStore((state) => state.flightId)
   const passengers = useBookingStore((state) => state.passengers)
   const extras = useBookingStore((state) => state.extras)
   const step = useBookingStore((state) => state.step)
+  const setFlight = useBookingStore((state) => state.setFlight)
   const setPassengers = useBookingStore((state) => state.setPassengers)
   const setExtras = useBookingStore((state) => state.setExtras)
   const setStep = useBookingStore((state) => state.setStep)
+  const reset = useBookingStore((state) => state.reset)
   const searchParams = useSearchStore((state) => state.params)
-  const travelerAdults = searchParams?.passengers.adults ?? 1
-  const travelerChildren = searchParams?.passengers.children ?? 0
+  const resolvedFlightId = routeFlightId ?? flightId ?? ''
+  const travelerAdults = searchParams?.passengers?.adults ?? 1
+  const travelerChildren = searchParams?.passengers?.children ?? 0
   const travelerCount = travelerAdults + travelerChildren
   const descriptors = buildPassengerDescriptors(travelerAdults, travelerChildren)
   const initialPassengers =
     passengers.length === descriptors.length
       ? passengers
       : createEmptyPassengers(descriptors)
-  const { data: flight, isLoading } = useFlight(flightId ?? '')
+  const { data: flight, isLoading } = useFlight(resolvedFlightId)
 
-  if (!flightId) {
-    return <Navigate to="/search" replace />
+  useEffect(() => {
+    if (!routeFlightId) {
+      return
+    }
+
+    reset()
+    setFlight(routeFlightId)
+    setStep(0)
+  }, [reset, routeFlightId, setFlight, setStep])
+
+  useEffect(() => {
+    document.title = 'Complete Your Booking — SkyQuest'
+  }, [])
+
+  useEffect(() => {
+    if (step === 0) {
+      return
+    }
+
+    window.history.pushState({ bookingStep: step }, '')
+
+    const handlePopState = () => {
+      const currentStep = useBookingStore.getState().step
+
+      if (currentStep > 0) {
+        const nextStep = (currentStep - 1) as 0 | 1 | 2
+        useBookingStore.getState().setStep(nextStep)
+        window.history.pushState({ bookingStep: nextStep }, '')
+      }
+    }
+
+    window.addEventListener('popstate', handlePopState)
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [step])
+
+  useEffect(() => {
+    if (step === 0) {
+      return
+    }
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault()
+      event.returnValue = ''
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [step])
+
+  if (!resolvedFlightId) {
+    return <Navigate to="/" replace />
   }
 
   if (isLoading) {
@@ -49,14 +113,7 @@ export function BookingPage() {
   }
 
   if (!flight) {
-    return (
-      <AppShell>
-        <EmptyState
-          title="Booking unavailable"
-          description="The selected flight could not be loaded. Return to search and pick another itinerary."
-        />
-      </AppShell>
-    )
+    return <Navigate to="/" replace />
   }
 
   return (
@@ -77,38 +134,74 @@ export function BookingPage() {
         <StepIndicator currentStep={step} />
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <section className="min-w-0">
-            {step === 0 ? (
-              <PassengerForm
-                descriptors={descriptors}
-                initialPassengers={initialPassengers}
-                onSubmit={(nextPassengers) => {
-                  setPassengers(nextPassengers)
-                  setStep(1)
+          <section className="min-w-0 overflow-hidden">
+            <AnimatePresence mode="wait" initial={false} custom={stepDirection}>
+              <motion.div
+                key={step}
+                custom={stepDirection}
+                variants={{
+                  hidden: (dir: StepDirection) => ({
+                    x: shouldReduceMotion ? 0 : dir === 'forward' ? 40 : -40,
+                    opacity: 0,
+                  }),
+                  visible: {
+                    x: 0,
+                    opacity: 1,
+                    transition: { duration: shouldReduceMotion ? 0 : 0.24, ease: 'easeOut' },
+                  },
+                  exit: (dir: StepDirection) => ({
+                    x: shouldReduceMotion ? 0 : dir === 'forward' ? -40 : 40,
+                    opacity: 0,
+                    transition: { duration: shouldReduceMotion ? 0 : 0.18, ease: 'easeIn' },
+                  }),
                 }}
-              />
-            ) : null}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                {step === 0 ? (
+                  <PassengerForm
+                    descriptors={descriptors}
+                    initialPassengers={initialPassengers}
+                    onSubmit={(nextPassengers) => {
+                      setPassengers(nextPassengers)
+                      setStepDirection('forward')
+                      setStep(1)
+                    }}
+                  />
+                ) : null}
 
-            {step === 1 ? (
-              <ExtrasForm
-                flight={flight}
-                passengers={descriptors}
-                extras={extras}
-                onChange={setExtras}
-                onBack={() => setStep(0)}
-                onNext={() => setStep(2)}
-              />
-            ) : null}
+                {step === 1 ? (
+                  <ExtrasForm
+                    flight={flight}
+                    passengers={descriptors}
+                    extras={extras}
+                    onChange={setExtras}
+                    onBack={() => {
+                      setStepDirection('backward')
+                      setStep(0)
+                    }}
+                    onNext={() => {
+                      setStepDirection('forward')
+                      setStep(2)
+                    }}
+                  />
+                ) : null}
 
-            {step === 2 ? (
-              <BookingReview
-                flight={flight}
-                passengers={passengers}
-                descriptors={descriptors}
-                extras={extras}
-                onBack={() => setStep(1)}
-              />
-            ) : null}
+                {step === 2 ? (
+                  <BookingReview
+                    flight={flight}
+                    passengers={passengers}
+                    descriptors={descriptors}
+                    extras={extras}
+                    onBack={() => {
+                      setStepDirection('backward')
+                      setStep(1)
+                    }}
+                  />
+                ) : null}
+              </motion.div>
+            </AnimatePresence>
           </section>
 
           <aside>
