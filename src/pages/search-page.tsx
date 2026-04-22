@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SearchWidget } from '@/components/features/search/SearchWidget'
-import { AppShell } from '@/components/layout/app-shell'
+import { AppShell } from '@/components/layout/AppShell'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useSearchStore } from '@/stores/searchStore'

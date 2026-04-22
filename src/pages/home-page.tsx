@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SearchWidget } from '@/components/features/search/SearchWidget'
-import { AppShell } from '@/components/layout/app-shell'
+import { AppShell } from '@/components/layout/AppShell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {

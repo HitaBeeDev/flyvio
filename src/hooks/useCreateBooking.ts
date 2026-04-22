@@ -25,7 +25,6 @@ export function useCreateBooking() {
     mutationFn: (data: CreateBookingPayload) => createBooking(data),
     onSuccess: (booking) => {
       const bookingStore = useBookingStore.getState()
-      bookingStore.setBooking(booking)
       bookingStore.setStep(2)
       navigate(`/confirmation?bookingId=${booking.id}`)
     },

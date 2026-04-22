@@ -1,5 +1,5 @@
 import { Compass, Sparkles } from 'lucide-react'
-import { AppShell } from '@/components/layout/app-shell'
+import { AppShell } from '@/components/layout/AppShell'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 

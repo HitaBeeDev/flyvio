@@ -1,14 +1,36 @@
+import { useQuery } from '@tanstack/react-query'
 import { Navigate, useSearchParams } from 'react-router-dom'
-import { AppShell } from '@/components/layout/app-shell'
+import { getBooking } from '@/api/bookings'
+import { AppShell } from '@/components/layout/AppShell'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { useBookingStore } from '@/stores/bookingStore'
+import { Spinner } from '@/components/ui/spinner'
 
 export function BookingConfirmationPage() {
-  const booking = useBookingStore((state) => state.booking)
   const [searchParams] = useSearchParams()
   const bookingId = searchParams.get('bookingId')
+  const { data: booking, isLoading } = useQuery({
+    queryKey: ['booking', bookingId],
+    queryFn: () => getBooking(bookingId!),
+    enabled: bookingId !== null && bookingId.length > 0,
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+  })
 
-  if (!booking || (bookingId && booking.id !== bookingId)) {
+  if (!bookingId) {
+    return <Navigate to="/" replace />
+  }
+
+  if (isLoading) {
+    return (
+      <AppShell>
+        <div className="mx-auto flex max-w-2xl justify-center py-16">
+          <Spinner size="lg" label="Loading booking details" />
+        </div>
+      </AppShell>
+    )
+  }
+
+  if (!booking) {
     return <Navigate to="/" replace />
   }
 
