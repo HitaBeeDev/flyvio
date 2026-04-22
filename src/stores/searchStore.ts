@@ -14,10 +14,10 @@ type SearchStore = {
   resetFilters: () => void
 }
 
-const DEFAULT_FILTERS: FilterState = {
+export const DEFAULT_FILTERS: FilterState = {
   priceRange: [0, 5000],
-  stops: 'any',
-  departureWindow: ['00:00', '23:59'],
+  stops: ['any'],
+  departureWindows: [],
   airlines: [],
   maxDuration: 24 * 60,
 }
@@ -40,6 +40,7 @@ export const useSearchStore = create<SearchStore>()(
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         params: state.params,
+        filters: state.filters,
         sort: state.sort,
       }),
     },

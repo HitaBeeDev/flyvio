@@ -18,8 +18,14 @@ export interface SearchParams {
 
 export interface FilterState {
   priceRange: [number, number]
-  stops: StopFilter
-  departureWindow: [string, string]
+  stops: StopFilter[]
+  departureWindows: DepartureWindow[]
   airlines: string[]
   maxDuration: number
 }
+
+export type DepartureWindow =
+  | 'morning'
+  | 'afternoon'
+  | 'evening'
+  | 'night'

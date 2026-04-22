@@ -13,6 +13,7 @@ export type {
   PassengerCount,
   SearchParams,
   FilterState,
+  DepartureWindow,
 } from './search'
 
 export type {

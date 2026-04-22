@@ -36,14 +36,9 @@ export function AirportInput({
   const [activeIndex, setActiveIndex] = useState(0)
 
   const options = useMemo(() => searchAirports(query || value || ''), [query, value])
-  const activeOption = options[activeIndex]
+  const boundedActiveIndex = Math.min(activeIndex, Math.max(options.length - 1, 0))
+  const activeOption = options[boundedActiveIndex]
   const displayValue = open ? query : getDisplayValue(value)
-
-  useEffect(() => {
-    if (activeIndex > options.length - 1) {
-      setActiveIndex(0)
-    }
-  }, [activeIndex, options.length])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -146,7 +141,7 @@ export function AirportInput({
                   onClick={() => selectOption(airport.iata)}
                   className={cn(
                     'flex w-full items-center justify-between rounded-xl px-3 py-3 text-left transition-colors',
-                    index === activeIndex
+                    index === boundedActiveIndex
                       ? 'bg-slate-100 dark:bg-slate-900'
                       : 'hover:bg-slate-50 dark:hover:bg-slate-900/80',
                   )}

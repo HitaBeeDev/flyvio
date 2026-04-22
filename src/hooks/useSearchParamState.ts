@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useDebounce } from '@/hooks/useDebounce'
 
 type SerializeFn<T> = (value: T) => string
 type DeserializeFn<T> = (value: string) => T
@@ -51,32 +50,34 @@ export function useSearchParamState<T>(
     return deserialize(rawValue)
   }, [defaultValue, deserialize, key, searchParams])
 
-  const [value, setValue] = useState<T>(valueFromUrl)
-  const debouncedValue = useDebounce(value, 300)
   const serializedDefaultValue = useMemo(
     () => serialize(defaultValue),
     [defaultValue, serialize],
   )
 
-  useEffect(() => {
-    setValue(valueFromUrl)
-  }, [valueFromUrl])
+  const setValue = useCallback(
+    (nextValue: T | ((currentValue: T) => T)) => {
+      const resolvedValue =
+        typeof nextValue === 'function'
+          ? (nextValue as (currentValue: T) => T)(valueFromUrl)
+          : nextValue
 
-  useEffect(() => {
-    const serializedValue = serialize(debouncedValue)
+      const serializedValue = serialize(resolvedValue)
 
-    setSearchParams((currentParams) => {
-      const nextParams = new URLSearchParams(currentParams)
+      setSearchParams((currentParams) => {
+        const nextParams = new URLSearchParams(currentParams)
 
-      if (serializedValue === serializedDefaultValue) {
-        nextParams.delete(key)
-      } else {
-        nextParams.set(key, serializedValue)
-      }
+        if (serializedValue === serializedDefaultValue) {
+          nextParams.delete(key)
+        } else {
+          nextParams.set(key, serializedValue)
+        }
 
-      return nextParams
-    }, { replace: true })
-  }, [debouncedValue, key, serializedDefaultValue, serialize, setSearchParams])
+        return nextParams
+      }, { replace: true })
+    },
+    [key, serializedDefaultValue, serialize, setSearchParams, valueFromUrl],
+  )
 
-  return [value, setValue] as const
+  return [valueFromUrl, setValue] as const
 }

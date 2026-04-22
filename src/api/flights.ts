@@ -1,22 +1,55 @@
-import { createQueryString, requestJson } from '@/api/client'
-import type { Flight, SearchParams } from '@/types'
+import { generateFlightsForRoute } from '@/data/flights'
+import type { CabinClass, Flight, SearchParams } from '@/types'
+
+const cabins: CabinClass[] = ['Economy', 'Premium Economy', 'Business', 'First']
+
+function delay(ms: number) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms)
+  })
+}
 
 export async function searchFlights(params: SearchParams): Promise<Flight[]> {
-  const queryString = createQueryString({
-    origin: params.origin,
-    destination: params.destination,
-    departureDate: params.departureDate,
-    returnDate: params.returnDate,
-    cabinClass: params.cabinClass,
-    isRoundTrip: params.isRoundTrip,
-    adults: params.passengers.adults,
-    children: params.passengers.children,
-    infants: params.passengers.infants,
-  })
+  await delay(240)
 
-  return (await requestJson<Flight[]>(`/api/flights/search?${queryString}`)) ?? []
+  return generateFlightsForRoute(
+    params.origin,
+    params.destination,
+    params.departureDate,
+    params.cabinClass,
+    params.isRoundTrip,
+  )
 }
 
 export async function getFlight(id: string): Promise<Flight | null> {
-  return requestJson<Flight>(`/api/flights/${id}`)
+  const match = id.match(
+    /^(?<origin>[A-Z]{3})-(?<destination>[A-Z]{3})-(?<date>\d{4}-\d{2}-\d{2})-(?<index>\d+)$/,
+  )
+
+  if (!match?.groups) {
+    return null
+  }
+
+  const origin = match.groups.origin!
+  const destination = match.groups.destination!
+  const date = match.groups.date!
+
+  for (const cabin of cabins) {
+    for (const isRoundTrip of [true, false]) {
+      const flights = generateFlightsForRoute(
+        origin,
+        destination,
+        date,
+        cabin,
+        isRoundTrip,
+      )
+      const flight = flights.find((candidate) => candidate.id === id)
+
+      if (flight) {
+        return flight
+      }
+    }
+  }
+
+  return null
 }

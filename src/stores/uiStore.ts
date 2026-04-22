@@ -9,6 +9,7 @@ type UiStore = {
   savedFlightIds: string[]
   setTheme: (theme: ThemeMode) => void
   toggleMobileNav: () => void
+  toggleSavedFlightId: (id: string) => void
   saveFlightId: (id: string) => void
   removeSavedFlightId: (id: string) => void
 }
@@ -22,6 +23,12 @@ export const useUiStore = create<UiStore>()(
       setTheme: (theme) => set({ theme }),
       toggleMobileNav: () =>
         set((state) => ({ mobileNavOpen: !state.mobileNavOpen })),
+      toggleSavedFlightId: (id) =>
+        set((state) => ({
+          savedFlightIds: state.savedFlightIds.includes(id)
+            ? state.savedFlightIds.filter((savedId) => savedId !== id)
+            : [...state.savedFlightIds, id],
+        })),
       saveFlightId: (id) =>
         set((state) => ({
           savedFlightIds: state.savedFlightIds.includes(id)
