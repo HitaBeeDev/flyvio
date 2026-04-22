@@ -44,10 +44,10 @@ export const bookings: Booking[] = [
       },
     ]),
     extras: {
-      extraBaggage: true,
+      extraBaggage: ['adult-1', 'adult-2'],
       selectedSeats: [
-        { flightSegmentId: 'outbound-1', seatCode: '4A', seatType: 'window' },
-        { flightSegmentId: 'outbound-1', seatCode: '4B', seatType: 'middle' },
+        { passengerKey: 'adult-1', flightSegmentId: 'outbound-1', seatCode: '4A', seatType: 'window' },
+        { passengerKey: 'adult-2', flightSegmentId: 'outbound-1', seatCode: '4B', seatType: 'middle' },
       ],
     },
     totalPrice: 4860,
@@ -68,8 +68,8 @@ export const bookings: Booking[] = [
       },
     ]),
     extras: {
-      extraBaggage: false,
-      selectedSeats: [{ flightSegmentId: 'outbound-1', seatCode: '18A', seatType: 'window' }],
+      extraBaggage: [],
+      selectedSeats: [{ passengerKey: 'adult-1', flightSegmentId: 'outbound-1', seatCode: '18A', seatType: 'window' }],
     },
     totalPrice: 612,
     status: 'ticketed',
@@ -89,8 +89,8 @@ export const bookings: Booking[] = [
       },
     ]),
     extras: {
-      extraBaggage: true,
-      selectedSeats: [{ flightSegmentId: 'outbound-1', seatCode: '12K', seatType: 'window' }],
+      extraBaggage: ['adult-1'],
+      selectedSeats: [{ passengerKey: 'adult-1', flightSegmentId: 'outbound-1', seatCode: '12K', seatType: 'window' }],
     },
     totalPrice: 1844,
     status: 'check-in-open',
@@ -117,10 +117,10 @@ export const bookings: Booking[] = [
       },
     ]),
     extras: {
-      extraBaggage: true,
+      extraBaggage: ['adult-1', 'adult-2'],
       selectedSeats: [
-        { flightSegmentId: 'outbound-1', seatCode: '6D', seatType: 'aisle' },
-        { flightSegmentId: 'outbound-1', seatCode: '6F', seatType: 'window' },
+        { passengerKey: 'adult-1', flightSegmentId: 'outbound-1', seatCode: '6D', seatType: 'aisle' },
+        { passengerKey: 'adult-2', flightSegmentId: 'outbound-1', seatCode: '6F', seatType: 'window' },
       ],
     },
     totalPrice: 3238,
@@ -141,8 +141,8 @@ export const bookings: Booking[] = [
       },
     ]),
     extras: {
-      extraBaggage: false,
-      selectedSeats: [{ flightSegmentId: 'outbound-1', seatCode: '28A', seatType: 'window' }],
+      extraBaggage: [],
+      selectedSeats: [{ passengerKey: 'adult-1', flightSegmentId: 'outbound-1', seatCode: '28A', seatType: 'window' }],
     },
     totalPrice: 914,
     status: 'ticketed',

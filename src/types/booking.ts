@@ -9,13 +9,14 @@ export interface Passenger {
 }
 
 export interface SeatSelection {
+  passengerKey: string
   flightSegmentId: string
   seatCode: string
   seatType: 'window' | 'middle' | 'aisle'
 }
 
 export interface BookingExtras {
-  extraBaggage: boolean
+  extraBaggage: string[]
   selectedSeats: SeatSelection[]
 }
 

@@ -1,23 +1,42 @@
-import { requestJson } from '@/api/client'
+import { bookings as seededBookings } from '@/data/bookings'
 import { ApiError } from '@/api/errors'
+import { getFlight } from '@/api/flights'
+import { calculateBookingPrice, generateConfirmationCode } from '@/components/features/booking/booking-utils'
 import type { Booking, CreateBookingPayload } from '@/types'
 
-export async function createBooking(data: CreateBookingPayload): Promise<Booking> {
-  const booking = await requestJson<Booking>('/api/bookings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
+const bookings = new Map(seededBookings.map((booking) => [booking.id, booking]))
+let bookingSequence = seededBookings.length + 1000
 
-  if (!booking) {
-    throw new ApiError(500, 'Booking creation returned no data.')
+export async function createBooking(data: CreateBookingPayload): Promise<Booking> {
+  const flight = await getFlight(data.flightId)
+
+  if (!flight) {
+    throw new ApiError(404, 'Selected flight was not found.')
   }
+
+  const price = calculateBookingPrice(
+    flight,
+    data.extras,
+    data.passengers.length,
+  )
+
+  const booking: Booking = {
+    id: `bk-${bookingSequence}`,
+    confirmationCode: generateConfirmationCode(),
+    flight,
+    passengers: data.passengers,
+    extras: data.extras,
+    totalPrice: price.total,
+    status: 'confirmed',
+    createdAt: new Date().toISOString(),
+  }
+
+  bookings.set(booking.id, booking)
+  bookingSequence += 1
 
   return booking
 }
 
 export async function getBooking(id: string): Promise<Booking | null> {
-  return requestJson<Booking>(`/api/bookings/${id}`)
+  return bookings.get(id) ?? null
 }

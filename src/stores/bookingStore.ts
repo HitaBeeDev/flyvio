@@ -17,7 +17,7 @@ type BookingStore = {
 }
 
 const createDefaultExtras = (): BookingExtras => ({
-  extraBaggage: false,
+  extraBaggage: [],
   selectedSeats: [],
 })
 

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import App from '@/App'
+import { BookingPage } from '@/pages/booking-page'
 import { BookingConfirmationPage } from '@/pages/booking-confirmation-page'
 import { ExplorePage } from '@/pages/explore-page'
 import { FlightDetailPage } from '@/pages/flight-detail-page'
@@ -13,6 +14,7 @@ export function AppRouter() {
         <Route index element={<HomePage />} />
         <Route path="explore" element={<ExplorePage />} />
         <Route path="search" element={<SearchPage />} />
+        <Route path="booking" element={<BookingPage />} />
         <Route path="flights/:flightId" element={<FlightDetailPage />} />
         <Route path="confirmation" element={<BookingConfirmationPage />} />
       </Route>

@@ -10,6 +10,7 @@ import { EmptyState } from '@/components/ui/empty-state'
 import { Spinner } from '@/components/ui/spinner'
 import { useFlight } from '@/hooks/useFlight'
 import { formatPrice } from '@/lib/formatters'
+import { useBookingStore } from '@/stores/bookingStore'
 import { useSearchStore } from '@/stores/searchStore'
 
 function getTravelerCounts() {
@@ -26,6 +27,7 @@ export function FlightDetailPage() {
   const resolvedFlightId = flightId ?? ''
   const { adults, children } = getTravelerCounts()
   const { data: flight, isLoading, isError } = useFlight(resolvedFlightId)
+  const setStep = useBookingStore((state) => state.setStep)
 
   if (!flightId) {
     return <Navigate to="/search" replace />
@@ -101,9 +103,12 @@ export function FlightDetailPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                <p>Booking flow components are still pending, but this selected itinerary is now fully reviewable.</p>
+                <p>Passenger details, extras, and booking review are now available in the next step.</p>
                 <p>Chosen travelers: {adults + children}</p>
                 <p>Total itinerary price: {formatPrice(flight.price * (adults + children), 'USD')}</p>
+                <Button asChild className="mt-2 rounded-2xl" onClick={() => setStep(0)}>
+                  <Link to="/booking">Continue to booking</Link>
+                </Button>
               </CardContent>
             </Card>
           </div>
