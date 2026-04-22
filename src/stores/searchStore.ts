@@ -12,7 +12,7 @@ type SearchState = {
 export const useSearchStore = create<SearchState>((set) => ({
   originCode: 'JFK',
   destinationCode: 'LHR',
-  cabinClass: 'economy',
+  cabinClass: 'Economy',
   setRoute: (originCode, destinationCode) => set({ originCode, destinationCode }),
   setCabinClass: (cabinClass) => set({ cabinClass }),
 }))

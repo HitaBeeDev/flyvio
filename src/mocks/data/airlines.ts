@@ -1,6 +1,6 @@
 import type { Airline } from '@/types'
 
 export const airlines: Airline[] = [
-  { id: 'sqx', name: 'SkyQuest Air', code: 'SQ' },
-  { id: 'atl', name: 'Atlantic Connect', code: 'AC' },
+  { code: 'SQ', name: 'SkyQuest Air', logoUrl: '/logos/skyquest-air.svg' },
+  { code: 'AC', name: 'Atlantic Connect', logoUrl: '/logos/atlantic-connect.svg' },
 ]

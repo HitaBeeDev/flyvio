@@ -1,17 +1,17 @@
-export const CABIN_CLASSES = ['economy', 'premium-economy', 'business', 'first'] as const
+export const CABIN_CLASSES = ['Economy', 'Premium Economy', 'Business', 'First'] as const
 
 export const STOP_LABELS = {
   any: 'Any stops',
-  nonstop: 'Nonstop only',
-  oneStop: 'Up to 1 stop',
-  twoPlusStops: '2+ stops',
+  direct: 'Nonstop only',
+  '1-stop': 'Up to 1 stop',
+  '2+stops': '2+ stops',
 } as const
 
 export const SORT_OPTIONS = [
-  { value: 'recommended', label: 'Recommended' },
-  { value: 'price-asc', label: 'Price: Low to High' },
-  { value: 'duration-asc', label: 'Duration: Shortest' },
-  { value: 'departure-asc', label: 'Departure: Earliest' },
+  { value: 'best', label: 'Recommended' },
+  { value: 'cheapest', label: 'Price: Low to High' },
+  { value: 'fastest', label: 'Duration: Shortest' },
+  { value: 'earliest', label: 'Departure: Earliest' },
 ] as const
 
 export const PASSENGER_LIMITS = {
