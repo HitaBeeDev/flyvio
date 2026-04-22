@@ -1,3 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #0f766e;
+  --color-surface: #f6f4ee;
+  --color-border: #d8d2c4;
+  --font-sans: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  --spacing: 0.25rem;
+}
