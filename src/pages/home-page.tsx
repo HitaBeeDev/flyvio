@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { SearchWidget } from '@/components/features/search/SearchWidget'
 import { AppShell } from '@/components/layout/app-shell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -40,7 +41,10 @@ export function HomePage() {
 
   return (
     <AppShell>
-      <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+      <div className="space-y-6">
+        <SearchWidget />
+
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
         <motion.section
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -126,6 +130,7 @@ export function HomePage() {
             </CardContent>
           </Card>
         </motion.aside>
+        </div>
       </div>
     </AppShell>
   )
