@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 import { createBooking } from '@/api/bookings'
 import { ApiError } from '@/api/errors'
 import { useBookingStore } from '@/stores/bookingStore'
-import { useToastStore } from '@/stores/toastStore'
 import type { CreateBookingPayload } from '@/types'
 
 function getErrorMessage(error: unknown) {
@@ -30,10 +30,7 @@ export function useCreateBooking() {
       navigate(`/confirmation?bookingId=${booking.id}`)
     },
     onError: (error) => {
-      useToastStore.getState().pushToast({
-        message: getErrorMessage(error),
-        variant: 'error',
-      })
+      toast.error(getErrorMessage(error))
     },
   })
 }

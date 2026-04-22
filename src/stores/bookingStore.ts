@@ -18,16 +18,16 @@ type BookingStore = {
   reset: () => void
 }
 
-const DEFAULT_EXTRAS: BookingExtras = {
+const createDefaultExtras = (): BookingExtras => ({
   extraBaggage: false,
   selectedSeats: [],
-}
+})
 
 export const useBookingStore = create<BookingStore>((set) => ({
   step: 0,
   flightId: null,
   passengers: [],
-  extras: DEFAULT_EXTRAS,
+  extras: createDefaultExtras(),
   booking: null,
   setStep: (step) => set({ step }),
   setFlight: (flightId) => set({ flightId }),
@@ -39,7 +39,7 @@ export const useBookingStore = create<BookingStore>((set) => ({
       step: 0,
       flightId: null,
       passengers: [],
-      extras: DEFAULT_EXTRAS,
+      extras: createDefaultExtras(),
       booking: null,
     }),
 }))

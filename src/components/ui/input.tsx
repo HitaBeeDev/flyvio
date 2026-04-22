@@ -1,21 +1,96 @@
-import * as React from "react"
+import * as React from 'react'
+import { cn } from '@/lib/utils'
 
-import { cn } from "@/lib/utils"
-
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-  return (
-    <input
-      type={type}
-      data-slot="input"
-      className={cn(
-        "h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30",
-        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
-        "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
-        className
-      )}
-      {...props}
-    />
-  )
+type InputProps = React.ComponentProps<'input'> & {
+  label?: string
+  labelMode?: 'floating' | 'top'
+  helperText?: string
+  error?: string
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
 }
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
+  {
+    className,
+    type,
+    label,
+    labelMode = 'top',
+    helperText,
+    error,
+    leftIcon,
+    rightIcon,
+    placeholder,
+    id,
+    ...props
+  },
+  ref,
+) {
+  const generatedId = React.useId()
+  const inputId = id ?? generatedId
+  const hasFloatingLabel = label && labelMode === 'floating'
+
+  return (
+    <div className="space-y-2">
+      {label && labelMode === 'top' ? (
+        <label
+          htmlFor={inputId}
+          className="block text-sm font-medium text-slate-700 dark:text-slate-200"
+        >
+          {label}
+        </label>
+      ) : null}
+      <div className="space-y-1">
+        <div className="relative">
+          {leftIcon ? (
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+              {leftIcon}
+            </span>
+          ) : null}
+          <input
+            ref={ref}
+            id={inputId}
+            type={type}
+            data-slot="input"
+            placeholder={hasFloatingLabel ? ' ' : placeholder}
+            aria-invalid={Boolean(error)}
+            className={cn(
+              'peer h-12 w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-xs transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-slate-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-950 dark:text-stone-100',
+              'focus-visible:border-teal-500 focus-visible:ring-[3px] focus-visible:ring-teal-500/20',
+              'aria-invalid:border-rose-500 aria-invalid:ring-rose-500/20 dark:aria-invalid:ring-rose-500/20',
+              leftIcon ? 'pl-11' : '',
+              rightIcon ? 'pr-11' : '',
+              hasFloatingLabel ? 'pt-5' : '',
+              className,
+            )}
+            {...props}
+          />
+          {hasFloatingLabel ? (
+            <label
+              htmlFor={inputId}
+              className={cn(
+                'pointer-events-none absolute left-4 top-1/2 origin-left -translate-y-1/2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-teal-700 dark:text-slate-400 dark:peer-focus:text-teal-300',
+                leftIcon ? 'left-11' : '',
+                'peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:text-xs',
+              )}
+            >
+              {label}
+            </label>
+          ) : null}
+          {rightIcon ? (
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+              {rightIcon}
+            </span>
+          ) : null}
+        </div>
+        {error ? (
+          <p className="text-sm text-rose-600 dark:text-rose-400">{error}</p>
+        ) : helperText ? (
+          <p className="text-sm text-slate-500 dark:text-slate-400">{helperText}</p>
+        ) : null}
+      </div>
+    </div>
+  )
+})
 
 export { Input }
