@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ArrowLeft, Bookmark, BookmarkCheck, ChevronRight } from 'lucide-react'
+import { ArrowLeft, Bookmark, BookmarkCheck, ChevronRight, Plane } from 'lucide-react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { AirlineInfo } from '@/components/features/flight-detail/AirlineInfo'
 import { FareBreakdown } from '@/components/features/flight-detail/FareBreakdown'
@@ -7,13 +7,13 @@ import { FlightTimeline } from '@/components/features/flight-detail/FlightTimeli
 import { AppShell } from '@/components/layout/AppShell'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { EmptyState } from '@/components/ui/empty-state'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useFlight } from '@/hooks/useFlight'
 import { formatPrice } from '@/lib/formatters'
 import { useBookingStore } from '@/stores/bookingStore'
 import { useSearchStore } from '@/stores/searchStore'
 import { useUiStore } from '@/stores/uiStore'
-import { toast } from 'sonner'
 
 function getTravelerCounts() {
   const params = useSearchStore.getState().params
@@ -88,15 +88,6 @@ export function FlightDetailPage() {
   const isSaved = savedFlightIds.includes(resolvedFlightId)
 
   useEffect(() => {
-    if (!isError || isLoading) {
-      return
-    }
-
-    toast.error('Flight not found')
-    navigate('/search', { replace: true })
-  }, [isError, isLoading, navigate])
-
-  useEffect(() => {
     if (!flight) {
       return
     }
@@ -117,7 +108,17 @@ export function FlightDetailPage() {
   }
 
   if (isError || !flight) {
-    return null
+    return (
+      <AppShell>
+        <EmptyState
+          title="Flight not found"
+          description="This flight is no longer available or the link may be outdated."
+          ctaLabel="Back to search"
+          onCtaClick={() => navigate('/search')}
+          icon={<Plane className="size-12" />}
+        />
+      </AppShell>
+    )
   }
 
   return (

@@ -22,7 +22,12 @@ export async function requestJson<T>(
   input: string,
   init?: RequestInit,
 ): Promise<T | null> {
-  const response = await fetch(input, init)
+  let response: Response
+  try {
+    response = await fetch(input, init)
+  } catch {
+    throw new ApiError(0, 'Network error. Please check your connection.')
+  }
   const isJson = response.headers.get('content-type')?.includes('application/json') ?? false
   const payload = isJson ? await response.json() : null
 

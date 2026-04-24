@@ -158,6 +158,14 @@ export function ExplorePage() {
               <DestinationCardSkeleton key={index} />
             ))}
           </div>
+        ) : destinationsQuery.isError ? (
+          <EmptyState
+            title="Could not load destinations"
+            description="There was a problem fetching destinations. Check your connection and try again."
+            ctaLabel="Try again"
+            onCtaClick={() => void destinationsQuery.refetch()}
+            icon={<Compass className="size-12" />}
+          />
         ) : filteredDestinations.length > 0 ? (
           <motion.div
             variants={staggerContainer}

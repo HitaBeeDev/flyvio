@@ -92,32 +92,34 @@ export function HomePage() {
           </motion.div>
         </section>
 
-        <section className="space-y-5">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
-                Explore
-              </p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
-                Popular destinations
-              </h2>
+        {!destinationsQuery.isError && (
+          <section className="space-y-5">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
+                  Explore
+                </p>
+                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+                  Popular destinations
+                </h2>
+              </div>
             </div>
-          </div>
 
-          {destinationsQuery.isLoading ? (
-            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
-              {Array.from({ length: 6 }, (_, index) => (
-                <DestinationCardSkeleton key={index} />
-              ))}
-            </div>
-          ) : (
-            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
-              {(destinationsQuery.data ?? []).slice(0, 6).map((destination) => (
-                <DestinationCard key={destination.id} destination={destination} />
-              ))}
-            </div>
-          )}
-        </section>
+            {destinationsQuery.isLoading ? (
+              <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
+                {Array.from({ length: 6 }, (_, index) => (
+                  <DestinationCardSkeleton key={index} />
+                ))}
+              </div>
+            ) : (
+              <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
+                {(destinationsQuery.data ?? []).slice(0, 6).map((destination) => (
+                  <DestinationCard key={destination.id} destination={destination} />
+                ))}
+              </div>
+            )}
+          </section>
+        )}
       </div>
     </AppShell>
   )

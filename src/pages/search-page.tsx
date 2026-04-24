@@ -133,7 +133,7 @@ export function SearchPage() {
 
   const shouldReduceMotion = useReducedMotion()
   const motionTransition = shouldReduceMotion ? ZERO_DURATION : undefined
-  const { data: flights = [], isLoading } = useFlights(validSearchParams)
+  const { data: flights = [], isLoading, isError, refetch } = useFlights(validSearchParams)
 
   const airlineOptions = useMemo(
     () =>
@@ -228,6 +228,14 @@ export function SearchPage() {
                   <FlightCardSkeleton key={index} />
                 ))}
               </div>
+            ) : isError ? (
+              <EmptyState
+                title="Could not load flights"
+                description="There was a problem fetching flights for this route. Check your connection and try again."
+                ctaLabel="Try again"
+                onCtaClick={() => void refetch()}
+                icon={<Plane className="size-12" />}
+              />
             ) : visibleFlights.length > 0 ? (
               <div className="space-y-5">
                 <motion.div
