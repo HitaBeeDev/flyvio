@@ -10,6 +10,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useUiStore } from '@/stores/uiStore'
 
@@ -99,29 +100,43 @@ export function Navbar() {
             <Badge variant="default">{savedFlightIds.length}</Badge>
           </div>
 
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Toggle dark mode"
-            onClick={toggleTheme}
-            className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
-          >
-            <ThemeIcon className="size-4" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                aria-label="Toggle dark mode"
+                onClick={toggleTheme}
+                className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
+              >
+                <ThemeIcon className="size-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            </TooltipContent>
+          </Tooltip>
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Toggle dark mode"
-            onClick={toggleTheme}
-            className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
-          >
-            <ThemeIcon className="size-4" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                aria-label="Toggle dark mode"
+                onClick={toggleTheme}
+                className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
+              >
+                <ThemeIcon className="size-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            </TooltipContent>
+          </Tooltip>
           <Button
             type="button"
             variant="outline"

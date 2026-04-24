@@ -37,21 +37,21 @@ export function HomePage() {
   return (
     <AppShell>
       <div className="space-y-8">
-        <section className="relative flex min-h-[calc(100vh-10rem)] items-center justify-center overflow-hidden rounded-[2.4rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top,_rgba(20,184,166,0.16),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.92)_0%,_rgba(244,239,230,0.9)_52%,_rgba(227,242,239,0.9)_100%)] px-6 py-16 shadow-[0_40px_140px_rgba(15,23,42,0.12)] dark:border-slate-800/70 dark:bg-[radial-gradient(circle_at_top,_rgba(45,212,191,0.18),_transparent_28%),linear-gradient(135deg,_rgba(2,6,23,0.94)_0%,_rgba(15,23,42,0.96)_56%,_rgba(10,35,38,0.92)_100%)] sm:px-10">
+        <section className="relative flex min-h-[calc(100vh-10rem)] items-center justify-center overflow-hidden rounded-[2.4rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.14),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.92)_0%,_rgba(248,248,255,0.9)_52%,_rgba(238,242,255,0.9)_100%)] px-6 py-16 shadow-[0_40px_140px_rgba(15,23,42,0.12)] dark:border-zinc-800/70 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.16),_transparent_28%),linear-gradient(135deg,_rgba(9,9,11,0.96)_0%,_rgba(15,14,27,0.97)_56%,_rgba(9,9,11,0.96)_100%)] sm:px-10">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
             <div
-              className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(20,184,166,0.22)_0%,_rgba(20,184,166,0.02)_68%,_transparent_74%)] blur-2xl"
+              className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.20)_0%,_rgba(99,102,241,0.02)_68%,_transparent_74%)] blur-2xl"
               style={{ animation: 'skyquest-mesh-drift 16s ease-in-out infinite alternate' }}
             />
             <div
-              className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(14,165,233,0.18)_0%,_rgba(14,165,233,0.03)_66%,_transparent_74%)] blur-2xl"
+              className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(168,85,247,0.14)_0%,_rgba(168,85,247,0.02)_66%,_transparent_74%)] blur-2xl"
               style={{ animation: 'skyquest-mesh-drift 20s ease-in-out infinite alternate-reverse' }}
             />
             <div
-              className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(245,158,11,0.16)_0%,_rgba(245,158,11,0.03)_64%,_transparent_74%)] blur-2xl"
+              className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(129,140,248,0.12)_0%,_rgba(129,140,248,0.02)_64%,_transparent_74%)] blur-2xl"
               style={{ animation: 'skyquest-mesh-drift 18s ease-in-out infinite alternate' }}
             />
           </div>

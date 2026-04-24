@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #0f766e;
+  --color-accent: #6366f1;
   --color-surface: #f6f4ee;
   --color-border: #d8d2c4;
   --font-sans: "Space Grotesk", "Segoe UI", sans-serif;
@@ -16,9 +16,9 @@
 
 .dark {
   color-scheme: dark;
-  --color-accent: #5eead4;
-  --color-surface: #0f172a;
-  --color-border: #334155;
+  --color-accent: #818cf8;
+  --color-surface: #09090b;
+  --color-border: #27272a;
 }
 
 body {
