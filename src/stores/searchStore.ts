@@ -42,7 +42,6 @@ export const useSearchStore = create<SearchStore>()(
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         params: state.params,
-        filters: state.filters,
         sort: state.sort,
       }),
     },
