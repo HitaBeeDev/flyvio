@@ -1,42 +1,44 @@
-import { useState } from 'react'
-import { ChevronUp, ReceiptText } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import type { BookingExtras, Flight } from '@/types'
+import { useState } from "react";
+import { ChevronUp, ReceiptText } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BOOKING_COPY } from "@/lib/constants";
+import { useBookingStore } from "@/stores/bookingStore";
+import type { Flight } from "@/types";
 import {
   calculateBookingPrice,
   EXTRA_BAGGAGE_PRICE,
   formatMoney,
   SEAT_SELECTION_PRICE,
-} from './booking-utils'
+} from "./booking-utils";
 
 type PriceSummaryProps = {
-  flight: Flight
-  extras: BookingExtras
-  travelerCount: number
-}
+  flight: Flight;
+  travelerCount: number;
+};
 
-function SummaryCard({
-  flight,
-  extras,
-  travelerCount,
-}: PriceSummaryProps) {
-  const totals = calculateBookingPrice(flight, extras, travelerCount)
+function SummaryCard({ flight, travelerCount }: PriceSummaryProps) {
+  const extras = useBookingStore((state) => state.extras);
+  const totals = calculateBookingPrice(flight, extras, travelerCount);
 
   return (
     <Card className="gap-0 border-slate-200/80 bg-white/90 py-0 dark:border-slate-800/80 dark:bg-slate-950/85">
       <CardHeader className="border-b border-slate-200/80 py-5 dark:border-slate-800/80">
         <CardTitle className="text-2xl text-slate-950 dark:text-stone-100">
-          Price summary
+          {BOOKING_COPY.summary.title}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 px-6 py-6 text-sm">
         <div className="grid grid-cols-[1fr_auto] gap-3 text-slate-600 dark:text-slate-300">
-          <span>Flight x {travelerCount}</span>
+          <span>
+            {BOOKING_COPY.summary.flightPrefix} {travelerCount}
+          </span>
           <span>{formatMoney(totals.flightSubtotal)}</span>
         </div>
         <div className="grid grid-cols-[1fr_auto] gap-3 text-slate-600 dark:text-slate-300">
-          <span>Extra baggage x {extras.extraBaggage.length}</span>
+          <span>
+            {BOOKING_COPY.summary.baggagePrefix} {extras.extraBaggage.length}
+          </span>
           <span>
             {extras.extraBaggage.length > 0
               ? formatMoney(extras.extraBaggage.length * EXTRA_BAGGAGE_PRICE)
@@ -44,7 +46,9 @@ function SummaryCard({
           </span>
         </div>
         <div className="grid grid-cols-[1fr_auto] gap-3 text-slate-600 dark:text-slate-300">
-          <span>Seat selection x {extras.selectedSeats.length}</span>
+          <span>
+            {BOOKING_COPY.summary.seatsPrefix} {extras.selectedSeats.length}
+          </span>
           <span>
             {extras.selectedSeats.length > 0
               ? formatMoney(extras.selectedSeats.length * SEAT_SELECTION_PRICE)
@@ -53,27 +57,24 @@ function SummaryCard({
         </div>
         <div className="rounded-[1.4rem] border border-accent/20 bg-accent/10 px-4 py-4">
           <div className="grid grid-cols-[1fr_auto] gap-3 text-base font-semibold text-slate-950 dark:text-stone-100">
-            <span>Total</span>
+            <span>{BOOKING_COPY.summary.total}</span>
             <span>{formatMoney(totals.total)}</span>
           </div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
-export function PriceSummary({
-  flight,
-  extras,
-  travelerCount,
-}: PriceSummaryProps) {
-  const [mobileExpanded, setMobileExpanded] = useState(false)
-  const totals = calculateBookingPrice(flight, extras, travelerCount)
+export function PriceSummary({ flight, travelerCount }: PriceSummaryProps) {
+  const [mobileExpanded, setMobileExpanded] = useState(false);
+  const extras = useBookingStore((state) => state.extras);
+  const totals = calculateBookingPrice(flight, extras, travelerCount);
 
   return (
     <>
       <div className="hidden lg:block lg:sticky lg:top-28">
-        <SummaryCard flight={flight} extras={extras} travelerCount={travelerCount} />
+        <SummaryCard flight={flight} travelerCount={travelerCount} />
       </div>
 
       <div className="lg:hidden">
@@ -82,14 +83,20 @@ export function PriceSummary({
             <div className="flex items-center justify-between border-b border-slate-200/80 px-5 py-4 dark:border-slate-800/80">
               <div className="flex items-center gap-2">
                 <ReceiptText className="size-5 text-accent" />
-                <p className="font-semibold text-slate-950 dark:text-stone-100">Price summary</p>
+                <p className="font-semibold text-slate-950 dark:text-stone-100">
+                  {BOOKING_COPY.summary.title}
+                </p>
               </div>
-              <Button variant="ghost" size="sm" onClick={() => setMobileExpanded(false)}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setMobileExpanded(false)}
+              >
                 <ChevronUp className="size-4" />
               </Button>
             </div>
             <div className="p-4">
-              <SummaryCard flight={flight} extras={extras} travelerCount={travelerCount} />
+              <SummaryCard flight={flight} travelerCount={travelerCount} />
             </div>
           </div>
         ) : (
@@ -98,7 +105,9 @@ export function PriceSummary({
             onClick={() => setMobileExpanded(true)}
             className="fixed inset-x-4 bottom-4 z-40 flex items-center justify-between rounded-[1.4rem] border border-slate-200/80 bg-white/95 px-5 py-4 shadow-[0_18px_50px_rgba(15,23,42,0.18)] backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/95"
           >
-            <span className="text-sm text-slate-500 dark:text-slate-400">Total</span>
+            <span className="text-sm text-slate-500 dark:text-slate-400">
+              {BOOKING_COPY.summary.total}
+            </span>
             <span className="text-base font-semibold text-slate-950 dark:text-stone-100">
               {formatMoney(totals.total)}
             </span>
@@ -106,5 +115,5 @@ export function PriceSummary({
         )}
       </div>
     </>
-  )
+  );
 }

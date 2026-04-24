@@ -1,6 +1,6 @@
-import { Skeleton } from '@/components/ui/skeleton'
-import { FlightCard as BaseFlightCard } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
+import { Skeleton } from "@/components/ui/skeleton";
+import { FlightCard as BaseFlightCard } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 function ItinerarySkeletonRow() {
   return (
@@ -25,7 +25,7 @@ function ItinerarySkeletonRow() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export function FlightCardSkeleton() {
@@ -57,5 +57,5 @@ export function FlightCardSkeleton() {
         </div>
       </div>
     </BaseFlightCard>
-  )
+  );
 }

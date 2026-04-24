@@ -1,10 +1,10 @@
-import { SearchWidget } from '@/components/features/search/SearchWidget'
-import type { SearchParams } from '@/types'
-import { formatResultsMeta, formatRouteTitle } from './results-utils'
+import { SearchWidget } from "@/components/features/search/SearchWidget";
+import type { SearchParams } from "@/types";
+import { formatResultsMeta, formatRouteTitle } from "./results-utils";
 
 type ResultsSummaryProps = {
-  params: Partial<SearchParams>
-}
+  params: Partial<SearchParams>;
+};
 
 export function ResultsSummary({ params }: ResultsSummaryProps) {
   return (
@@ -23,5 +23,5 @@ export function ResultsSummary({ params }: ResultsSummaryProps) {
 
       <SearchWidget variant="compact" initialParams={params} />
     </section>
-  )
+  );
 }

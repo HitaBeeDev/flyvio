@@ -1,23 +1,23 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export type ThemeMode = 'light' | 'dark' | 'system'
+export type ThemeMode = "light" | "dark" | "system";
 
 type UiStore = {
-  theme: ThemeMode
-  mobileNavOpen: boolean
-  savedFlightIds: string[]
-  setTheme: (theme: ThemeMode) => void
-  toggleMobileNav: () => void
-  toggleSavedFlightId: (id: string) => void
-  saveFlightId: (id: string) => void
-  removeSavedFlightId: (id: string) => void
-}
+  theme: ThemeMode;
+  mobileNavOpen: boolean;
+  savedFlightIds: string[];
+  setTheme: (theme: ThemeMode) => void;
+  toggleMobileNav: () => void;
+  toggleSavedFlightId: (id: string) => void;
+  saveFlightId: (id: string) => void;
+  removeSavedFlightId: (id: string) => void;
+};
 
 export const useUiStore = create<UiStore>()(
   persist(
     (set) => ({
-      theme: 'system',
+      theme: "system",
       mobileNavOpen: false,
       savedFlightIds: [],
       setTheme: (theme) => set({ theme }),
@@ -37,15 +37,17 @@ export const useUiStore = create<UiStore>()(
         })),
       removeSavedFlightId: (id) =>
         set((state) => ({
-          savedFlightIds: state.savedFlightIds.filter((savedId) => savedId !== id),
+          savedFlightIds: state.savedFlightIds.filter(
+            (savedId) => savedId !== id,
+          ),
         })),
     }),
     {
-      name: 'skyquest-ui',
+      name: "skyquest-ui",
       partialize: (state) => ({
         theme: state.theme,
         savedFlightIds: state.savedFlightIds,
       }),
     },
   ),
-)
+);

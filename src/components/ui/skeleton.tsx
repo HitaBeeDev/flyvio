@@ -1,22 +1,22 @@
-import { FlightCard, FlightCardDivider } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { FlightCard, FlightCardDivider } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 function Skeleton({
   className,
-  variant = 'block',
+  variant = "block",
   ...props
-}: React.ComponentProps<'div'> & { variant?: 'block' | 'text' }) {
+}: React.ComponentProps<"div"> & { variant?: "block" | "text" }) {
   return (
     <div
       data-slot="skeleton"
       className={cn(
-        'animate-pulse rounded-md bg-slate-200/80 dark:bg-slate-800/80',
-        variant === 'text' ? 'h-4 rounded-full' : '',
+        "animate-pulse rounded-md bg-slate-200/80 dark:bg-slate-800/80",
+        variant === "text" ? "h-4 rounded-full" : "",
         className,
       )}
       {...props}
     />
-  )
+  );
 }
 
 function FlightCardSkeleton() {
@@ -48,7 +48,7 @@ function FlightCardSkeleton() {
         <Skeleton className="h-11 w-32 rounded-xl" />
       </div>
     </FlightCard>
-  )
+  );
 }
 
-export { Skeleton, FlightCardSkeleton }
+export { Skeleton, FlightCardSkeleton };

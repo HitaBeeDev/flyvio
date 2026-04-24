@@ -1,19 +1,19 @@
-import { format } from 'date-fns'
-import { airportsByCode } from '@/data/airports'
-import type { CabinClass, PassengerCount, SearchParams } from '@/types'
+import { format } from "date-fns";
+import { airportsByCode } from "@/data/airports";
+import type { CabinClass, PassengerCount, SearchParams } from "@/types";
 
 function pluralize(count: number, singular: string, plural = `${singular}s`) {
-  return `${count} ${count === 1 ? singular : plural}`
+  return `${count} ${count === 1 ? singular : plural}`;
 }
 
 export function getAirportLabel(code: string) {
-  const airport = airportsByCode.get(code)
+  const airport = airportsByCode.get(code);
 
   if (!airport) {
-    return code
+    return code;
   }
 
-  return `${airport.city} (${airport.iata})`
+  return `${airport.city} (${airport.iata})`;
 }
 
 export function formatPassengerSummary(
@@ -21,12 +21,12 @@ export function formatPassengerSummary(
   cabinClass: CabinClass,
 ) {
   const parts = [
-    pluralize(passengers.adults, 'Adult'),
-    passengers.children ? pluralize(passengers.children, 'Child') : null,
-    passengers.infants ? pluralize(passengers.infants, 'Infant') : null,
-  ].filter(Boolean)
+    pluralize(passengers.adults, "Adult"),
+    passengers.children ? pluralize(passengers.children, "Child") : null,
+    passengers.infants ? pluralize(passengers.infants, "Infant") : null,
+  ].filter(Boolean);
 
-  return `${parts.join(', ')} · ${cabinClass}`
+  return `${parts.join(", ")} · ${cabinClass}`;
 }
 
 export function formatWidgetDateLabel(
@@ -35,16 +35,16 @@ export function formatWidgetDateLabel(
   isRoundTrip?: boolean,
 ) {
   if (!departureDate) {
-    return 'Select travel dates'
+    return "Select travel dates";
   }
 
-  const departure = format(new Date(departureDate), 'EEE, d MMM')
+  const departure = format(new Date(departureDate), "EEE, d MMM");
 
   if (!isRoundTrip || !returnDate) {
-    return departure
+    return departure;
   }
 
-  return `${departure} → ${format(new Date(returnDate), 'EEE, d MMM')}`
+  return `${departure} → ${format(new Date(returnDate), "EEE, d MMM")}`;
 }
 
 export function formatSearchSummary(params: SearchParams) {
@@ -56,5 +56,5 @@ export function formatSearchSummary(params: SearchParams) {
       params.isRoundTrip,
     ),
     formatPassengerSummary(params.passengers, params.cabinClass),
-  ].join(' · ')
+  ].join(" · ");
 }

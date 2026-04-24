@@ -1,21 +1,21 @@
-import * as React from 'react'
-import { cn } from '@/lib/utils'
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-type InputProps = React.ComponentProps<'input'> & {
-  label?: string
-  labelMode?: 'floating' | 'top'
-  helperText?: string
-  error?: string
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
-}
+type InputProps = React.ComponentProps<"input"> & {
+  label?: string;
+  labelMode?: "floating" | "top";
+  helperText?: string;
+  error?: string;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+};
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   {
     className,
     type,
     label,
-    labelMode = 'top',
+    labelMode = "top",
     helperText,
     error,
     leftIcon,
@@ -26,14 +26,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   },
   ref,
 ) {
-  const generatedId = React.useId()
-  const errorId = React.useId()
-  const inputId = id ?? generatedId
-  const hasFloatingLabel = label && labelMode === 'floating'
+  const generatedId = React.useId();
+  const errorId = React.useId();
+  const inputId = id ?? generatedId;
+  const hasFloatingLabel = label && labelMode === "floating";
 
   return (
     <div className="space-y-2">
-      {label && labelMode === 'top' ? (
+      {label && labelMode === "top" ? (
         <label
           htmlFor={inputId}
           className="block text-sm font-medium text-slate-700 dark:text-slate-200"
@@ -53,16 +53,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
             id={inputId}
             type={type}
             data-slot="input"
-            placeholder={hasFloatingLabel ? ' ' : placeholder}
+            placeholder={hasFloatingLabel ? " " : placeholder}
             aria-invalid={Boolean(error)}
-            aria-describedby={error ? errorId : helperText ? errorId : undefined}
+            aria-describedby={
+              error ? errorId : helperText ? errorId : undefined
+            }
             className={cn(
-              'peer h-12 w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-xs transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-slate-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-950 dark:text-stone-100',
-              'focus-visible:border-indigo-500 focus-visible:ring-[3px] focus-visible:ring-indigo-500/20',
-              'aria-invalid:border-rose-500 aria-invalid:ring-rose-500/20 dark:aria-invalid:ring-rose-500/20',
-              leftIcon ? 'pl-11' : '',
-              rightIcon ? 'pr-11' : '',
-              hasFloatingLabel ? 'pt-5' : '',
+              "peer h-12 w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-xs transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-slate-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-950 dark:text-stone-100",
+              "focus-visible:border-indigo-500 focus-visible:ring-[3px] focus-visible:ring-indigo-500/20",
+              "aria-invalid:border-rose-500 aria-invalid:ring-rose-500/20 dark:aria-invalid:ring-rose-500/20",
+              leftIcon ? "pl-11" : "",
+              rightIcon ? "pr-11" : "",
+              hasFloatingLabel ? "pt-5" : "",
               className,
             )}
             {...props}
@@ -71,9 +73,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
             <label
               htmlFor={inputId}
               className={cn(
-                'pointer-events-none absolute left-4 top-1/2 origin-left -translate-y-1/2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-indigo-700 dark:text-slate-400 dark:peer-focus:text-indigo-400',
-                leftIcon ? 'left-11' : '',
-                'peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:text-xs',
+                "pointer-events-none absolute left-4 top-1/2 origin-left -translate-y-1/2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-indigo-700 dark:text-slate-400 dark:peer-focus:text-indigo-400",
+                leftIcon ? "left-11" : "",
+                "peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:text-xs",
               )}
             >
               {label}
@@ -86,17 +88,24 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
           ) : null}
         </div>
         {error ? (
-          <p id={errorId} role="alert" className="text-sm text-rose-600 dark:text-rose-400">
+          <p
+            id={errorId}
+            role="alert"
+            className="text-sm text-rose-600 dark:text-rose-400"
+          >
             {error}
           </p>
         ) : helperText ? (
-          <p id={errorId} className="text-sm text-slate-500 dark:text-slate-400">
+          <p
+            id={errorId}
+            className="text-sm text-slate-500 dark:text-slate-400"
+          >
             {helperText}
           </p>
         ) : null}
       </div>
     </div>
-  )
-})
+  );
+});
 
-export { Input }
+export { Input };

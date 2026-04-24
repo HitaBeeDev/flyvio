@@ -7,4 +7,4 @@ export {
   DialogHeader as ModalHeader,
   DialogTitle as ModalTitle,
   DialogTrigger as ModalTrigger,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";

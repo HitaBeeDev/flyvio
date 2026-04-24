@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
-import { WifiOff } from 'lucide-react'
+import { useEffect, useState } from "react";
+import { WifiOff } from "lucide-react";
 
 export function OfflineBanner() {
-  const [isOnline, setIsOnline] = useState(navigator.onLine)
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true)
-    const handleOffline = () => setIsOnline(false)
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
 
-    window.addEventListener('online', handleOnline)
-    window.addEventListener('offline', handleOffline)
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      window.removeEventListener('online', handleOnline)
-      window.removeEventListener('offline', handleOffline)
-    }
-  }, [])
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
-  if (isOnline) return null
+  if (isOnline) return null;
 
   return (
     <div
@@ -28,5 +28,5 @@ export function OfflineBanner() {
       <WifiOff className="size-4 shrink-0" aria-hidden="true" />
       You're offline — some features may be unavailable
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-import { useEffect } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import { SearchWidget } from '@/components/features/search/SearchWidget'
-import { DestinationCard } from '@/components/features/explore/DestinationCard'
-import { AppShell } from '@/components/layout/AppShell'
-import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
-import { useDestinations } from '@/hooks/useDestinations'
-import { slideUp, staggerContainer, ZERO_DURATION } from '@/lib/motion'
+import { useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { SearchWidget } from "@/components/features/search/SearchWidget";
+import { DestinationCard } from "@/components/features/explore/DestinationCard";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useDestinations } from "@/hooks/useDestinations";
+import { slideUp, staggerContainer, ZERO_DURATION } from "@/lib/motion";
 
 function DestinationCardSkeleton() {
   return (
@@ -22,17 +22,17 @@ function DestinationCardSkeleton() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export function HomePage() {
-  const destinationsQuery = useDestinations()
-  const shouldReduceMotion = useReducedMotion()
-  const transition = shouldReduceMotion ? ZERO_DURATION : undefined
+  const destinationsQuery = useDestinations();
+  const shouldReduceMotion = useReducedMotion();
+  const transition = shouldReduceMotion ? ZERO_DURATION : undefined;
 
   useEffect(() => {
-    document.title = 'SkyQuest — Find Your Next Flight'
-  }, [])
+    document.title = "SkyQuest — Find Your Next Flight";
+  }, []);
 
   return (
     <AppShell>
@@ -44,15 +44,24 @@ export function HomePage() {
           >
             <div
               className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.20)_0%,_rgba(99,102,241,0.02)_68%,_transparent_74%)] blur-2xl"
-              style={{ animation: 'skyquest-mesh-drift 16s ease-in-out infinite alternate' }}
+              style={{
+                animation:
+                  "skyquest-mesh-drift 16s ease-in-out infinite alternate",
+              }}
             />
             <div
               className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(168,85,247,0.14)_0%,_rgba(168,85,247,0.02)_66%,_transparent_74%)] blur-2xl"
-              style={{ animation: 'skyquest-mesh-drift 20s ease-in-out infinite alternate-reverse' }}
+              style={{
+                animation:
+                  "skyquest-mesh-drift 20s ease-in-out infinite alternate-reverse",
+              }}
             />
             <div
               className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(129,140,248,0.12)_0%,_rgba(129,140,248,0.02)_64%,_transparent_74%)] blur-2xl"
-              style={{ animation: 'skyquest-mesh-drift 18s ease-in-out infinite alternate' }}
+              style={{
+                animation:
+                  "skyquest-mesh-drift 18s ease-in-out infinite alternate",
+              }}
             />
           </div>
 
@@ -113,14 +122,19 @@ export function HomePage() {
               </div>
             ) : (
               <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
-                {(destinationsQuery.data ?? []).slice(0, 6).map((destination) => (
-                  <DestinationCard key={destination.id} destination={destination} />
-                ))}
+                {(destinationsQuery.data ?? [])
+                  .slice(0, 6)
+                  .map((destination) => (
+                    <DestinationCard
+                      key={destination.id}
+                      destination={destination}
+                    />
+                  ))}
               </div>
             )}
           </section>
         )}
       </div>
     </AppShell>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-const year = new Date().getFullYear()
+const year = new Date().getFullYear();
 
 export function Footer() {
   return (
@@ -16,10 +16,16 @@ export function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
-          <Link className="hover:text-slate-950 dark:hover:text-stone-100" to="/">
+          <Link
+            className="hover:text-slate-950 dark:hover:text-stone-100"
+            to="/"
+          >
             Home
           </Link>
-          <Link className="hover:text-slate-950 dark:hover:text-stone-100" to="/explore">
+          <Link
+            className="hover:text-slate-950 dark:hover:text-stone-100"
+            to="/explore"
+          >
             Explore
           </Link>
           <a
@@ -35,5 +41,5 @@ export function Footer() {
         <p>© {year} SkyQuest</p>
       </div>
     </footer>
-  )
+  );
 }

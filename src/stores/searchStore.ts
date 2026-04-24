@@ -1,30 +1,30 @@
-import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-import type { SortOption } from '@/types/flight'
-import type { FilterState, SearchParams } from '@/types/search'
+import type { SortOption } from "@/types/flight";
+import type { FilterState, SearchParams } from "@/types/search";
 
-export type SearchDraft = Partial<SearchParams>
+export type SearchDraft = Partial<SearchParams>;
 
 type SearchStore = {
-  params: SearchDraft | null
-  filters: FilterState
-  sort: SortOption
-  setParams: (params: SearchDraft | null) => void
-  setFilters: (filters: FilterState) => void
-  setSort: (sort: SortOption) => void
-  resetFilters: () => void
-}
+  params: SearchDraft | null;
+  filters: FilterState;
+  sort: SortOption;
+  setParams: (params: SearchDraft | null) => void;
+  setFilters: (filters: FilterState) => void;
+  setSort: (sort: SortOption) => void;
+  resetFilters: () => void;
+};
 
 export const DEFAULT_FILTERS: FilterState = {
   priceRange: [0, 5000],
-  stops: ['any'],
+  stops: ["any"],
   departureWindows: [],
   airlines: [],
   maxDuration: 24 * 60,
-}
+};
 
-const DEFAULT_SORT: SortOption = 'best'
+const DEFAULT_SORT: SortOption = "best";
 
 export const useSearchStore = create<SearchStore>()(
   persist(
@@ -38,7 +38,7 @@ export const useSearchStore = create<SearchStore>()(
       resetFilters: () => set({ filters: DEFAULT_FILTERS }),
     }),
     {
-      name: 'search-store',
+      name: "search-store",
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         params: state.params,
@@ -46,4 +46,4 @@ export const useSearchStore = create<SearchStore>()(
       }),
     },
   ),
-)
+);

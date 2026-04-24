@@ -7,14 +7,14 @@ export type {
   CabinClass,
   StopFilter,
   Flight,
-} from './flight'
+} from "./flight";
 
 export type {
   PassengerCount,
   SearchParams,
   FilterState,
   DepartureWindow,
-} from './search'
+} from "./search";
 
 export type {
   Passenger,
@@ -23,9 +23,6 @@ export type {
   BookingStatus,
   Booking,
   CreateBookingPayload,
-} from './booking'
+} from "./booking";
 
-export type {
-  Region,
-  Destination,
-} from './destination'
+export type { Region, Destination } from "./destination";

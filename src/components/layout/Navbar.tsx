@@ -1,63 +1,65 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { Heart, Menu, MoonStar, SunMedium } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Heart, Menu, MoonStar, SunMedium } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
-import { useUiStore } from '@/stores/uiStore'
+} from "@/components/ui/drawer";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { useUiStore } from "@/stores/uiStore";
 
-const navigation = [
-  { label: 'Explore', to: '/explore' },
-] as const
+const navigation = [{ label: "Explore", to: "/explore" }] as const;
 
 export function Navbar() {
-  const theme = useUiStore((state) => state.theme)
-  const setTheme = useUiStore((state) => state.setTheme)
-  const mobileNavOpen = useUiStore((state) => state.mobileNavOpen)
-  const savedFlightIds = useUiStore((state) => state.savedFlightIds)
-  const toggleMobileNav = useUiStore((state) => state.toggleMobileNav)
-  const [scrolled, setScrolled] = useState(false)
+  const theme = useUiStore((state) => state.theme);
+  const setTheme = useUiStore((state) => state.setTheme);
+  const mobileNavOpen = useUiStore((state) => state.mobileNavOpen);
+  const savedFlightIds = useUiStore((state) => state.savedFlightIds);
+  const toggleMobileNav = useUiStore((state) => state.toggleMobileNav);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+      setScrolled(window.scrollY > 20);
+    };
 
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
-  const resolvedTheme = theme === 'dark' ? 'dark' : 'light'
-  const ThemeIcon = resolvedTheme === 'dark' ? SunMedium : MoonStar
+  const resolvedTheme = theme === "dark" ? "dark" : "light";
+  const ThemeIcon = resolvedTheme === "dark" ? SunMedium : MoonStar;
 
   const toggleTheme = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
-  }
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
 
   const closeMobileNav = () => {
     if (mobileNavOpen) {
-      toggleMobileNav()
+      toggleMobileNav();
     }
-  }
+  };
 
   return (
     <nav
       className={cn(
-        'sticky top-4 z-40 rounded-[1.5rem] border border-transparent transition-all duration-300',
+        "sticky top-4 z-40 rounded-[1.5rem] border border-transparent transition-all duration-300",
         scrolled &&
-          'border-border/80 bg-white/75 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:bg-slate-950/70',
+          "border-border/80 bg-white/75 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:bg-slate-950/70",
       )}
     >
       <div className="flex items-center justify-between gap-4 px-1 py-1">
@@ -85,8 +87,9 @@ export function Navbar() {
               to={item.to}
               className={({ isActive }) =>
                 cn(
-                  'rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-white/70 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900/70 dark:hover:text-stone-100',
-                  isActive && 'bg-white/80 text-slate-950 shadow-sm dark:bg-slate-900/80 dark:text-stone-100',
+                  "rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-white/70 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900/70 dark:hover:text-stone-100",
+                  isActive &&
+                    "bg-white/80 text-slate-950 shadow-sm dark:bg-slate-900/80 dark:text-stone-100",
                 )
               }
             >
@@ -114,7 +117,9 @@ export function Navbar() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              {resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              {resolvedTheme === "dark"
+                ? "Switch to light mode"
+                : "Switch to dark mode"}
             </TooltipContent>
           </Tooltip>
         </div>
@@ -134,7 +139,9 @@ export function Navbar() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              {resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              {resolvedTheme === "dark"
+                ? "Switch to light mode"
+                : "Switch to dark mode"}
             </TooltipContent>
           </Tooltip>
           <Button
@@ -154,14 +161,16 @@ export function Navbar() {
         open={mobileNavOpen}
         onOpenChange={(open) => {
           if (open !== mobileNavOpen) {
-            toggleMobileNav()
+            toggleMobileNav();
           }
         }}
       >
         <DrawerContent className="px-2 pb-6 pt-2">
           <DrawerHeader className="px-4">
             <DrawerTitle>Navigation</DrawerTitle>
-            <DrawerDescription>Browse the current routes and saved flight state.</DrawerDescription>
+            <DrawerDescription>
+              Browse the current routes and saved flight state.
+            </DrawerDescription>
           </DrawerHeader>
 
           <div className="space-y-2 px-2">
@@ -172,8 +181,9 @@ export function Navbar() {
                 onClick={closeMobileNav}
                 className={({ isActive }) =>
                   cn(
-                    'flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900',
-                    isActive && 'bg-slate-100 text-slate-950 dark:bg-slate-900 dark:text-stone-100',
+                    "flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900",
+                    isActive &&
+                      "bg-slate-100 text-slate-950 dark:bg-slate-900 dark:text-stone-100",
                   )
                 }
               >
@@ -192,5 +202,5 @@ export function Navbar() {
         </DrawerContent>
       </Drawer>
     </nav>
-  )
+  );
 }
