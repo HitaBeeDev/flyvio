@@ -24,4 +24,9 @@ export const cardItem: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 }
 
+export const scaleIn: Variants = {
+  hidden: { scale: 0.95, opacity: 0 },
+  visible: { scale: 1, opacity: 1 },
+}
+
 export const ZERO_DURATION = { duration: 0 } as const
