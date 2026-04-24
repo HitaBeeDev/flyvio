@@ -131,7 +131,7 @@ export function PassengerPicker({
                 className={cn(
                   'rounded-2xl border px-4 py-3 text-sm font-medium transition-colors',
                   cabinClass === option.value
-                    ? 'border-teal-600 bg-teal-50 text-teal-900 dark:bg-teal-950/40 dark:text-teal-200'
+                    ? 'border-indigo-500 bg-indigo-50 text-indigo-900 dark:bg-indigo-950/40 dark:text-indigo-200'
                     : 'border-border/80 bg-white text-slate-700 hover:bg-slate-50 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900',
                 )}
               >

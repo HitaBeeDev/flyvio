@@ -20,7 +20,7 @@ export function ProgressSteps({ steps, currentStep, className }: ProgressStepsPr
             className={cn(
               'flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm',
               isCurrent
-                ? 'border-teal-500 bg-teal-50 text-teal-900 dark:bg-teal-950/40 dark:text-teal-200'
+                ? 'border-indigo-500 bg-indigo-50 text-indigo-900 dark:bg-indigo-950/40 dark:text-indigo-200'
                 : 'border-border/80 bg-white/70 text-slate-600 dark:bg-slate-950/60 dark:text-slate-300',
             )}
           >

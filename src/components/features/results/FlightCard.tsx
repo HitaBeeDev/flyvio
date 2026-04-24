@@ -100,7 +100,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
     <motion.div variants={cardItem}>
       <BaseFlightCard
         className={cn(
-          'gap-0 border-slate-200/90 bg-white/95 py-0 transition duration-300 hover:scale-[1.01] hover:border-accent/60 hover:shadow-[0_24px_70px_rgba(15,118,110,0.14)] dark:border-slate-800/90 dark:bg-slate-950/90',
+          'gap-0 border-slate-200/90 bg-white/95 py-0 transition duration-300 hover:scale-[1.01] hover:border-accent/60 hover:shadow-[0_24px_70px_rgba(99,102,241,0.14)] dark:border-slate-800/90 dark:bg-slate-950/90',
           className,
         )}
       >

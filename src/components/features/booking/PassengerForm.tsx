@@ -152,14 +152,22 @@ export function PassengerForm({
                 error={passengerErrors.passportNumber}
               />
               <div className="space-y-2 md:col-span-2">
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
+                <label
+                  htmlFor={`${descriptor.key}-nationality`}
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-200"
+                >
                   Nationality
                 </label>
                 <Select
                   value={passenger.nationality}
                   onValueChange={(value) => setField(index, 'nationality', value)}
                 >
-                  <SelectTrigger className="h-12 w-full rounded-2xl border-slate-200 bg-white px-4 text-left dark:border-slate-800 dark:bg-slate-950">
+                  <SelectTrigger
+                    id={`${descriptor.key}-nationality`}
+                    aria-describedby={passengerErrors.nationality ? `${descriptor.key}-nationality-error` : undefined}
+                    aria-invalid={Boolean(passengerErrors.nationality)}
+                    className="h-12 w-full rounded-2xl border-slate-200 bg-white px-4 text-left dark:border-slate-800 dark:bg-slate-950"
+                  >
                     <SelectValue placeholder="Choose a nationality" />
                   </SelectTrigger>
                   <SelectContent className="max-h-80">
@@ -171,7 +179,11 @@ export function PassengerForm({
                   </SelectContent>
                 </Select>
                 {passengerErrors.nationality ? (
-                  <p className="text-sm text-rose-600 dark:text-rose-400">
+                  <p
+                    id={`${descriptor.key}-nationality-error`}
+                    role="alert"
+                    className="text-sm text-rose-600 dark:text-rose-400"
+                  >
                     {passengerErrors.nationality}
                   </p>
                 ) : null}

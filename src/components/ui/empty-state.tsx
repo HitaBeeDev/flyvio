@@ -18,7 +18,7 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center rounded-[2rem] border border-dashed border-slate-300 bg-white/70 px-6 py-12 text-center dark:border-slate-700 dark:bg-slate-950/60">
-      <div className="mb-5 flex size-24 items-center justify-center rounded-full bg-[radial-gradient(circle,_rgba(20,184,166,0.18),_transparent_68%)] text-teal-700 dark:text-teal-300">
+      <div className="mb-5 flex size-24 items-center justify-center rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.18),_transparent_68%)] text-indigo-600 dark:text-indigo-400">
         {icon ?? (
           <svg viewBox="0 0 120 120" className="size-16" fill="none" aria-hidden="true">
             <path d="M18 76h84" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />

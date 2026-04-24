@@ -28,7 +28,9 @@ export function AirportInput({
   placeholder,
   error,
 }: AirportInputProps) {
+  const inputId = useId()
   const listboxId = useId()
+  const errorId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
@@ -63,24 +65,30 @@ export function AirportInput({
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
+      <label
+        htmlFor={inputId}
+        className="block text-sm font-medium text-slate-700 dark:text-slate-200"
+      >
         {label}
       </label>
       <div ref={wrapperRef} className="relative">
         <div
           className={cn(
-            'flex h-12 items-center gap-3 rounded-2xl border bg-white px-4 shadow-xs transition-[border-color,box-shadow,background-color] focus-within:border-teal-600 focus-within:ring-4 focus-within:ring-teal-500/10 dark:bg-slate-950',
+            'flex h-12 items-center gap-3 rounded-2xl border bg-white px-4 shadow-xs transition-[border-color,box-shadow,background-color] focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-500/15 dark:bg-slate-950',
             error ? 'border-rose-500 ring-4 ring-rose-500/10' : 'border-border/80',
           )}
         >
-          <PlaneTakeoff className="size-4 text-slate-400" />
+          <PlaneTakeoff className="size-4 text-slate-400" aria-hidden="true" />
           <input
             ref={inputRef}
+            id={inputId}
             role="combobox"
             aria-expanded={open}
             aria-controls={listboxId}
             aria-activedescendant={open && activeOption ? `${listboxId}-${activeOption.iata}` : undefined}
             aria-autocomplete="list"
+            aria-describedby={error ? errorId : undefined}
+            aria-invalid={Boolean(error)}
             value={displayValue}
             onFocus={() => {
               setOpen(true)
@@ -107,6 +115,16 @@ export function AirportInput({
                 setActiveIndex((current) => Math.max(current - 1, 0))
               }
 
+              if (event.key === 'Home') {
+                event.preventDefault()
+                setActiveIndex(0)
+              }
+
+              if (event.key === 'End') {
+                event.preventDefault()
+                setActiveIndex(Math.max(options.length - 1, 0))
+              }
+
               if (event.key === 'Enter' && activeOption) {
                 event.preventDefault()
                 selectOption(activeOption.iata)
@@ -127,6 +145,7 @@ export function AirportInput({
           <div
             id={listboxId}
             role="listbox"
+            aria-label={label}
             className="absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-2xl border border-border/80 bg-white/95 p-2 shadow-[0_24px_80px_rgba(15,23,42,0.16)] backdrop-blur dark:bg-slate-950/95"
           >
             {options.length ? (
@@ -147,7 +166,7 @@ export function AirportInput({
                   )}
                 >
                   <span className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 size-4 text-slate-400" />
+                    <MapPin className="mt-0.5 size-4 text-slate-400" aria-hidden="true" />
                     <span>
                       <span className="block text-sm font-medium text-slate-900 dark:text-stone-100">
                         {airport.iata} · {airport.city}
@@ -159,9 +178,10 @@ export function AirportInput({
                   </span>
                   <Check
                     className={cn(
-                      'size-4 text-teal-600',
+                      'size-4 text-indigo-500',
                       value === airport.iata ? 'opacity-100' : 'opacity-0',
                     )}
+                    aria-hidden="true"
                   />
                 </button>
               ))
@@ -173,7 +193,11 @@ export function AirportInput({
           </div>
         ) : null}
       </div>
-      {error ? <p className="text-sm text-rose-600 dark:text-rose-400">{error}</p> : null}
+      {error ? (
+        <p id={errorId} role="alert" className="text-sm text-rose-600 dark:text-rose-400">
+          {error}
+        </p>
+      ) : null}
     </div>
   )
 }
