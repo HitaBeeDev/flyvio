@@ -21,6 +21,10 @@ function AirlineMark({ name, logoUrl }: { name: string; logoUrl: string }) {
         <img
           src={logoUrl}
           alt={name}
+          width={56}
+          height={56}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-contain p-2"
           onError={() => setImageFailed(true)}
         />
