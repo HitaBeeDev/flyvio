@@ -154,7 +154,8 @@ export function ExtrasForm({
                 <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
                   {passenger.label}
                 </p>
-                <div className="grid gap-2">
+                <div className="overflow-x-auto">
+                  <div className="grid min-w-[264px] gap-2">
                   {Array.from({ length: 3 }, (_, rowIndex) => {
                     const rowNumber = rowIndex + 1
 
@@ -183,7 +184,7 @@ export function ExtrasForm({
                               onClick={() => toggleSeat(passenger.key, segment.key, seatCode)}
                               disabled={unavailable || selectedByAnotherPassenger}
                               className={cn(
-                                'rounded-xl border px-0 py-3 text-sm font-medium transition',
+                                'min-h-[44px] rounded-xl border px-0 py-3 text-sm font-medium transition',
                                 selectedByPassenger
                                   ? 'border-accent bg-accent text-white'
                                   : unavailable || selectedByAnotherPassenger
@@ -198,6 +199,7 @@ export function ExtrasForm({
                       </div>
                     )
                   })}
+                  </div>
                 </div>
               </div>
             ))}

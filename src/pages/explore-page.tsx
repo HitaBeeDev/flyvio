@@ -107,11 +107,11 @@ export function ExplorePage() {
   return (
     <AppShell>
       <div className="space-y-6">
-        <section className="rounded-[2rem] border border-border/80 bg-white/75 p-8 shadow-[0_30px_120px_rgba(15,23,42,0.10)] backdrop-blur dark:bg-slate-950/70">
+        <section className="rounded-[2rem] border border-border/80 bg-white/75 p-5 shadow-[0_30px_120px_rgba(15,23,42,0.10)] backdrop-blur sm:p-8 dark:bg-slate-950/70">
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
             Explore
           </p>
-          <h1 className="mt-4 font-serif text-5xl text-slate-950 dark:text-stone-50">
+          <h1 className="mt-4 font-serif text-3xl text-slate-950 sm:text-4xl md:text-5xl dark:text-stone-50">
             Explore destinations worth the detour
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">
@@ -142,8 +142,8 @@ export function ExplorePage() {
                 }}
                 className={
                   active
-                    ? 'rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-[0_10px_24px_rgba(15,118,110,0.24)]'
-                    : 'rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800'
+                    ? 'min-h-[44px] rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-[0_10px_24px_rgba(15,118,110,0.24)]'
+                    : 'min-h-[44px] rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800'
                 }
               >
                 {tab.label}
@@ -153,7 +153,7 @@ export function ExplorePage() {
         </div>
 
         {destinationsQuery.isLoading ? (
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {Array.from({ length: 12 }, (_, index) => (
               <DestinationCardSkeleton key={index} />
             ))}
@@ -164,7 +164,7 @@ export function ExplorePage() {
             initial="hidden"
             animate="visible"
             transition={motionTransition}
-            className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"
+            className="grid gap-5 md:grid-cols-2 lg:grid-cols-4"
           >
             {filteredDestinations.map((destination) => (
               <motion.div key={destination.id} variants={cardItem} transition={motionTransition}>

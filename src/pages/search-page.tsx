@@ -194,8 +194,8 @@ export function SearchPage() {
       <div className="space-y-6">
         <ResultsSummary params={summaryParams} />
 
-        <div className="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="hidden xl:block">
+        <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <aside className="hidden lg:block">
             <div className="sticky top-28">
               <FilterPanel
                 filters={filters}
@@ -280,7 +280,7 @@ export function SearchPage() {
       </div>
 
       <Drawer open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
-        <DrawerContent className="px-2 pb-6 pt-2 xl:hidden">
+        <DrawerContent className="px-2 pb-6 pt-2 lg:hidden">
           <DrawerHeader className="px-4">
             <DrawerTitle>Filters</DrawerTitle>
             <DrawerDescription>

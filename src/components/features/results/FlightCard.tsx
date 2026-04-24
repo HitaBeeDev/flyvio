@@ -108,7 +108,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
           type="button"
           onClick={() => toggleSavedFlightId(flight.id)}
           aria-label={isSaved ? 'Remove saved flight' : 'Save flight'}
-          className="absolute right-5 top-5 inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 transition hover:border-accent hover:text-accent dark:border-slate-800 dark:bg-slate-950/80 dark:text-slate-300"
+          className="absolute right-5 top-5 inline-flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 transition hover:border-accent hover:text-accent dark:border-slate-800 dark:bg-slate-950/80 dark:text-slate-300"
         >
           {isSaved ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
         </button>

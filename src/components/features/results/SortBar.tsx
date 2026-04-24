@@ -26,7 +26,7 @@ export function SortBar({
             type="button"
             onClick={() => onSortChange(option.key)}
             className={cn(
-              'rounded-full px-4 py-2 text-sm font-medium transition',
+              'min-h-[44px] rounded-full px-4 py-2 text-sm font-medium transition',
               sort === option.key
                 ? 'bg-accent text-white shadow-[0_10px_24px_rgba(15,118,110,0.24)]'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800',
@@ -45,7 +45,7 @@ export function SortBar({
           variant="outline"
           size="sm"
           onClick={onOpenFilters}
-          className="rounded-full md:hidden"
+          className="rounded-full lg:hidden"
         >
           <SlidersHorizontal className="size-4" />
           Filters

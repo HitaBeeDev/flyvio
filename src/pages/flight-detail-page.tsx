@@ -33,7 +33,7 @@ function FlightDetailSkeleton() {
         <Skeleton variant="text" className="w-56" />
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-6">
           {Array.from({ length: 2 }, (_, index) => (
             <div
@@ -163,7 +163,7 @@ export function FlightDetailPage() {
           </button>
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="space-y-6">
             <FlightTimeline title="Outbound" segments={flight.outbound} />
             {flight.isRoundTrip && flight.inbound ? (
