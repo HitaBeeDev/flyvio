@@ -1,7 +1,6 @@
 # Flyvio
 
-A frontend flight search and booking application built as a ground-up TypeScript rewrite of a legacy React/JSX codebase. The goal is to demonstrate senior-level frontend engineering through clean architecture, TypeScript discipline, modern performance patterns, accessible UI, and a polished dark-first design.
-
+A frontend flight search and booking application.
 **Live demo:** _coming soon_
 
 ---
