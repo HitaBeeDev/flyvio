@@ -1,6 +1,6 @@
 # Flyvio
 
-A frontend flight search and booking application.
+A flight search and booking app where users can search any route, browse results, view flight details, and complete a full booking flow from start to confirmation.
 
 
 ---
