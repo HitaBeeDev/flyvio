@@ -4,23 +4,23 @@ import { Separator } from "@/components/ui/separator";
 
 function ItinerarySkeletonRow() {
   return (
-    <div className="grid gap-3 md:grid-cols-[auto_1fr_auto] md:items-center">
-      <Skeleton variant="text" className="h-3 w-16" />
-      <div className="grid gap-3 md:grid-cols-[auto_1fr_auto] md:items-center">
-        <div className="space-y-2">
-          <Skeleton className="h-7 w-18" />
+    <div className="grid gap-2 md:grid-cols-[70px_minmax(0,1fr)] md:items-center">
+      <Skeleton variant="text" className="h-3 w-14" />
+      <div className="grid gap-3 md:grid-cols-[64px_minmax(96px,1fr)_64px] md:items-center">
+        <div className="space-y-1">
+          <Skeleton className="h-5 w-14" />
           <Skeleton variant="text" className="w-10" />
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <Skeleton variant="text" className="w-16" />
+            <Skeleton variant="text" className="w-12" />
             <Skeleton className="h-px flex-1" />
             <Skeleton className="size-4 rounded-full" />
           </div>
-          <Skeleton className="h-7 w-36 rounded-full" />
+          <Skeleton className="h-5 w-20 rounded-md" />
         </div>
-        <div className="space-y-2 md:justify-self-end">
-          <Skeleton className="h-7 w-18" />
+        <div className="space-y-1 md:justify-self-end">
+          <Skeleton className="h-5 w-14" />
           <Skeleton variant="text" className="w-10" />
         </div>
       </div>
@@ -30,31 +30,34 @@ function ItinerarySkeletonRow() {
 
 export function FlightCardSkeleton() {
   return (
-    <BaseFlightCard className="gap-0 py-0">
-      <div className="grid gap-6 p-6 lg:grid-cols-[220px_minmax(0,1fr)_150px]">
-        <div className="flex items-start gap-4">
-          <Skeleton className="size-14 rounded-2xl" />
+    <BaseFlightCard className="gap-0 rounded-lg py-0 shadow-none">
+      <div className="grid gap-4 p-5 lg:grid-cols-[180px_minmax(0,1fr)_132px] lg:items-stretch">
+        <div className="flex items-start gap-3">
+          <Skeleton className="size-9 rounded-md" />
           <div className="space-y-2">
-            <Skeleton className="h-6 w-32" />
-            <Skeleton variant="text" className="w-24" />
-            <Skeleton variant="text" className="w-32" />
+            <Skeleton className="h-5 w-32" />
+            <div className="flex gap-3">
+              <Skeleton variant="text" className="w-20" />
+              <Skeleton variant="text" className="w-28" />
+            </div>
           </div>
         </div>
 
-        <div className="space-y-4 lg:pr-6">
+        <div className="space-y-3 lg:px-2">
           <ItinerarySkeletonRow />
           <Separator className="bg-slate-200 dark:bg-slate-800" />
           <ItinerarySkeletonRow />
         </div>
 
-        <div className="flex flex-col justify-between gap-5 lg:items-end">
-          <div className="space-y-2 lg:text-right">
-            <Skeleton className="ml-auto size-10 rounded-full" />
-            <Skeleton variant="text" className="ml-auto w-12" />
-            <Skeleton className="ml-auto h-9 w-24" />
-            <Skeleton variant="text" className="ml-auto w-20" />
+        <div className="flex items-center justify-between gap-4 border-t border-slate-100 pt-4 lg:flex-col lg:items-end lg:justify-between lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+          <div className="flex w-full items-start justify-between gap-3 lg:flex-col lg:items-end">
+            <Skeleton className="size-9 rounded-md" />
+            <div className="space-y-1">
+              <Skeleton className="h-8 w-20" />
+              <Skeleton variant="text" className="w-16" />
+            </div>
           </div>
-          <Skeleton className="h-12 w-full rounded-2xl lg:w-28" />
+          <Skeleton className="h-9 w-24 rounded-md lg:w-full" />
         </div>
       </div>
     </BaseFlightCard>

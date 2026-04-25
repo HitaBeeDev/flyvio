@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Luggage, PlaneTakeoff } from "lucide-react";
+import { ArrowRight, Luggage } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { formatDuration } from "@/lib/formatters";
 import type { Flight, FlightSegment } from "@/types";
@@ -19,16 +19,16 @@ export function AirlineMark({
   const [imageFailed, setImageFailed] = useState(false);
 
   return (
-    <div className="flex size-14 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
+    <div className="flex size-9 items-center justify-center overflow-hidden rounded-md border border-slate-200 bg-slate-50 text-[11px] font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
       {!imageFailed ? (
         <img
           src={logoUrl}
           alt={name}
-          width={56}
-          height={56}
+          width={36}
+          height={36}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-contain p-2"
+          className="h-full w-full object-contain p-1"
           onError={() => setImageFailed(true)}
         />
       ) : (
@@ -40,21 +40,21 @@ export function AirlineMark({
 
 export function FlightCardHeader({ flight }: { flight: Flight }) {
   return (
-    <div className="flex items-start gap-4">
+    <div className="flex min-w-0 items-start gap-3">
       <AirlineMark
         name={flight.airline.name}
         logoUrl={flight.airline.logoUrl}
       />
-      <div className="space-y-2">
-        <p className="text-lg font-semibold text-slate-950 dark:text-white">
+      <div className="min-w-0 space-y-2">
+        <p className="truncate text-sm font-semibold leading-5 text-slate-950 dark:text-white">
           {flight.airline.name}
         </p>
-        <div className="space-y-1 text-sm text-slate-500 dark:text-slate-400">
-          <p>{flight.cabinClass}</p>
-          <p className="inline-flex items-center gap-2">
-            <Luggage className="size-4" />
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+          <span>{flight.cabinClass}</span>
+          <span className="inline-flex items-center gap-1.5">
+            <Luggage className="size-3.5" />
             {flight.baggageAllowance}
-          </p>
+          </span>
         </div>
       </div>
     </div>
@@ -69,45 +69,49 @@ export function ItineraryRow({
   segments: FlightSegment[];
 }) {
   const stopBadge = getStopBadge(segments);
+  const departure = segments[0]!;
+  const arrival = segments[segments.length - 1]!;
+  const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
 
   return (
-    <div className="grid gap-3 md:grid-cols-[auto_1fr_auto] md:items-center">
-      <div className="text-xs font-medium uppercase tracking-[0.24em] text-slate-400">
+    <div className="grid gap-2 md:grid-cols-[70px_minmax(0,1fr)] md:items-center">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
         {label}
       </div>
-      <div className="grid gap-3 md:grid-cols-[auto_1fr_auto] md:items-center">
-        <div>
-          <p className="font-mono text-xl font-semibold text-slate-950 dark:text-white">
-            {new Intl.DateTimeFormat("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            }).format(new Date(segments[0]!.departureTime))}
+      <div className="grid gap-3 md:grid-cols-[64px_minmax(96px,1fr)_64px] md:items-center">
+        <div className="min-w-0">
+          <p className="font-mono text-lg font-semibold leading-none text-slate-950 dark:text-white">
+            {timeFormatter.format(new Date(departure.departureTime))}
           </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            {segments[0]!.departureAirport.iata}
+          <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+            {departure.departureAirport.iata}
           </p>
         </div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-            <span>{formatDuration(getJourneyDuration(segments))}</span>
+        <div className="min-w-0 space-y-2">
+          <div className="flex items-center gap-3">
+            <span className="min-w-12 text-xs font-medium leading-tight text-slate-500 dark:text-slate-400">
+              {formatDuration(getJourneyDuration(segments))}
+            </span>
             <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
-            <PlaneTakeoff className="size-4 text-accent" />
+            <ArrowRight className="size-4 text-slate-400" />
           </div>
-          <Badge variant={stopBadge.variant} className="rounded-full px-3 py-1">
+          <Badge
+            variant={stopBadge.variant}
+            className="rounded-md px-2 py-0.5 text-[11px] font-semibold"
+          >
             {stopBadge.label}
           </Badge>
         </div>
-        <div className="md:text-right">
-          <p className="font-mono text-xl font-semibold text-slate-950 dark:text-white">
-            {new Intl.DateTimeFormat("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            }).format(new Date(segments[segments.length - 1]!.arrivalTime))}
+        <div className="min-w-0 md:text-right">
+          <p className="font-mono text-lg font-semibold leading-none text-slate-950 dark:text-white">
+            {timeFormatter.format(new Date(arrival.arrivalTime))}
           </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            {segments[segments.length - 1]!.arrivalAirport.iata}
+          <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+            {arrival.arrivalAirport.iata}
           </p>
         </div>
       </div>

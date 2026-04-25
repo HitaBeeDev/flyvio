@@ -24,30 +24,30 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
     <motion.div variants={cardItem}>
       <BaseFlightCard
         className={cn(
-          "gap-0 border-slate-200 bg-white py-0 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700",
+          "gap-0 rounded-lg border-slate-200 bg-white py-0 shadow-none transition duration-200 hover:border-slate-300 hover:bg-slate-50/40 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-900/80",
           className,
         )}
       >
-        <div className="grid gap-6 p-6 lg:grid-cols-[220px_minmax(0,1fr)_150px]">
+        <div className="grid gap-4 p-5 lg:grid-cols-[180px_minmax(0,1fr)_132px] lg:items-stretch">
           <FlightCardHeader flight={flight} />
 
-          <div className="space-y-4 lg:pr-6">
+          <div className="space-y-3 lg:px-2">
             <ItineraryRow label="Outbound" segments={flight.outbound} />
             {flight.isRoundTrip && flight.inbound ? (
               <>
-                <Separator className="bg-slate-200 dark:bg-slate-800" />
+                <Separator className="bg-slate-100 dark:bg-slate-800" />
                 <ItineraryRow label="Inbound" segments={flight.inbound} />
               </>
             ) : null}
           </div>
 
-          <div className="flex flex-col justify-between gap-5 lg:items-end">
-            <div className="flex w-full items-start justify-between gap-4 lg:block lg:space-y-4 lg:text-right">
+          <div className="flex items-center justify-between gap-4 border-t border-slate-100 pt-4 lg:flex-col lg:items-end lg:justify-between lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+            <div className="flex w-full items-start justify-between gap-3 lg:flex-col lg:items-end">
               <button
                 type="button"
                 onClick={() => toggleSavedFlightId(flight.id)}
                 aria-label={isSaved ? "Remove saved flight" : "Save flight"}
-                className="inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:border-accent hover:text-accent dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 lg:ml-auto"
+                className="inline-flex size-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-500 transition hover:border-accent hover:text-accent dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
               >
                 {isSaved ? (
                   <BookmarkCheck className="size-4" />
@@ -55,20 +55,18 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
                   <Bookmark className="size-4" />
                 )}
               </button>
-              <div className="space-y-1">
-                <p className="text-xs font-medium uppercase tracking-[0.24em] text-slate-400">
-                  Price
-                </p>
-                <p className="text-3xl font-semibold text-slate-950 dark:text-white">
+              <div className="text-right">
+                <p className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-white">
                   €{flight.price}
                 </p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  per person
+                <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-slate-400">
+                  per traveler
                 </p>
               </div>
             </div>
             <Button
-              className="w-full rounded-xl lg:w-auto"
+              size="sm"
+              className="rounded-md px-5 shadow-none lg:w-full"
               onClick={() => onSelect?.(flight)}
             >
               Select

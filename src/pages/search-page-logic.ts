@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   filterFlights,
   getAirlineCounts,
@@ -125,6 +125,52 @@ type SyncSearchStoreArgs = {
   urlParams: URLSearchParams;
 };
 
+function areStringArraysEqual(left: string[], right: string[]) {
+  return (
+    left.length === right.length &&
+    left.every((value, index) => value === right[index])
+  );
+}
+
+function areFilterStatesEqual(left: FilterState, right: FilterState) {
+  return (
+    left.priceRange[0] === right.priceRange[0] &&
+    left.priceRange[1] === right.priceRange[1] &&
+    areStringArraysEqual(left.stops, right.stops) &&
+    areStringArraysEqual(left.departureWindows, right.departureWindows) &&
+    areStringArraysEqual(left.airlines, right.airlines) &&
+    left.maxDuration === right.maxDuration
+  );
+}
+
+function getSyncedUrlParams(
+  currentParams: URLSearchParams,
+  filters: FilterState,
+  sort: SortOption,
+) {
+  const nextParams = new URLSearchParams(currentParams);
+
+  ["price", "stops", "depart", "airlines", "maxDuration", "sort"].forEach(
+    (key) => {
+      nextParams.delete(key);
+    },
+  );
+
+  const serializedFilters = serializeFilters(filters, DEFAULT_FILTERS);
+
+  serializedFilters.forEach((value, key) => {
+    nextParams.set(key, value);
+  });
+
+  const serializedSort = serializeSort(sort, "best");
+
+  if (serializedSort) {
+    nextParams.set("sort", serializedSort);
+  }
+
+  return nextParams;
+}
+
 export function useSyncSearchStore({
   filters,
   sort,
@@ -133,50 +179,42 @@ export function useSyncSearchStore({
   setUrlParams,
   urlParams,
 }: SyncSearchStoreArgs) {
+  const suppressStoreToUrlRef = useRef(false);
+  const urlParamString = urlParams.toString();
   const parsedFilters = useMemo(
-    () => parseFilters(urlParams, DEFAULT_FILTERS),
-    [urlParams],
+    () => parseFilters(new URLSearchParams(urlParamString), DEFAULT_FILTERS),
+    [urlParamString],
   );
   const parsedSort = useMemo(
-    () => (urlParams.get("sort") as SortOption | null) ?? "best",
-    [urlParams],
+    () =>
+      (new URLSearchParams(urlParamString).get("sort") as SortOption | null) ??
+      "best",
+    [urlParamString],
   );
 
   useEffect(() => {
+    suppressStoreToUrlRef.current = true;
     setFilters(parsedFilters);
     setSort(parsedSort);
-  }, [parsedFilters, parsedSort, setFilters, setSort]);
+  }, [parsedFilters, parsedSort, setFilters, setSort, urlParamString]);
 
   useEffect(() => {
-    setUrlParams(
-      (currentParams) => {
-        const nextParams = new URLSearchParams(currentParams);
+    if (suppressStoreToUrlRef.current) {
+      if (areFilterStatesEqual(filters, parsedFilters) && sort === parsedSort) {
+        suppressStoreToUrlRef.current = false;
+      }
 
-        ["price", "stops", "depart", "airlines", "maxDuration", "sort"].forEach(
-          (key) => {
-            nextParams.delete(key);
-          },
-        );
+      return;
+    }
 
-        const serializedFilters = serializeFilters(filters, DEFAULT_FILTERS);
-
-        serializedFilters.forEach((value, key) => {
-          nextParams.set(key, value);
-        });
-
-        const serializedSort = serializeSort(sort, "best");
-
-        if (serializedSort) {
-          nextParams.set("sort", serializedSort);
-        }
-
-        if (nextParams.toString() === currentParams.toString()) {
-          return currentParams;
-        }
-
-        return nextParams;
-      },
-      { replace: true },
+    const nextParams = getSyncedUrlParams(
+      new URLSearchParams(urlParamString),
+      filters,
+      sort,
     );
-  }, [filters, setUrlParams, sort]);
+
+    if (nextParams.toString() !== urlParamString) {
+      setUrlParams(nextParams, { replace: true });
+    }
+  }, [filters, parsedFilters, parsedSort, setUrlParams, sort, urlParamString]);
 }
