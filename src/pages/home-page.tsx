@@ -37,7 +37,10 @@ export function HomePage() {
   return (
     <AppShell>
       <div className="space-y-8">
-        <section className="relative flex min-h-[calc(100vh-10rem)] items-center justify-center overflow-hidden rounded-[2.4rem] border border-indigo-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.95)_0%,_rgba(248,248,255,0.92)_52%,_rgba(238,242,255,0.92)_100%)] px-6 py-16 shadow-[0_40px_140px_rgba(30,27,75,0.12)] dark:border-indigo-800/60 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.22),_transparent_28%),linear-gradient(135deg,_rgba(30,27,75,0.98)_0%,_rgba(49,46,129,0.96)_56%,_rgba(30,27,75,0.98)_100%)] sm:px-10">
+        <section
+          className="pb-5 pt-5 relative flex min-h-[calc(100vh-9rem)] items-center justify-center overflow-hidden rounded-[2.4rem] 
+        border border-indigo-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.95)_0%,_rgba(248,248,255,0.92)_52%,_rgba(238,242,255,0.92)_100%)] shadow-[0_40px_140px_rgba(30,27,75,0.12)] dark:border-indigo-800/60 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.22),_transparent_28%),linear-gradient(135deg,_rgba(30,27,75,0.98)_0%,_rgba(49,46,129,0.96)_56%,_rgba(30,27,75,0.98)_100%)] sm:px-10"
+        >
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -73,17 +76,22 @@ export function HomePage() {
             className="relative mx-auto flex w-full max-w-4xl flex-col items-center text-center"
           >
             <motion.div variants={slideUp} transition={transition}>
-              <Badge className="border-indigo-200/60 bg-white/60 px-4 py-1.5 text-indigo-800 backdrop-blur hover:bg-white/60 dark:border-indigo-700/60 dark:bg-indigo-900/55 dark:text-indigo-100 dark:hover:bg-indigo-900/55">
-                Search smarter
+              <Badge
+                className="border-indigo-200/60 bg-white/60 px-4 py-1.5 text-indigo-800 backdrop-blur
+               hover:bg-white/60 dark:border-indigo-700/60 dark:bg-indigo-900/55 dark:text-indigo-100 dark:hover:bg-indigo-900/55"
+              >
+                Flyvio
               </Badge>
             </motion.div>
+
             <motion.h1
               variants={slideUp}
               transition={transition}
-              className="mt-6 max-w-3xl text-5xl font-semibold tracking-tight text-indigo-950 sm:text-6xl md:text-7xl dark:text-indigo-50"
+              className="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-indigo-950 sm:text-6xl md:text-7xl dark:text-indigo-50"
             >
               Find your next flight
             </motion.h1>
+
             <motion.p
               variants={slideUp}
               transition={transition}
