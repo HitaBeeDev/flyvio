@@ -7,7 +7,6 @@ import { useFlight } from "@/hooks/useFlight";
 import { FLIGHT_DETAIL_COPY } from "@/lib/constants";
 import { useBookingStore } from "@/stores/bookingStore";
 import { useSearchStore } from "@/stores/searchStore";
-import { useUiStore } from "@/stores/uiStore";
 import {
   FlightDetailContent,
   FlightDetailSkeleton,
@@ -28,11 +27,8 @@ export function FlightDetailPage() {
   const resolvedFlightId = flightId ?? "";
   const { adults, children } = getTravelerCounts();
   const { data: flight, isLoading, isError } = useFlight(resolvedFlightId);
-  const savedFlightIds = useUiStore((state) => state.savedFlightIds);
-  const toggleSavedFlightId = useUiStore((state) => state.toggleSavedFlightId);
   const setFlight = useBookingStore((state) => state.setFlight);
   const setStep = useBookingStore((state) => state.setStep);
-  const isSaved = savedFlightIds.includes(resolvedFlightId);
 
   useEffect(() => {
     if (!flight) {
@@ -74,8 +70,6 @@ export function FlightDetailPage() {
         flight={flight}
         adults={adults}
         children={children}
-        isSaved={isSaved}
-        onToggleSave={() => toggleSavedFlightId(flight.id)}
         onBook={() => {
           setFlight(flight.id);
           setStep(0);

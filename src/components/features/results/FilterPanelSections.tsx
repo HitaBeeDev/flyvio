@@ -19,7 +19,7 @@ type FilterSectionProps = PropsWithChildren<{ title: string }>;
 export function FilterSection({ title, children }: FilterSectionProps) {
   return (
     <section className="space-y-4">
-      <h3 className="text-xs font-medium uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+      <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
         {title}
       </h3>
       {children}
@@ -31,20 +31,21 @@ export function FilterPanelHeader({ onReset }: { onReset: () => void }) {
   return (
     <div className="flex items-center justify-between gap-4">
       <div>
-        <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
           {FILTER_PANEL_COPY.eyebrow}
         </p>
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           {FILTER_PANEL_COPY.description}
         </p>
       </div>
       <button
         type="button"
         onClick={onReset}
-        className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-accent dark:text-slate-300"
+        aria-label={FILTER_PANEL_COPY.resetLabel}
+        title={FILTER_PANEL_COPY.resetLabel}
+        className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-slate-900 dark:hover:text-slate-50"
       >
         <RotateCcw className="size-4" />
-        {FILTER_PANEL_COPY.resetLabel}
       </button>
     </div>
   );
@@ -71,7 +72,7 @@ export function RangeFilterSection({
 }: RangeFilterSectionProps) {
   return (
     <FilterSection title={title}>
-      <div className="rounded-xl bg-slate-100 px-4 py-3 text-sm font-medium text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-950 dark:bg-slate-900 dark:text-slate-100">
         {valueLabel}
       </div>
       <Slider
@@ -98,7 +99,7 @@ export function StopsFilterSection({
         {STOP_OPTIONS.map((option) => (
           <label
             key={option.key}
-            className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 px-3 py-2.5 text-sm text-slate-700 dark:border-slate-800 dark:text-slate-200"
+            className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200"
           >
             <span>{option.label}</span>
             <Checkbox
@@ -142,8 +143,8 @@ export function DepartureTimeFilterSection({
               className={cn(
                 "rounded-xl border px-3 py-3 text-left text-sm transition",
                 active
-                  ? "border-indigo-950 bg-indigo-950 text-white dark:border-indigo-100 dark:bg-indigo-100 dark:text-indigo-950"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800",
+                  ? "border-slate-950 bg-slate-950 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-slate-950"
+                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900",
               )}
             >
               {window.label}
@@ -166,12 +167,12 @@ export function AirlinesFilterSection({
 }) {
   return (
     <FilterSection title={FILTER_PANEL_COPY.sections.airlines}>
-      <ScrollArea className="h-52 rounded-xl border border-slate-200 px-3 dark:border-slate-800">
+      <ScrollArea className="h-52 rounded-xl border border-slate-200 bg-white px-3 dark:border-slate-800 dark:bg-slate-950">
         <div className="space-y-2 py-3">
           {airlines.map((airline) => (
             <label
               key={airline.code}
-              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
+              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
             >
               <div className="flex items-center gap-3">
                 <Checkbox

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Heart, Menu, MoonStar, SunMedium } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Menu, MoonStar, SunMedium } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -24,7 +23,6 @@ export function Navbar() {
   const theme = useUiStore((state) => state.theme);
   const setTheme = useUiStore((state) => state.setTheme);
   const mobileNavOpen = useUiStore((state) => state.mobileNavOpen);
-  const savedFlightIds = useUiStore((state) => state.savedFlightIds);
   const toggleMobileNav = useUiStore((state) => state.toggleMobileNav);
   const [scrolled, setScrolled] = useState(false);
 
@@ -97,12 +95,6 @@ export function Navbar() {
             </NavLink>
           ))}
 
-          <div className="ml-2 inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/70 px-3 py-2 text-sm text-indigo-700 shadow-sm dark:bg-indigo-900/60 dark:text-indigo-200">
-            <Heart className="size-4" />
-            Saved
-            <Badge variant="default">{savedFlightIds.length}</Badge>
-          </div>
-
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -168,9 +160,7 @@ export function Navbar() {
         <DrawerContent className="px-2 pb-6 pt-2">
           <DrawerHeader className="px-4">
             <DrawerTitle>Navigation</DrawerTitle>
-            <DrawerDescription>
-              Browse the current routes and saved flight state.
-            </DrawerDescription>
+            <DrawerDescription>Browse current routes.</DrawerDescription>
           </DrawerHeader>
 
           <div className="space-y-2 px-2">
@@ -191,13 +181,6 @@ export function Navbar() {
               </NavLink>
             ))}
 
-            <div className="flex items-center justify-between rounded-2xl border border-border/80 bg-white/70 px-4 py-3 text-sm text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-200">
-              <span className="inline-flex items-center gap-2">
-                <Heart className="size-4" />
-                Saved flights
-              </span>
-              <Badge variant="default">{savedFlightIds.length}</Badge>
-            </div>
           </div>
         </DrawerContent>
       </Drawer>

@@ -123,7 +123,7 @@ export function SearchWidget({
   };
 
   return (
-    <Card className="gap-0 overflow-hidden rounded-3xl border-indigo-200 bg-white p-0 shadow-[0_20px_60px_rgba(30,27,75,0.08)] backdrop-blur-none dark:border-indigo-800 dark:bg-indigo-900">
+    <Card className="gap-0 overflow-hidden rounded-2xl border-slate-200 bg-white p-0 shadow-sm shadow-slate-950/[0.03] backdrop-blur-none dark:border-slate-800 dark:bg-slate-950">
       {variant === "compact" ? (
         <button
           type="button"
@@ -131,7 +131,7 @@ export function SearchWidget({
           className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
         >
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
               {SEARCH_WIDGET_COPY.compactTitle}
             </p>
             <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">

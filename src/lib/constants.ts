@@ -172,8 +172,6 @@ export const FLIGHT_DETAIL_COPY = {
   breadcrumb: "Breadcrumb",
   searchResults: "Search Results",
   backToResults: "Back to results",
-  removeSavedFlight: "Remove saved flight",
-  saveFlight: "Save flight",
   outbound: "Outbound",
   inbound: "Inbound",
   bookTitle: "Book this flight",

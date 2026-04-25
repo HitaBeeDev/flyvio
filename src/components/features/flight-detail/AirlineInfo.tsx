@@ -27,7 +27,7 @@ function AirlineMark({ name, logoUrl }: { name: string; logoUrl: string }) {
     .join("");
 
   return (
-    <div className="flex size-16 items-center justify-center overflow-hidden rounded-2xl border border-indigo-200 bg-indigo-50 text-base font-semibold text-indigo-700 dark:border-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
+    <div className="flex size-14 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
       {!imageFailed ? (
         <img
           src={logoUrl}
@@ -51,78 +51,48 @@ export function AirlineInfo({ flight }: AirlineInfoProps) {
   const fleetType = getFleetType(flight);
 
   return (
-    <Card className="gap-0 border-indigo-200/80 bg-white/90 py-0 dark:border-indigo-800/80 dark:bg-indigo-950/80">
-      <CardHeader className="border-b border-indigo-200/80 py-5 dark:border-indigo-800/80">
-        <CardTitle className="text-2xl text-indigo-950 dark:text-indigo-50">
+    <Card className="gap-0 rounded-2xl border-slate-200 bg-white py-0 shadow-sm shadow-slate-950/[0.03] dark:border-slate-800 dark:bg-slate-950">
+      <CardHeader className="border-b border-slate-100 py-5 dark:border-slate-800">
+        <CardTitle className="text-2xl text-slate-950 dark:text-slate-50">
           Airline information
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6 px-6 py-6">
-        <div className="flex items-center gap-4">
-          <AirlineMark
-            name={flight.airline.name}
-            logoUrl={flight.airline.logoUrl}
-          />
-          <div>
-            <p className="text-xl font-semibold text-indigo-950 dark:text-indigo-50">
-              {flight.airline.name}
-            </p>
-            <p className="text-sm text-indigo-500 dark:text-indigo-300">
-              {fleetType}
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-3 rounded-[1.5rem] border border-indigo-200/80 bg-indigo-50/80 p-4 dark:border-indigo-800/80 dark:bg-indigo-900/50">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-medium text-indigo-700 dark:text-indigo-200">
-              On-time performance
-            </p>
-            <p className="text-sm font-semibold text-indigo-950 dark:text-indigo-50">
-              {onTimePerformance}%
-            </p>
-          </div>
-          <Progress
-            value={onTimePerformance}
-            className="h-2.5 bg-indigo-200 dark:bg-indigo-800"
-          />
-        </div>
-
         <div className="grid gap-3 md:grid-cols-3">
-          <div className="rounded-[1.4rem] border border-indigo-200/80 px-4 py-4 dark:border-indigo-800/80">
+          <div className="rounded-xl border border-slate-200 px-4 py-4 dark:border-slate-800">
             <div className="flex items-start gap-3">
-              <BriefcaseBusiness className="mt-0.5 size-5 text-accent" />
+              <BriefcaseBusiness className="mt-0.5 size-5 text-slate-500" />
               <div>
-                <p className="font-medium text-indigo-950 dark:text-indigo-50">
+                <p className="font-medium text-slate-950 dark:text-slate-50">
                   Carry-on
                 </p>
-                <p className="text-sm text-indigo-500 dark:text-indigo-300">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   1 cabin bag included
                 </p>
               </div>
             </div>
           </div>
-          <div className="rounded-[1.4rem] border border-indigo-200/80 px-4 py-4 dark:border-indigo-800/80">
+          <div className="rounded-xl border border-slate-200 px-4 py-4 dark:border-slate-800">
             <div className="flex items-start gap-3">
-              <Luggage className="mt-0.5 size-5 text-accent" />
+              <Luggage className="mt-0.5 size-5 text-slate-500" />
               <div>
-                <p className="font-medium text-indigo-950 dark:text-indigo-50">
+                <p className="font-medium text-slate-950 dark:text-slate-50">
                   Checked bag
                 </p>
-                <p className="text-sm text-indigo-500 dark:text-indigo-300">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   {flight.baggageAllowance}
                 </p>
               </div>
             </div>
           </div>
-          <div className="rounded-[1.4rem] border border-indigo-200/80 px-4 py-4 dark:border-indigo-800/80">
+          <div className="rounded-xl border border-slate-200 px-4 py-4 dark:border-slate-800">
             <div className="flex items-start gap-3">
-              <CookingPot className="mt-0.5 size-5 text-accent" />
+              <CookingPot className="mt-0.5 size-5 text-slate-500" />
               <div>
-                <p className="font-medium text-indigo-950 dark:text-indigo-50">
+                <p className="font-medium text-slate-950 dark:text-slate-50">
                   Meal
                 </p>
-                <p className="text-sm text-indigo-500 dark:text-indigo-300">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   {getMealLabel(flight.cabinClass)}
                 </p>
               </div>
@@ -130,7 +100,7 @@ export function AirlineInfo({ flight }: AirlineInfoProps) {
           </div>
         </div>
 
-        <div className="rounded-[1.4rem] border border-emerald-200/80 bg-emerald-50/80 px-4 py-4 dark:border-emerald-900/60 dark:bg-emerald-950/20">
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-4 dark:border-emerald-900/60 dark:bg-emerald-950/20">
           <div className="flex items-center gap-3">
             <ShieldCheck className="size-5 text-emerald-600 dark:text-emerald-400" />
             <p className="text-sm text-emerald-800 dark:text-emerald-200">
