@@ -36,49 +36,18 @@ export function HomePage() {
 
   return (
     <AppShell>
-      <div className="space-y-14">
-        <section
-          className="pb-5 pt-5 relative flex min-h-[calc(100vh-9rem)] items-center justify-center overflow-hidden rounded-[2.4rem] 
-        border border-indigo-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.95)_0%,_rgba(248,248,255,0.92)_52%,_rgba(238,242,255,0.92)_100%)] shadow-[0_40px_140px_rgba(30,27,75,0.12)] dark:border-indigo-800/60 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.22),_transparent_28%),linear-gradient(135deg,_rgba(30,27,75,0.98)_0%,_rgba(49,46,129,0.96)_56%,_rgba(30,27,75,0.98)_100%)] sm:px-10"
-        >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 overflow-hidden"
-          >
-            <div
-              className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.24)_0%,_rgba(99,102,241,0.02)_68%,_transparent_74%)] blur-2xl"
-              style={{
-                animation:
-                  "flyvio-mesh-drift 16s ease-in-out infinite alternate",
-              }}
-            />
-            <div
-              className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.16)_0%,_rgba(99,102,241,0.02)_66%,_transparent_74%)] blur-2xl"
-              style={{
-                animation:
-                  "flyvio-mesh-drift 20s ease-in-out infinite alternate-reverse",
-              }}
-            />
-            <div
-              className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(129,140,248,0.16)_0%,_rgba(129,140,248,0.02)_64%,_transparent_74%)] blur-2xl"
-              style={{
-                animation:
-                  "flyvio-mesh-drift 18s ease-in-out infinite alternate",
-              }}
-            />
-          </div>
-
+      <div className="space-y-12">
+        <section className="flex items-center justify-center py-16 sm:py-20">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
             transition={transition}
-            className="relative mx-auto flex w-full max-w-4xl flex-col items-center text-center"
+            className="mx-auto flex w-full max-w-4xl flex-col items-center text-center"
           >
             <motion.div variants={slideUp} transition={transition}>
               <Badge
-                className="border-indigo-200/60 bg-white/60 px-4 py-1.5 text-indigo-800 backdrop-blur
-               hover:bg-white/60 dark:border-indigo-700/60 dark:bg-indigo-900/55 dark:text-indigo-100 dark:hover:bg-indigo-900/55"
+                className="border-slate-200 bg-slate-50 px-3 py-1 text-indigo-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-200 dark:hover:bg-slate-800"
               >
                 Flyvio
               </Badge>
@@ -87,7 +56,7 @@ export function HomePage() {
             <motion.h1
               variants={slideUp}
               transition={transition}
-              className="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-indigo-950 sm:text-6xl md:text-7xl dark:text-indigo-50"
+              className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl md:text-6xl dark:text-white"
             >
               Find your next flight
             </motion.h1>
@@ -95,14 +64,14 @@ export function HomePage() {
             <motion.p
               variants={slideUp}
               transition={transition}
-              className="mt-5 max-w-2xl text-lg leading-8 text-indigo-700 dark:text-indigo-200"
+              className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg"
             >
               Search hundreds of routes. No fees. No noise.
             </motion.p>
             <motion.div
               variants={slideUp}
               transition={transition}
-              className="mt-10 w-full max-w-4xl"
+              className="mt-9 w-full max-w-4xl"
             >
               <SearchWidget />
             </motion.div>
@@ -110,7 +79,7 @@ export function HomePage() {
         </section>
 
         {!destinationsQuery.isError && (
-          <section className="space-y-5 mt-5">
+          <section className="space-y-5">
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">

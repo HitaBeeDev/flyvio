@@ -72,7 +72,17 @@ export function SearchWidget({
     values: startingValues,
   });
 
-  const values = useWatch({ control });
+  const watchedValues = useWatch({ control });
+  const values: SearchFormValues = {
+    ...defaultValues,
+    ...watchedValues,
+    passengers: {
+      ...defaultValues.passengers,
+      ...watchedValues.passengers,
+    },
+    cabinClass: watchedValues.cabinClass ?? defaultValues.cabinClass,
+    isRoundTrip: watchedValues.isRoundTrip ?? defaultValues.isRoundTrip,
+  };
   const summary =
     values.origin && values.destination && values.departureDate
       ? formatSearchSummary(values as SearchParams)
@@ -113,7 +123,7 @@ export function SearchWidget({
   };
 
   return (
-    <Card className="gap-0 overflow-hidden rounded-[2rem] border-border/80 bg-white/90 p-0 dark:bg-indigo-950/85">
+    <Card className="gap-0 overflow-hidden rounded-3xl border-slate-200 bg-white p-0 shadow-none backdrop-blur-none dark:border-slate-800 dark:bg-slate-900">
       {variant === "compact" ? (
         <button
           type="button"
@@ -136,7 +146,7 @@ export function SearchWidget({
       ) : null}
 
       {expanded ? (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 px-5 py-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 px-5 py-5 sm:px-6 sm:py-6">
           <SearchWidgetFields
             control={control}
             errors={errors}
@@ -156,7 +166,7 @@ export function SearchWidget({
                 type="submit"
                 size="lg"
                 loading={isSubmitting}
-                className="h-12 w-full rounded-2xl lg:w-44"
+                className="h-12 w-full rounded-xl shadow-none lg:w-44"
               >
                 <Search className="size-4" />
                 {SEARCH_WIDGET_COPY.searchButton}
