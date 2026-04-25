@@ -1,4 +1,4 @@
-import { PlaneTakeoff } from "lucide-react";
+import { PlaneLanding, PlaneTakeoff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type AirportInputFieldProps = {
@@ -10,6 +10,7 @@ type AirportInputFieldProps = {
   error?: string;
   displayValue: string;
   placeholder: string;
+  icon?: "takeoff" | "landing";
   inputRef: React.RefObject<HTMLInputElement | null>;
   onFocus: () => void;
   onChange: (value: string) => void;
@@ -25,11 +26,14 @@ export function AirportInputField({
   error,
   displayValue,
   placeholder,
+  icon = "takeoff",
   inputRef,
   onFocus,
   onChange,
   onKeyDown,
 }: AirportInputFieldProps) {
+  const Icon = icon === "landing" ? PlaneLanding : PlaneTakeoff;
+
   return (
     <div
       className={cn(
@@ -37,7 +41,7 @@ export function AirportInputField({
         error ? "border-rose-500 ring-4 ring-rose-500/10" : "border-border/80",
       )}
     >
-      <PlaneTakeoff className="size-4 text-indigo-400" aria-hidden="true" />
+      <Icon className="size-4 text-indigo-400" aria-hidden="true" />
       <input
         ref={inputRef}
         id={inputId}

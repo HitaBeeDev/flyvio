@@ -10,6 +10,7 @@ type AirportInputProps = {
   onChange: (value: string) => void;
   label: string;
   placeholder: string;
+  icon?: "takeoff" | "landing";
   error?: string;
 };
 
@@ -30,6 +31,7 @@ export function AirportInput({
   onChange,
   label,
   placeholder,
+  icon = "takeoff",
   error,
 }: AirportInputProps) {
   const inputId = useId();
@@ -39,24 +41,24 @@ export function AirportInput({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [editing, setEditing] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const options = useMemo(
-    () => searchAirports(query || value || ""),
-    [query, value],
-  );
+  const trimmedQuery = query.trim();
+  const options = useMemo(() => searchAirports(trimmedQuery), [trimmedQuery]);
   const boundedActiveIndex = Math.min(
     activeIndex,
     Math.max(options.length - 1, 0),
   );
   const activeOption = options[boundedActiveIndex];
-  const displayValue = open ? query : getDisplayValue(value);
+  const displayValue = editing ? query : getDisplayValue(value);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!wrapperRef.current?.contains(event.target as Node)) {
         setOpen(false);
         setQuery("");
+        setEditing(false);
       }
     };
 
@@ -70,11 +72,16 @@ export function AirportInput({
     onChange(nextValue);
     setOpen(false);
     setQuery("");
+    setEditing(false);
     inputRef.current?.blur();
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (!open && AIRPORT_INPUT_COPY.focusKeys.includes(event.key)) {
+    if (
+      !open &&
+      trimmedQuery.length > 0 &&
+      AIRPORT_INPUT_COPY.focusKeys.includes(event.key)
+    ) {
       setOpen(true);
       return;
     }
@@ -107,6 +114,7 @@ export function AirportInput({
     if (event.key === "Escape") {
       setOpen(false);
       setQuery("");
+      setEditing(false);
       inputRef.current?.blur();
     }
   };
@@ -131,21 +139,24 @@ export function AirportInput({
           error={error}
           displayValue={displayValue}
           placeholder={placeholder}
+          icon={icon}
           inputRef={inputRef}
           onFocus={() => {
-            setOpen(true);
             setQuery("");
+            setEditing(false);
+            window.requestAnimationFrame(() => inputRef.current?.select());
           }}
           onChange={(nextValue) => {
-            setOpen(true);
             setQuery(nextValue);
+            setEditing(true);
+            setOpen(nextValue.trim().length > 0);
             setActiveIndex(0);
           }}
           onKeyDown={handleKeyDown}
         />
 
         <AirportInputPopover
-          open={open}
+          open={open && trimmedQuery.length > 0}
           listboxId={listboxId}
           label={label}
           options={options}

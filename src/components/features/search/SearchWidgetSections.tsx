@@ -109,6 +109,7 @@ export function RouteFields({
             placeholder={SEARCH_WIDGET_COPY.placeholders.destination}
             value={field.value}
             onChange={field.onChange}
+            icon="landing"
             error={errors.destination?.message}
           />
         )}
