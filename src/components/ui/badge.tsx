@@ -9,7 +9,7 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-slate-200 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200",
+          "border-indigo-200 bg-indigo-100 text-indigo-700 dark:border-indigo-700 dark:bg-indigo-800 dark:text-indigo-200",
         direct:
           "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-300",
         oneStop:
@@ -25,7 +25,7 @@ const badgeVariants = cva(
         "check-in-open":
           "border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-900 dark:bg-violet-950/60 dark:text-violet-300",
         cancelled:
-          "border-slate-300 bg-slate-100 text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300",
+          "border-indigo-200 bg-indigo-100 text-indigo-600 dark:border-indigo-700 dark:bg-indigo-800 dark:text-indigo-300",
       },
     },
     defaultVariants: {

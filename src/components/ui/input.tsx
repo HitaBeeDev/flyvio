@@ -36,7 +36,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
       {label && labelMode === "top" ? (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-slate-700 dark:text-slate-200"
+          className="block text-sm font-medium text-indigo-700 dark:text-indigo-200"
         >
           {label}
         </label>
@@ -44,7 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
       <div className="space-y-1">
         <div className="relative">
           {leftIcon ? (
-            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-400">
               {leftIcon}
             </span>
           ) : null}
@@ -59,7 +59,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
               error ? errorId : helperText ? errorId : undefined
             }
             className={cn(
-              "peer h-12 w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-xs transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-slate-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-950 dark:text-stone-100",
+              "peer h-12 w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-sm text-indigo-900 shadow-xs transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-indigo-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-indigo-950 dark:text-indigo-50",
               "focus-visible:border-indigo-500 focus-visible:ring-[3px] focus-visible:ring-indigo-500/20",
               "aria-invalid:border-rose-500 aria-invalid:ring-rose-500/20 dark:aria-invalid:ring-rose-500/20",
               leftIcon ? "pl-11" : "",
@@ -73,7 +73,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
             <label
               htmlFor={inputId}
               className={cn(
-                "pointer-events-none absolute left-4 top-1/2 origin-left -translate-y-1/2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-indigo-700 dark:text-slate-400 dark:peer-focus:text-indigo-400",
+                "pointer-events-none absolute left-4 top-1/2 origin-left -translate-y-1/2 text-sm text-indigo-500 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-indigo-700 dark:text-indigo-400 dark:peer-focus:text-indigo-400",
                 leftIcon ? "left-11" : "",
                 "peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:text-xs",
               )}
@@ -82,7 +82,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
             </label>
           ) : null}
           {rightIcon ? (
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-400">
               {rightIcon}
             </span>
           ) : null}
@@ -98,7 +98,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
         ) : helperText ? (
           <p
             id={errorId}
-            className="text-sm text-slate-500 dark:text-slate-400"
+            className="text-sm text-indigo-500 dark:text-indigo-400"
           >
             {helperText}
           </p>

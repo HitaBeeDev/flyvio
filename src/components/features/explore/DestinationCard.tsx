@@ -24,9 +24,9 @@ export function DestinationCard({ destination }: DestinationCardProps) {
         });
         navigate(`/search?destination=${destination.iataCode}`);
       }}
-      className="group relative overflow-hidden rounded-[1.9rem] border border-slate-200/80 text-left shadow-[0_18px_50px_rgba(15,23,42,0.12)]"
+      className="group relative overflow-hidden rounded-[1.9rem] border border-indigo-200/80 text-left shadow-[0_18px_50px_rgba(30,27,75,0.12)]"
     >
-      <div className="aspect-[16/9] overflow-hidden bg-slate-200 dark:bg-slate-800">
+      <div className="aspect-[16/9] overflow-hidden bg-indigo-200 dark:bg-indigo-800">
         <img
           src={destination.imageUrl}
           alt={`${destination.city}, ${destination.country}`}
@@ -38,7 +38,7 @@ export function DestinationCard({ destination }: DestinationCardProps) {
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent transition duration-500 group-hover:from-slate-950/92 group-hover:via-slate-950/38" />
+      <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/85 via-indigo-950/25 to-transparent transition duration-500 group-hover:from-indigo-950/92 group-hover:via-indigo-950/38" />
 
       <div className="absolute inset-x-0 bottom-0 p-5">
         <div className="flex items-end justify-between gap-4">

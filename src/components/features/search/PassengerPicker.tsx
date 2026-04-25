@@ -41,10 +41,10 @@ function CounterRow({
   return (
     <div className="flex items-center justify-between gap-4">
       <div>
-        <p className="font-medium text-slate-900 dark:text-stone-100">
+        <p className="font-medium text-indigo-900 dark:text-indigo-50">
           {label}
         </p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-indigo-500 dark:text-indigo-300">
           {description}
         </p>
       </div>
@@ -99,7 +99,7 @@ export function PassengerPicker({
           className="h-12 w-full justify-between rounded-2xl px-4"
         >
           <span className="flex items-center gap-2 truncate">
-            <Users className="size-4 text-slate-400" />
+            <Users className="size-4 text-indigo-400" />
             <span className="truncate">
               {formatPassengerSummary(value, cabinClass)}
             </span>
@@ -151,7 +151,7 @@ export function PassengerPicker({
         </div>
 
         <div className="mt-5 space-y-3">
-          <p className="text-sm font-medium text-slate-900 dark:text-stone-100">
+          <p className="text-sm font-medium text-indigo-900 dark:text-indigo-50">
             Cabin class
           </p>
           <div className="grid grid-cols-2 gap-2">
@@ -164,7 +164,7 @@ export function PassengerPicker({
                   "rounded-2xl border px-4 py-3 text-sm font-medium transition-colors",
                   cabinClass === option.value
                     ? "border-indigo-500 bg-indigo-50 text-indigo-900 dark:bg-indigo-950/40 dark:text-indigo-200"
-                    : "border-border/80 bg-white text-slate-700 hover:bg-slate-50 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900",
+                    : "border-border/80 bg-white text-indigo-700 hover:bg-indigo-50 dark:bg-indigo-950 dark:text-indigo-200 dark:hover:bg-indigo-900",
                 )}
               >
                 {option.label}

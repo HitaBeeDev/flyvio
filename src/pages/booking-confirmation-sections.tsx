@@ -17,7 +17,7 @@ import type { Booking } from "@/types";
 export function ConfirmationSkeleton() {
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <div className="rounded-[2rem] border border-slate-200/80 bg-white/85 p-8 dark:border-slate-800/80 dark:bg-slate-950/75">
+      <div className="rounded-[2rem] border border-indigo-200/80 bg-white/90 p-8 dark:border-indigo-800/80 dark:bg-indigo-950/80">
         <div className="flex flex-col items-center space-y-5 text-center">
           <Skeleton className="size-24 rounded-full" />
           <Skeleton className="h-10 w-72" />
@@ -29,7 +29,7 @@ export function ConfirmationSkeleton() {
         {Array.from({ length: 2 }, (_, index) => (
           <div
             key={index}
-            className="rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 dark:border-slate-800/80 dark:bg-slate-950/75"
+            className="rounded-[1.75rem] border border-indigo-200/80 bg-white/90 p-6 dark:border-indigo-800/80 dark:bg-indigo-950/80"
           >
             <div className="space-y-4">
               <Skeleton className="h-7 w-48" />
@@ -45,7 +45,7 @@ export function ConfirmationSkeleton() {
 
 function ConfirmationHero({ confirmationCode }: { confirmationCode: string }) {
   return (
-    <Card className="border-border/80 bg-white/80 dark:bg-slate-950/75">
+    <Card className="border-border/80 bg-white/80 dark:bg-indigo-950/80">
       <CardContent className="flex flex-col items-center px-6 py-10 text-center">
         <motion.svg
           viewBox="0 0 120 120"
@@ -90,10 +90,10 @@ function ConfirmationHero({ confirmationCode }: { confirmationCode: string }) {
         <CardDescription>
           {BOOKING_CONFIRMATION_COPY.confirmedLabel}
         </CardDescription>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
           {BOOKING_CONFIRMATION_COPY.confirmedTitle}
         </h1>
-        <p className="mt-3 font-mono text-2xl font-semibold text-slate-950 dark:text-stone-100">
+        <p className="mt-3 font-mono text-2xl font-semibold text-indigo-950 dark:text-indigo-50">
           {confirmationCode}
         </p>
       </CardContent>
@@ -103,7 +103,7 @@ function ConfirmationHero({ confirmationCode }: { confirmationCode: string }) {
 
 function FlightSummaryCard({ booking }: { booking: Booking }) {
   return (
-    <Card className="border-border/80 bg-white/80 dark:bg-slate-950/75">
+    <Card className="border-border/80 bg-white/80 dark:bg-indigo-950/80">
       <CardHeader>
         <CardDescription>
           {BOOKING_CONFIRMATION_COPY.flightSummary}
@@ -116,7 +116,7 @@ function FlightSummaryCard({ booking }: { booking: Booking }) {
           }
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      <CardContent className="space-y-3 text-sm leading-6 text-indigo-700 dark:text-indigo-200">
         <p>
           {BOOKING_CONFIRMATION_COPY.routePrefix}{" "}
           {booking.flight.outbound[0]!.departureAirport.city} to{" "}
@@ -149,7 +149,7 @@ function FlightSummaryCard({ booking }: { booking: Booking }) {
 
 function PassengerCard({ booking }: { booking: Booking }) {
   return (
-    <Card className="border-border/80 bg-white/80 dark:bg-slate-950/75">
+    <Card className="border-border/80 bg-white/80 dark:bg-indigo-950/80">
       <CardHeader>
         <CardDescription>
           {BOOKING_CONFIRMATION_COPY.passengers}
@@ -159,13 +159,13 @@ function PassengerCard({ booking }: { booking: Booking }) {
           {booking.passengers.length > 1 ? "s" : ""}
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      <CardContent className="space-y-4 text-sm leading-6 text-indigo-700 dark:text-indigo-200">
         {booking.passengers.map((passenger, index) => (
           <div
             key={`${passenger.passportNumber}-${index}`}
-            className="rounded-[1.2rem] border border-slate-200/80 px-4 py-4 dark:border-slate-800/80"
+            className="rounded-[1.2rem] border border-indigo-200/80 px-4 py-4 dark:border-indigo-800/80"
           >
-            <p className="font-medium text-slate-950 dark:text-stone-100">
+            <p className="font-medium text-indigo-950 dark:text-indigo-50">
               {passenger.firstName} {passenger.lastName}
             </p>
             <p>
@@ -182,7 +182,7 @@ function PassengerCard({ booking }: { booking: Booking }) {
 
 function NextActionsCard() {
   return (
-    <Card className="border-border/80 bg-white/80 dark:bg-slate-950/75">
+    <Card className="border-border/80 bg-white/80 dark:bg-indigo-950/80">
       <CardHeader>
         <CardDescription>
           {BOOKING_CONFIRMATION_COPY.nextActions}

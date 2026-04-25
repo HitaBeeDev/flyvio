@@ -115,7 +115,7 @@ export function AirportInput({
     <div className="space-y-2">
       <label
         htmlFor={inputId}
-        className="block text-sm font-medium text-slate-700 dark:text-slate-200"
+        className="block text-sm font-medium text-indigo-700 dark:text-indigo-200"
       >
         {label}
       </label>

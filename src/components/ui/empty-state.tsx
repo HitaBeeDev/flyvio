@@ -17,7 +17,7 @@ export function EmptyState({
   icon,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center rounded-[2rem] border border-dashed border-slate-300 bg-white/70 px-6 py-12 text-center dark:border-slate-700 dark:bg-slate-950/60">
+    <div className="flex flex-col items-center rounded-[2rem] border border-dashed border-indigo-200 bg-white/70 px-6 py-12 text-center dark:border-indigo-700 dark:bg-indigo-950/60">
       <div className="mb-5 flex size-24 items-center justify-center rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.18),_transparent_68%)] text-indigo-600 dark:text-indigo-400">
         {icon ?? (
           <svg
@@ -43,10 +43,10 @@ export function EmptyState({
           </svg>
         )}
       </div>
-      <h3 className="text-xl font-semibold text-slate-900 dark:text-stone-100">
+      <h3 className="text-xl font-semibold text-indigo-950 dark:text-indigo-50">
         {title}
       </h3>
-      <p className="mt-3 max-w-md text-sm leading-6 text-slate-600 dark:text-slate-300">
+      <p className="mt-3 max-w-md text-sm leading-6 text-indigo-700 dark:text-indigo-200">
         {description}
       </p>
       {ctaLabel && onCtaClick ? (

@@ -33,11 +33,11 @@ export function AirportInputField({
   return (
     <div
       className={cn(
-        "flex h-12 items-center gap-3 rounded-2xl border bg-white px-4 shadow-xs transition-[border-color,box-shadow,background-color] focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-500/15 dark:bg-slate-950",
+        "flex h-12 items-center gap-3 rounded-2xl border bg-white px-4 shadow-xs transition-[border-color,box-shadow,background-color] focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-500/15 dark:bg-indigo-950",
         error ? "border-rose-500 ring-4 ring-rose-500/10" : "border-border/80",
       )}
     >
-      <PlaneTakeoff className="size-4 text-slate-400" aria-hidden="true" />
+      <PlaneTakeoff className="size-4 text-indigo-400" aria-hidden="true" />
       <input
         ref={inputRef}
         id={inputId}
@@ -53,7 +53,7 @@ export function AirportInputField({
         onChange={(event) => onChange(event.target.value)}
         onKeyDown={onKeyDown}
         placeholder={placeholder}
-        className="w-full bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-stone-100"
+        className="w-full bg-transparent text-sm text-indigo-900 outline-none placeholder:text-indigo-400 dark:text-indigo-50"
       />
     </div>
   );

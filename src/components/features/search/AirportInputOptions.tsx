@@ -24,7 +24,7 @@ export function AirportInputOptions({
 }: AirportInputOptionsProps) {
   if (!options.length) {
     return (
-      <div className="px-3 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
+      <div className="px-3 py-6 text-center text-sm text-indigo-500 dark:text-indigo-400">
         {AIRPORT_INPUT_COPY.empty}
       </div>
     );
@@ -43,17 +43,17 @@ export function AirportInputOptions({
       className={cn(
         "flex w-full items-center justify-between rounded-xl px-3 py-3 text-left transition-colors",
         index === activeIndex
-          ? "bg-slate-100 dark:bg-slate-900"
-          : "hover:bg-slate-50 dark:hover:bg-slate-900/80",
+          ? "bg-indigo-100 dark:bg-indigo-900"
+          : "hover:bg-indigo-50 dark:hover:bg-indigo-900/80",
       )}
     >
       <span className="flex items-start gap-3">
-        <MapPin className="mt-0.5 size-4 text-slate-400" aria-hidden="true" />
+        <MapPin className="mt-0.5 size-4 text-indigo-400" aria-hidden="true" />
         <span>
-          <span className="block text-sm font-medium text-slate-900 dark:text-stone-100">
+          <span className="block text-sm font-medium text-indigo-900 dark:text-indigo-50">
             {airport.iata} · {airport.city}
           </span>
-          <span className="block text-xs text-slate-500 dark:text-slate-400">
+          <span className="block text-xs text-indigo-500 dark:text-indigo-400">
             {airport.name}
           </span>
         </span>

@@ -9,10 +9,10 @@ export function NotFoundPage() {
         <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
           404
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
           This route doesn&apos;t exist
         </h1>
-        <p className="mt-4 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p className="mt-4 max-w-xl text-base leading-7 text-indigo-700 dark:text-indigo-200">
           Looks like this flight path is unknown. Head back home and pick a
           route that actually clears departure.
         </p>

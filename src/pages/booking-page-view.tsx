@@ -33,10 +33,10 @@ export function BookingPageView({
         <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
           {BOOKING_COPY.pageEyebrow}
         </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+        <h1 className="text-4xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
           {BOOKING_COPY.pageTitle}
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-indigo-500 dark:text-indigo-300">
           {flight.outbound[0]!.departureAirport.iata} to{" "}
           {flight.outbound[flight.outbound.length - 1]!.arrivalAirport.iata} ·{" "}
           {travelerCount} travelers

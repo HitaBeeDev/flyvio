@@ -24,7 +24,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
     <motion.div variants={cardItem}>
       <BaseFlightCard
         className={cn(
-          "gap-0 border-slate-200/90 bg-white/95 py-0 transition duration-300 hover:scale-[1.01] hover:border-accent/60 hover:shadow-[0_24px_70px_rgba(99,102,241,0.14)] dark:border-slate-800/90 dark:bg-slate-950/90",
+          "gap-0 border-indigo-200/90 bg-white/95 py-0 transition duration-300 hover:scale-[1.01] hover:border-accent/60 hover:shadow-[0_24px_70px_rgba(99,102,241,0.18)] dark:border-indigo-800/90 dark:bg-indigo-950/90",
           className,
         )}
       >
@@ -32,7 +32,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
           type="button"
           onClick={() => toggleSavedFlightId(flight.id)}
           aria-label={isSaved ? "Remove saved flight" : "Save flight"}
-          className="absolute right-5 top-5 inline-flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 transition hover:border-accent hover:text-accent dark:border-slate-800 dark:bg-slate-950/80 dark:text-slate-300"
+          className="absolute right-5 top-5 inline-flex size-11 items-center justify-center rounded-full border border-indigo-200 bg-white/90 text-indigo-500 transition hover:border-accent hover:text-accent dark:border-indigo-800 dark:bg-indigo-950/80 dark:text-indigo-300"
         >
           {isSaved ? (
             <BookmarkCheck className="size-4" />
@@ -48,7 +48,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
             <ItineraryRow label="Outbound" segments={flight.outbound} />
             {flight.isRoundTrip && flight.inbound ? (
               <>
-                <Separator className="bg-slate-200/80 dark:bg-slate-800/80" />
+                <Separator className="bg-indigo-200/80 dark:bg-indigo-800/80" />
                 <ItineraryRow label="Inbound" segments={flight.inbound} />
               </>
             ) : null}
@@ -56,13 +56,13 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
 
           <div className="flex flex-col justify-between gap-5 lg:items-end">
             <div className="space-y-1 lg:text-right">
-              <p className="text-xs font-medium uppercase tracking-[0.24em] text-slate-400">
+              <p className="text-xs font-medium uppercase tracking-[0.24em] text-indigo-400">
                 Price
               </p>
-              <p className="text-3xl font-semibold text-slate-950 dark:text-stone-100">
+              <p className="text-3xl font-semibold text-indigo-950 dark:text-indigo-50">
                 €{flight.price}
               </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-indigo-500 dark:text-indigo-300">
                 per person
               </p>
             </div>

@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<
     if (this.state.error) {
       return (
         <div className="mx-auto flex min-h-[60vh] max-w-2xl items-center justify-center px-4">
-          <Card className="w-full border-border/80 bg-white/85 dark:bg-slate-950/75">
+          <Card className="w-full border-border/80 bg-white/90 dark:bg-indigo-950/80">
             <CardHeader>
               <CardDescription>Unexpected error</CardDescription>
               <CardTitle className="text-3xl">
@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+              <p className="text-sm leading-6 text-indigo-700 dark:text-indigo-200">
                 {this.state.error.message ||
                   "An unknown rendering error occurred."}
               </p>

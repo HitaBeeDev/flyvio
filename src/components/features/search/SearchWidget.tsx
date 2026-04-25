@@ -113,7 +113,7 @@ export function SearchWidget({
   };
 
   return (
-    <Card className="gap-0 overflow-hidden rounded-[2rem] border-border/80 bg-white/85 p-0 dark:bg-slate-950/75">
+    <Card className="gap-0 overflow-hidden rounded-[2rem] border-border/80 bg-white/90 p-0 dark:bg-indigo-950/85">
       {variant === "compact" ? (
         <button
           type="button"
@@ -124,11 +124,11 @@ export function SearchWidget({
             <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
               {SEARCH_WIDGET_COPY.compactTitle}
             </p>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+            <p className="mt-1 text-sm text-indigo-700 dark:text-indigo-200">
               {summary}
             </p>
           </div>
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 dark:text-indigo-200">
             <SlidersHorizontal className="size-4" />
             {expanded ? SEARCH_WIDGET_COPY.hide : SEARCH_WIDGET_COPY.edit}
           </span>

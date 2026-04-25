@@ -26,13 +26,13 @@ export function BookingReview({ flight, descriptors }: BookingReviewProps) {
 
   return (
     <div className="space-y-5">
-      <Card className="border-slate-200/80 bg-white/85 dark:border-slate-800/80 dark:bg-slate-950/75">
+      <Card className="border-indigo-200/80 bg-white/90 dark:border-indigo-800/80 dark:bg-indigo-950/80">
         <CardHeader>
-          <CardTitle className="text-2xl text-slate-950 dark:text-stone-100">
+          <CardTitle className="text-2xl text-indigo-950 dark:text-indigo-50">
             {BOOKING_COPY.review.flightSummaryTitle}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+        <CardContent className="space-y-4 text-sm text-indigo-700 dark:text-indigo-200">
           <p>
             {flight.outbound[0]!.departureAirport.city} (
             {flight.outbound[0]!.departureAirport.iata}) to{" "}
@@ -51,9 +51,9 @@ export function BookingReview({ flight, descriptors }: BookingReviewProps) {
         </CardContent>
       </Card>
 
-      <Card className="border-slate-200/80 bg-white/85 dark:border-slate-800/80 dark:bg-slate-950/75">
+      <Card className="border-indigo-200/80 bg-white/90 dark:border-indigo-800/80 dark:bg-indigo-950/80">
         <CardHeader>
-          <CardTitle className="text-2xl text-slate-950 dark:text-stone-100">
+          <CardTitle className="text-2xl text-indigo-950 dark:text-indigo-50">
             {BOOKING_COPY.review.passengerListTitle}
           </CardTitle>
         </CardHeader>
@@ -61,16 +61,16 @@ export function BookingReview({ flight, descriptors }: BookingReviewProps) {
           {passengers.map((passenger, index) => (
             <div
               key={`${passenger.firstName}-${passenger.passportNumber}-${index}`}
-              className="rounded-[1.2rem] border border-slate-200/80 px-4 py-4 text-sm dark:border-slate-800/80"
+              className="rounded-[1.2rem] border border-indigo-200/80 px-4 py-4 text-sm dark:border-indigo-800/80"
             >
-              <p className="font-medium text-slate-950 dark:text-stone-100">
+              <p className="font-medium text-indigo-950 dark:text-indigo-50">
                 {passenger.firstName} {passenger.lastName}
               </p>
-              <p className="mt-1 text-slate-500 dark:text-slate-400">
+              <p className="mt-1 text-indigo-500 dark:text-indigo-300">
                 {BOOKING_COPY.review.passportPrefix} {passenger.passportNumber}{" "}
                 · {passenger.nationality}
               </p>
-              <p className="mt-1 text-slate-500 dark:text-slate-400">
+              <p className="mt-1 text-indigo-500 dark:text-indigo-300">
                 {BOOKING_COPY.review.seatsPrefix}{" "}
                 {formatSeatSummary(
                   extras.selectedSeats,
@@ -82,13 +82,13 @@ export function BookingReview({ flight, descriptors }: BookingReviewProps) {
         </CardContent>
       </Card>
 
-      <Card className="border-slate-200/80 bg-white/85 dark:border-slate-800/80 dark:bg-slate-950/75">
+      <Card className="border-indigo-200/80 bg-white/90 dark:border-indigo-800/80 dark:bg-indigo-950/80">
         <CardHeader>
-          <CardTitle className="text-2xl text-slate-950 dark:text-stone-100">
+          <CardTitle className="text-2xl text-indigo-950 dark:text-indigo-50">
             {BOOKING_COPY.review.extrasTitle}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+        <CardContent className="space-y-3 text-sm text-indigo-700 dark:text-indigo-200">
           <p>
             {BOOKING_COPY.review.flightSubtotal}:{" "}
             {formatMoney(price.flightSubtotal)}

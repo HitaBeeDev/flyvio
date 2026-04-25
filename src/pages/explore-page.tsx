@@ -22,7 +22,7 @@ const REGION_TABS: Array<{ key: ExploreRegion; label: string }> = [
 
 function DestinationCardSkeleton() {
   return (
-    <div className="overflow-hidden rounded-[1.9rem] border border-slate-200/80 bg-white/85 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-slate-800/80 dark:bg-slate-950/75">
+    <div className="overflow-hidden rounded-[1.9rem] border border-indigo-200/80 bg-white/90 shadow-[0_18px_50px_rgba(30,27,75,0.08)] dark:border-indigo-800/80 dark:bg-indigo-950/80">
       <Skeleton className="aspect-[16/9] w-full rounded-none" />
       <div className="space-y-3 p-5">
         <div className="flex items-start justify-between gap-4">
@@ -107,14 +107,14 @@ export function ExplorePage() {
   return (
     <AppShell>
       <div className="space-y-6">
-        <section className="rounded-[2rem] border border-border/80 bg-white/75 p-5 shadow-[0_30px_120px_rgba(15,23,42,0.10)] backdrop-blur sm:p-8 dark:bg-slate-950/70">
+        <section className="rounded-[2rem] border border-border/80 bg-white/85 p-5 shadow-[0_30px_120px_rgba(30,27,75,0.10)] backdrop-blur sm:p-8 dark:bg-indigo-950/80">
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
             Explore
           </p>
-          <h1 className="mt-4 font-serif text-3xl text-slate-950 sm:text-4xl md:text-5xl dark:text-stone-50">
+          <h1 className="mt-4 font-serif text-3xl text-indigo-950 sm:text-4xl md:text-5xl dark:text-indigo-50">
             Explore destinations worth the detour
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-indigo-700 dark:text-indigo-200">
             Filter curated city picks by region, compare starting fares, and
             jump into search from the places that fit the trip you want.
           </p>
@@ -146,8 +146,8 @@ export function ExplorePage() {
                 }}
                 className={
                   active
-                    ? "min-h-[44px] rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-[0_10px_24px_rgba(15,118,110,0.24)]"
-                    : "min-h-[44px] rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
+                    ? "min-h-[44px] rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-[0_10px_24px_rgba(99,102,241,0.28)]"
+                    : "min-h-[44px] rounded-full bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 transition hover:bg-indigo-200 dark:bg-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-800"
                 }
               >
                 {tab.label}

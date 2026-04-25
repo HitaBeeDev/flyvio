@@ -19,7 +19,7 @@ export function AirlineMark({
   const [imageFailed, setImageFailed] = useState(false);
 
   return (
-    <div className="flex size-14 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200">
+    <div className="flex size-14 items-center justify-center overflow-hidden rounded-2xl border border-indigo-200 bg-indigo-50 text-sm font-semibold text-indigo-700 dark:border-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
       {!imageFailed ? (
         <img
           src={logoUrl}
@@ -46,10 +46,10 @@ export function FlightCardHeader({ flight }: { flight: Flight }) {
         logoUrl={flight.airline.logoUrl}
       />
       <div className="space-y-2">
-        <p className="text-lg font-semibold text-slate-950 dark:text-stone-100">
+        <p className="text-lg font-semibold text-indigo-950 dark:text-indigo-50">
           {flight.airline.name}
         </p>
-        <div className="space-y-1 text-sm text-slate-500 dark:text-slate-400">
+        <div className="space-y-1 text-sm text-indigo-500 dark:text-indigo-300">
           <p>{flight.cabinClass}</p>
           <p className="inline-flex items-center gap-2">
             <Luggage className="size-4" />
@@ -72,26 +72,26 @@ export function ItineraryRow({
 
   return (
     <div className="grid gap-3 md:grid-cols-[auto_1fr_auto] md:items-center">
-      <div className="text-xs font-medium uppercase tracking-[0.24em] text-slate-400">
+      <div className="text-xs font-medium uppercase tracking-[0.24em] text-indigo-400">
         {label}
       </div>
       <div className="grid gap-3 md:grid-cols-[auto_1fr_auto] md:items-center">
         <div>
-          <p className="font-mono text-xl font-semibold text-slate-950 dark:text-stone-100">
+          <p className="font-mono text-xl font-semibold text-indigo-950 dark:text-indigo-50">
             {new Intl.DateTimeFormat("en-US", {
               hour: "2-digit",
               minute: "2-digit",
               hour12: false,
             }).format(new Date(segments[0]!.departureTime))}
           </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-indigo-500 dark:text-indigo-300">
             {segments[0]!.departureAirport.iata}
           </p>
         </div>
         <div className="space-y-2">
-          <div className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-3 text-sm text-indigo-500 dark:text-indigo-300">
             <span>{formatDuration(getJourneyDuration(segments))}</span>
-            <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+            <div className="h-px flex-1 bg-indigo-200 dark:bg-indigo-800" />
             <PlaneTakeoff className="size-4 text-accent" />
           </div>
           <Badge variant={stopBadge.variant} className="rounded-full px-3 py-1">
@@ -99,14 +99,14 @@ export function ItineraryRow({
           </Badge>
         </div>
         <div className="md:text-right">
-          <p className="font-mono text-xl font-semibold text-slate-950 dark:text-stone-100">
+          <p className="font-mono text-xl font-semibold text-indigo-950 dark:text-indigo-50">
             {new Intl.DateTimeFormat("en-US", {
               hour: "2-digit",
               minute: "2-digit",
               hour12: false,
             }).format(new Date(segments[segments.length - 1]!.arrivalTime))}
           </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-indigo-500 dark:text-indigo-300">
             {segments[segments.length - 1]!.arrivalAirport.iata}
           </p>
         </div>

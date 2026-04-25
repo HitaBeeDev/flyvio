@@ -59,22 +59,22 @@ export function Navbar() {
       className={cn(
         "sticky top-4 z-40 rounded-[1.5rem] border border-transparent transition-all duration-300",
         scrolled &&
-          "border-border/80 bg-white/75 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:bg-slate-950/70",
+          "border-border/80 bg-white/85 shadow-[0_20px_60px_rgba(30,27,75,0.14)] backdrop-blur-xl dark:bg-indigo-950/85",
       )}
     >
       <div className="flex items-center justify-between gap-4 px-1 py-1">
         <Link
           to="/"
-          className="group inline-flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors hover:bg-white/70 dark:hover:bg-slate-900/70"
+          className="group inline-flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors hover:bg-white/70 dark:hover:bg-indigo-900/60"
         >
-          <span className="inline-flex size-10 items-center justify-center rounded-2xl bg-slate-950 text-sm font-semibold text-white dark:bg-stone-100 dark:text-slate-950">
+          <span className="inline-flex size-10 items-center justify-center rounded-2xl bg-indigo-950 text-sm font-semibold text-white dark:bg-indigo-100 dark:text-indigo-950">
             SQ
           </span>
           <span className="flex flex-col">
             <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-accent">
               SkyQuest
             </span>
-            <span className="font-serif text-xl text-slate-950 dark:text-stone-50">
+            <span className="font-serif text-xl text-indigo-950 dark:text-indigo-50">
               Flight Atelier
             </span>
           </span>
@@ -87,9 +87,9 @@ export function Navbar() {
               to={item.to}
               className={({ isActive }) =>
                 cn(
-                  "rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-white/70 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900/70 dark:hover:text-stone-100",
+                  "rounded-full px-4 py-2 text-sm font-medium text-indigo-700 transition-colors hover:bg-white/70 hover:text-indigo-950 dark:text-indigo-300 dark:hover:bg-indigo-900/60 dark:hover:text-indigo-50",
                   isActive &&
-                    "bg-white/80 text-slate-950 shadow-sm dark:bg-slate-900/80 dark:text-stone-100",
+                    "bg-white/80 text-indigo-950 shadow-sm dark:bg-indigo-900/70 dark:text-indigo-50",
                 )
               }
             >
@@ -97,7 +97,7 @@ export function Navbar() {
             </NavLink>
           ))}
 
-          <div className="ml-2 inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/70 px-3 py-2 text-sm text-slate-700 shadow-sm dark:bg-slate-900/70 dark:text-slate-200">
+          <div className="ml-2 inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/70 px-3 py-2 text-sm text-indigo-700 shadow-sm dark:bg-indigo-900/60 dark:text-indigo-200">
             <Heart className="size-4" />
             Saved
             <Badge variant="default">{savedFlightIds.length}</Badge>
@@ -111,7 +111,7 @@ export function Navbar() {
                 size="icon"
                 aria-label="Toggle dark mode"
                 onClick={toggleTheme}
-                className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
+                className="rounded-full border-border/80 bg-white/70 dark:bg-indigo-900/60"
               >
                 <ThemeIcon className="size-4" />
               </Button>
@@ -133,7 +133,7 @@ export function Navbar() {
                 size="icon"
                 aria-label="Toggle dark mode"
                 onClick={toggleTheme}
-                className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
+                className="rounded-full border-border/80 bg-white/70 dark:bg-indigo-900/60"
               >
                 <ThemeIcon className="size-4" />
               </Button>
@@ -150,7 +150,7 @@ export function Navbar() {
             size="icon"
             aria-label="Open navigation menu"
             onClick={toggleMobileNav}
-            className="rounded-full border-border/80 bg-white/70 dark:bg-slate-900/70"
+            className="rounded-full border-border/80 bg-white/70 dark:bg-indigo-900/60"
           >
             <Menu className="size-4" />
           </Button>
@@ -181,9 +181,9 @@ export function Navbar() {
                 onClick={closeMobileNav}
                 className={({ isActive }) =>
                   cn(
-                    "flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900",
+                    "flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-50 dark:text-indigo-200 dark:hover:bg-indigo-900",
                     isActive &&
-                      "bg-slate-100 text-slate-950 dark:bg-slate-900 dark:text-stone-100",
+                      "bg-indigo-50 text-indigo-950 dark:bg-indigo-900 dark:text-indigo-50",
                   )
                 }
               >
@@ -191,7 +191,7 @@ export function Navbar() {
               </NavLink>
             ))}
 
-            <div className="flex items-center justify-between rounded-2xl border border-border/80 bg-white/70 px-4 py-3 text-sm text-slate-700 dark:bg-slate-900/70 dark:text-slate-200">
+            <div className="flex items-center justify-between rounded-2xl border border-border/80 bg-white/70 px-4 py-3 text-sm text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-200">
               <span className="inline-flex items-center gap-2">
                 <Heart className="size-4" />
                 Saved flights

@@ -58,10 +58,10 @@ function DrawerContent({
       <DrawerPrimitive.Content
         data-slot="drawer-content"
         className={cn(
-          "group/drawer-content fixed z-50 flex h-auto flex-col bg-white/95 shadow-[0_24px_80px_rgba(15,23,42,0.2)] backdrop-blur dark:bg-slate-950/95",
+          "group/drawer-content fixed z-50 flex h-auto flex-col bg-white/95 shadow-[0_24px_80px_rgba(30,27,75,0.2)] backdrop-blur dark:bg-indigo-950/95",
           "data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-b-lg data-[vaul-drawer-direction=top]:border-b",
           "data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-lg data-[vaul-drawer-direction=bottom]:border-t",
-          "data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-[min(92vw,28rem)] data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=right]:border-slate-200 data-[vaul-drawer-direction=right]:sm:max-w-none dark:data-[vaul-drawer-direction=right]:border-slate-800",
+          "data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-[min(92vw,28rem)] data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=right]:border-indigo-200 data-[vaul-drawer-direction=right]:sm:max-w-none dark:data-[vaul-drawer-direction=right]:border-indigo-800",
           "data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=left]:sm:max-w-sm",
           className,
         )}

@@ -43,7 +43,7 @@ export function FlightCardSkeleton() {
 
         <div className="space-y-4 lg:pr-6">
           <ItinerarySkeletonRow />
-          <Separator className="bg-slate-200/80 dark:bg-slate-800/80" />
+          <Separator className="bg-indigo-200/80 dark:bg-indigo-800/80" />
           <ItinerarySkeletonRow />
         </div>
 

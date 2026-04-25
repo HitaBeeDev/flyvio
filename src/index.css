@@ -2,8 +2,8 @@
 
 @theme {
   --color-accent: #6366f1;
-  --color-surface: #f6f4ee;
-  --color-border: #d8d2c4;
+  --color-surface: #eef2ff;
+  --color-border: #c7d2fe;
   --font-sans: "Space Grotesk", "Segoe UI", sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
@@ -17,8 +17,8 @@
 .dark {
   color-scheme: dark;
   --color-accent: #818cf8;
-  --color-surface: #09090b;
-  --color-border: #27272a;
+  --color-surface: #1e1b4b;
+  --color-border: #3730a3;
 }
 
 body {

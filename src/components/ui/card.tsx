@@ -6,7 +6,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "flex flex-col gap-6 rounded-[1.75rem] border border-border/80 bg-white/85 py-6 text-card-foreground shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur dark:bg-slate-950/75",
+        "flex flex-col gap-6 rounded-[1.75rem] border border-border/80 bg-white/90 py-6 text-card-foreground shadow-[0_20px_70px_rgba(30,27,75,0.08)] backdrop-blur dark:bg-indigo-950/80",
         className,
       )}
       {...props}
@@ -85,7 +85,7 @@ function FlightCard({ className, ...props }: React.ComponentProps<"div">) {
     <Card
       data-slot="flight-card"
       className={cn(
-        "relative overflow-hidden rounded-[2rem] border-slate-200/80 bg-white/95 dark:border-slate-800/80 dark:bg-slate-950/90",
+        "relative overflow-hidden rounded-[2rem] border-indigo-200/80 bg-white/95 dark:border-indigo-800/80 dark:bg-indigo-950/90",
         className,
       )}
       {...props}
@@ -101,9 +101,9 @@ function FlightCardDivider({
     <div
       data-slot="flight-card-divider"
       className={cn(
-        "relative mx-6 border-t border-dashed border-slate-300 dark:border-slate-700",
-        "before:absolute before:-left-8 before:top-1/2 before:size-6 before:-translate-y-1/2 before:rounded-full before:bg-[linear-gradient(180deg,_#fcfbf8_0%,_#f2ede3_100%)] dark:before:bg-[linear-gradient(180deg,_#09090b_0%,_#111827_100%)]",
-        "after:absolute after:-right-8 after:top-1/2 after:size-6 after:-translate-y-1/2 after:rounded-full after:bg-[linear-gradient(180deg,_#fcfbf8_0%,_#f2ede3_100%)] dark:after:bg-[linear-gradient(180deg,_#09090b_0%,_#111827_100%)]",
+        "relative mx-6 border-t border-dashed border-indigo-200 dark:border-indigo-700",
+        "before:absolute before:-left-8 before:top-1/2 before:size-6 before:-translate-y-1/2 before:rounded-full before:bg-[#eef2ff] dark:before:bg-[#1e1b4b]",
+        "after:absolute after:-right-8 after:top-1/2 after:size-6 after:-translate-y-1/2 after:rounded-full after:bg-[#eef2ff] dark:after:bg-[#1e1b4b]",
         className,
       )}
       {...props}

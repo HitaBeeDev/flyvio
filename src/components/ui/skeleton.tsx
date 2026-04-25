@@ -10,7 +10,7 @@ function Skeleton({
     <div
       data-slot="skeleton"
       className={cn(
-        "animate-pulse rounded-md bg-slate-200/80 dark:bg-slate-800/80",
+        "animate-pulse rounded-md bg-indigo-200/80 dark:bg-indigo-800/80",
         variant === "text" ? "h-4 rounded-full" : "",
         className,
       )}

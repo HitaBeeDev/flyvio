@@ -18,7 +18,7 @@ export function SortBar({
   onOpenFilters,
 }: SortBarProps) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 rounded-[1.75rem] border border-slate-200/80 bg-white/85 px-4 py-4 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/75">
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-[1.75rem] border border-indigo-200/80 bg-white/90 px-4 py-4 backdrop-blur dark:border-indigo-800/80 dark:bg-indigo-950/80">
       <div className="flex flex-wrap items-center gap-2">
         {SORT_OPTIONS.map((option) => (
           <button
@@ -28,8 +28,8 @@ export function SortBar({
             className={cn(
               "min-h-[44px] rounded-full px-4 py-2 text-sm font-medium transition",
               sort === option.key
-                ? "bg-accent text-white shadow-[0_10px_24px_rgba(15,118,110,0.24)]"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800",
+                ? "bg-accent text-white shadow-[0_10px_24px_rgba(99,102,241,0.28)]"
+                : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200 dark:bg-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-800",
             )}
           >
             {option.label}
@@ -38,7 +38,7 @@ export function SortBar({
       </div>
 
       <div className="flex items-center gap-3">
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-indigo-500 dark:text-indigo-300">
           Showing {resultCount} flights
         </p>
         <Button

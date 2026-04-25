@@ -10,7 +10,7 @@ import { slideUp, staggerContainer, ZERO_DURATION } from "@/lib/motion";
 
 function DestinationCardSkeleton() {
   return (
-    <div className="min-w-[18.5rem] overflow-hidden rounded-[1.9rem] border border-slate-200/80 bg-white/85 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-slate-800/80 dark:bg-slate-950/75 md:min-w-0">
+    <div className="min-w-[18.5rem] overflow-hidden rounded-[1.9rem] border border-indigo-200/80 bg-white/90 shadow-[0_18px_50px_rgba(30,27,75,0.08)] dark:border-indigo-800/80 dark:bg-indigo-950/80 md:min-w-0">
       <Skeleton className="aspect-[16/9] w-full rounded-none" />
       <div className="space-y-3 p-5">
         <div className="flex items-start justify-between gap-4">
@@ -37,27 +37,27 @@ export function HomePage() {
   return (
     <AppShell>
       <div className="space-y-8">
-        <section className="relative flex min-h-[calc(100vh-10rem)] items-center justify-center overflow-hidden rounded-[2.4rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.14),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.92)_0%,_rgba(248,248,255,0.9)_52%,_rgba(238,242,255,0.9)_100%)] px-6 py-16 shadow-[0_40px_140px_rgba(15,23,42,0.12)] dark:border-zinc-800/70 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.16),_transparent_28%),linear-gradient(135deg,_rgba(9,9,11,0.96)_0%,_rgba(15,14,27,0.97)_56%,_rgba(9,9,11,0.96)_100%)] sm:px-10">
+        <section className="relative flex min-h-[calc(100vh-10rem)] items-center justify-center overflow-hidden rounded-[2.4rem] border border-indigo-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.95)_0%,_rgba(248,248,255,0.92)_52%,_rgba(238,242,255,0.92)_100%)] px-6 py-16 shadow-[0_40px_140px_rgba(30,27,75,0.12)] dark:border-indigo-800/60 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.22),_transparent_28%),linear-gradient(135deg,_rgba(30,27,75,0.98)_0%,_rgba(49,46,129,0.96)_56%,_rgba(30,27,75,0.98)_100%)] sm:px-10">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
             <div
-              className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.20)_0%,_rgba(99,102,241,0.02)_68%,_transparent_74%)] blur-2xl"
+              className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.24)_0%,_rgba(99,102,241,0.02)_68%,_transparent_74%)] blur-2xl"
               style={{
                 animation:
                   "skyquest-mesh-drift 16s ease-in-out infinite alternate",
               }}
             />
             <div
-              className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(168,85,247,0.14)_0%,_rgba(168,85,247,0.02)_66%,_transparent_74%)] blur-2xl"
+              className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.16)_0%,_rgba(99,102,241,0.02)_66%,_transparent_74%)] blur-2xl"
               style={{
                 animation:
                   "skyquest-mesh-drift 20s ease-in-out infinite alternate-reverse",
               }}
             />
             <div
-              className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(129,140,248,0.12)_0%,_rgba(129,140,248,0.02)_64%,_transparent_74%)] blur-2xl"
+              className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(129,140,248,0.16)_0%,_rgba(129,140,248,0.02)_64%,_transparent_74%)] blur-2xl"
               style={{
                 animation:
                   "skyquest-mesh-drift 18s ease-in-out infinite alternate",
@@ -73,21 +73,21 @@ export function HomePage() {
             className="relative mx-auto flex w-full max-w-4xl flex-col items-center text-center"
           >
             <motion.div variants={slideUp} transition={transition}>
-              <Badge className="border-white/30 bg-white/55 px-4 py-1.5 text-slate-800 backdrop-blur hover:bg-white/55 dark:border-slate-700/60 dark:bg-slate-900/55 dark:text-stone-100 dark:hover:bg-slate-900/55">
+              <Badge className="border-indigo-200/60 bg-white/60 px-4 py-1.5 text-indigo-800 backdrop-blur hover:bg-white/60 dark:border-indigo-700/60 dark:bg-indigo-900/55 dark:text-indigo-100 dark:hover:bg-indigo-900/55">
                 Search smarter
               </Badge>
             </motion.div>
             <motion.h1
               variants={slideUp}
               transition={transition}
-              className="mt-6 max-w-3xl text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl md:text-7xl dark:text-stone-50"
+              className="mt-6 max-w-3xl text-5xl font-semibold tracking-tight text-indigo-950 sm:text-6xl md:text-7xl dark:text-indigo-50"
             >
               Find your next flight
             </motion.h1>
             <motion.p
               variants={slideUp}
               transition={transition}
-              className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300"
+              className="mt-5 max-w-2xl text-lg leading-8 text-indigo-700 dark:text-indigo-200"
             >
               Search hundreds of routes. No fees. No noise.
             </motion.p>
@@ -108,7 +108,7 @@ export function HomePage() {
                 <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
                   Explore
                 </p>
-                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
                   Popular destinations
                 </h2>
               </div>

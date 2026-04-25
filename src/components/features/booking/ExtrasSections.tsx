@@ -23,14 +23,14 @@ export function BaggageSection({
   onToggle,
 }: BaggageSectionProps) {
   return (
-    <section className="rounded-[1.8rem] border border-slate-200/80 bg-white/85 p-5 dark:border-slate-800/80 dark:bg-slate-950/75">
+    <section className="rounded-[1.8rem] border border-indigo-200/80 bg-white/85 p-5 dark:border-indigo-800/80 dark:bg-indigo-950/75">
       <div className="mb-5 flex items-center gap-3">
         <Luggage className="size-5 text-accent" />
         <div>
-          <p className="text-lg font-semibold text-slate-950 dark:text-stone-100">
+          <p className="text-lg font-semibold text-indigo-950 dark:text-indigo-50">
             {BOOKING_COPY.extras.baggageTitle}
           </p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-indigo-500 dark:text-indigo-300">
             {BOOKING_COPY.extras.baggageDescription}
           </p>
         </div>
@@ -40,13 +40,13 @@ export function BaggageSection({
         {passengers.map((passenger) => (
           <label
             key={passenger.key}
-            className="flex items-center justify-between gap-4 rounded-[1.2rem] border border-slate-200/80 px-4 py-3 dark:border-slate-800/80"
+            className="flex items-center justify-between gap-4 rounded-[1.2rem] border border-indigo-200/80 px-4 py-3 dark:border-indigo-800/80"
           >
             <div>
-              <p className="font-medium text-slate-950 dark:text-stone-100">
+              <p className="font-medium text-indigo-950 dark:text-indigo-50">
                 {passenger.label}
               </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-indigo-500 dark:text-indigo-300">
                 Add 23kg bag - ${EXTRA_BAGGAGE_PRICE}
               </p>
             </div>
@@ -86,7 +86,7 @@ function PassengerSeatGrid({
 >) {
   return (
     <div className="space-y-3">
-      <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
+      <p className="text-sm font-medium text-indigo-700 dark:text-indigo-200">
         {passenger.label}
       </p>
       <div className="overflow-x-auto">
@@ -125,8 +125,8 @@ function PassengerSeatGrid({
                         selectedByPassenger
                           ? "border-accent bg-accent text-white"
                           : unavailable || selectedByAnotherPassenger
-                            ? "border-slate-200 bg-slate-200 text-slate-400 dark:border-slate-800 dark:bg-slate-800 dark:text-slate-500"
-                            : "border-slate-200 bg-white text-slate-700 hover:border-accent/50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200",
+                            ? "border-indigo-200 bg-indigo-200 text-indigo-400 dark:border-indigo-800 dark:bg-indigo-800 dark:text-indigo-500"
+                            : "border-indigo-200 bg-white text-indigo-700 hover:border-accent/50 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-200",
                       )}
                     >
                       {seatCode}
@@ -152,14 +152,14 @@ export function SeatSelectionSection({
   onToggleSeat,
 }: SeatSelectionSectionProps) {
   return (
-    <section className="rounded-[1.8rem] border border-slate-200/80 bg-white/85 p-5 dark:border-slate-800/80 dark:bg-slate-950/75">
+    <section className="rounded-[1.8rem] border border-indigo-200/80 bg-white/85 p-5 dark:border-indigo-800/80 dark:bg-indigo-950/75">
       <div className="mb-5 flex items-center gap-3">
         <Sofa className="size-5 text-accent" />
         <div>
-          <p className="text-lg font-semibold text-slate-950 dark:text-stone-100">
+          <p className="text-lg font-semibold text-indigo-950 dark:text-indigo-50">
             {segmentLabel} {BOOKING_COPY.extras.seatSelectionSuffix}
           </p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-indigo-500 dark:text-indigo-300">
             {departureIata} to {arrivalIata}
           </p>
         </div>

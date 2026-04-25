@@ -58,7 +58,7 @@ export function FilterPanel({
   return (
     <div
       className={cn(
-        "space-y-6 rounded-[2rem] border border-slate-200/80 bg-white/90 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/80",
+        "space-y-6 rounded-[2rem] border border-indigo-200/80 bg-white/90 p-5 shadow-[0_18px_50px_rgba(30,27,75,0.08)] backdrop-blur dark:border-indigo-800/80 dark:bg-indigo-950/85",
         className,
       )}
     >

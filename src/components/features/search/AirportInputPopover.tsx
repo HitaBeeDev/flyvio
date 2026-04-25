@@ -31,7 +31,7 @@ export function AirportInputPopover({
       id={listboxId}
       role="listbox"
       aria-label={label}
-      className="absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-2xl border border-border/80 bg-white/95 p-2 shadow-[0_24px_80px_rgba(15,23,42,0.16)] backdrop-blur dark:bg-slate-950/95"
+      className="absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-2xl border border-border/80 bg-white/95 p-2 shadow-[0_24px_80px_rgba(15,23,42,0.16)] backdrop-blur dark:bg-indigo-950/95"
     >
       <AirportInputOptions
         listboxId={listboxId}

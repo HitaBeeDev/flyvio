@@ -24,7 +24,7 @@ export function FlightDetailSkeleton() {
           {Array.from({ length: 2 }, (_, index) => (
             <div
               key={index}
-              className="rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 dark:border-slate-800/80 dark:bg-slate-950/75"
+              className="rounded-[1.75rem] border border-indigo-200/80 bg-white/90 p-6 dark:border-indigo-800/80 dark:bg-indigo-950/80"
             >
               <div className="space-y-4">
                 <Skeleton className="h-7 w-40" />
@@ -33,7 +33,7 @@ export function FlightDetailSkeleton() {
               </div>
             </div>
           ))}
-          <div className="rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 dark:border-slate-800/80 dark:bg-slate-950/75">
+          <div className="rounded-[1.75rem] border border-indigo-200/80 bg-white/90 p-6 dark:border-indigo-800/80 dark:bg-indigo-950/80">
             <div className="space-y-4">
               <Skeleton className="h-7 w-48" />
               <Skeleton className="h-40 w-full rounded-[1.25rem]" />
@@ -42,13 +42,13 @@ export function FlightDetailSkeleton() {
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 dark:border-slate-800/80 dark:bg-slate-950/75">
+          <div className="rounded-[1.75rem] border border-indigo-200/80 bg-white/90 p-6 dark:border-indigo-800/80 dark:bg-indigo-950/80">
             <div className="space-y-4">
               <Skeleton className="h-7 w-44" />
               <Skeleton className="h-48 w-full rounded-[1.25rem]" />
             </div>
           </div>
-          <div className="rounded-[1.75rem] border border-slate-200/80 bg-white/85 p-6 dark:border-slate-800/80 dark:bg-slate-950/75">
+          <div className="rounded-[1.75rem] border border-indigo-200/80 bg-white/90 p-6 dark:border-indigo-800/80 dark:bg-indigo-950/80">
             <div className="space-y-3">
               <Skeleton className="h-7 w-32" />
               <Skeleton variant="text" className="w-40" />
@@ -75,7 +75,7 @@ function FlightHeader({
       <div className="space-y-2">
         <nav
           aria-label={FLIGHT_DETAIL_COPY.breadcrumb}
-          className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400"
+          className="flex flex-wrap items-center gap-2 text-sm text-indigo-500 dark:text-indigo-300"
         >
           <Link to="/search" className="transition hover:text-accent">
             {FLIGHT_DETAIL_COPY.searchResults}
@@ -92,11 +92,11 @@ function FlightHeader({
             {FLIGHT_DETAIL_COPY.backToResults}
           </Link>
         </Button>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-950 dark:text-stone-100">
+        <h1 className="text-4xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
           {flight.outbound[0]!.departureAirport.city} to{" "}
           {flight.outbound[flight.outbound.length - 1]!.arrivalAirport.city}
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-indigo-500 dark:text-indigo-300">
           {flight.airline.name} · {flight.cabinClass} ·{" "}
           {formatPrice(flight.price, "USD")} {FLIGHT_DETAIL_COPY.perTraveler}
         </p>
@@ -110,7 +110,7 @@ function FlightHeader({
             ? FLIGHT_DETAIL_COPY.removeSavedFlight
             : FLIGHT_DETAIL_COPY.saveFlight
         }
-        className="inline-flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-accent hover:text-accent dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
+        className="inline-flex size-11 items-center justify-center rounded-full border border-indigo-200 bg-white text-indigo-500 transition hover:border-accent hover:text-accent dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-300"
       >
         {isSaved ? (
           <BookmarkCheck className="size-4" />
@@ -132,13 +132,13 @@ function BookingCard({
   onBook: () => void;
 }) {
   return (
-    <Card className="border-slate-200/80 bg-white/85 dark:border-slate-800/80 dark:bg-slate-950/75">
+    <Card className="border-indigo-200/80 bg-white/90 dark:border-indigo-800/80 dark:bg-indigo-950/80">
       <CardHeader>
-        <CardTitle className="text-2xl text-slate-950 dark:text-stone-100">
+        <CardTitle className="text-2xl text-indigo-950 dark:text-indigo-50">
           {FLIGHT_DETAIL_COPY.bookTitle}
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+      <CardContent className="space-y-3 text-sm text-indigo-700 dark:text-indigo-200">
         <p>{FLIGHT_DETAIL_COPY.bookDescription}</p>
         <p>
           {FLIGHT_DETAIL_COPY.chosenTravelers} {travelers}

@@ -23,7 +23,7 @@ export function OfflineBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center gap-2 bg-slate-950 px-4 py-3 text-sm font-medium text-white dark:bg-zinc-900"
+      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center gap-2 bg-indigo-950 px-4 py-3 text-sm font-medium text-white dark:bg-indigo-900"
     >
       <WifiOff className="size-4 shrink-0" aria-hidden="true" />
       You're offline — some features may be unavailable

@@ -22,8 +22,8 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
               isCompleted
                 ? "border-accent bg-accent text-white"
                 : isCurrent
-                  ? "border-accent bg-white text-slate-950 shadow-[0_14px_32px_rgba(15,118,110,0.12)] dark:bg-slate-950 dark:text-stone-100"
-                  : "border-slate-200 bg-slate-100 text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400",
+                  ? "border-accent bg-white text-indigo-950 shadow-[0_14px_32px_rgba(99,102,241,0.16)] dark:bg-indigo-950 dark:text-indigo-50"
+                  : "border-indigo-200 bg-indigo-100 text-indigo-500 dark:border-indigo-800 dark:bg-indigo-900 dark:text-indigo-400",
             )}
           >
             {isCurrent ? (
@@ -41,7 +41,7 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
                     ? "border-white/30 bg-white/15 text-white"
                     : isCurrent
                       ? "border-accent text-accent"
-                      : "border-slate-300 text-slate-500 dark:border-slate-700 dark:text-slate-400",
+                      : "border-indigo-200 text-indigo-400 dark:border-indigo-700 dark:text-indigo-400",
                 )}
               >
                 {isCompleted ? <Check className="size-4" /> : index + 1}
