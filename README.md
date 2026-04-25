@@ -7,7 +7,7 @@ A frontend flight search and booking application.
 
 ## What It Does
 
-Flyvio lets users search for flights between airports, browse dynamically generated results, view full flight details , and complete a 3-step booking flow through to a confirmation screen.
+Flyvio lets users search for flights between airports, browse dynamically generated results, view full flight details, and complete a 3-step booking flow through to a confirmation screen.
 
 All airport and airline data comes from the [OpenFlights public dataset](https://openflights.org/data.html). Flights are generated on-demand for any airport pair using real carrier and route data — there is no hardcoded route list and no backend.
 
