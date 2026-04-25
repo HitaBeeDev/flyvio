@@ -57,6 +57,7 @@ export function DateRangePicker({
           <Calendar
             mode="range"
             numberOfMonths={2}
+            showOutsideDays={false}
             selected={selectedRange}
             disabled={{ before: today }}
             onSelect={(range) => {

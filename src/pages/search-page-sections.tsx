@@ -71,6 +71,15 @@ export function SearchResultsSection({
   return (
     <>
       <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="lg:col-span-2">
+          <SortBar
+            sort={sort}
+            resultCount={visibleFlights.length}
+            onSortChange={setSort}
+            onOpenFilters={() => setMobileFiltersOpen(true)}
+          />
+        </div>
+
         <aside className="hidden lg:block">
           <div className="sticky top-28">
             <FilterPanel
@@ -85,13 +94,6 @@ export function SearchResultsSection({
         </aside>
 
         <section className="space-y-5">
-          <SortBar
-            sort={sort}
-            resultCount={visibleFlights.length}
-            onSortChange={setSort}
-            onOpenFilters={() => setMobileFiltersOpen(true)}
-          />
-
           {validSearchParams == null ? (
             <EmptyState
               title={SEARCH_PAGE_COPY.invalidSearchTitle}
