@@ -49,7 +49,7 @@ export function DateRangePicker({
           <CalendarDays className="size-4 opacity-60" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-auto rounded-[1.5rem] p-0">
+      <PopoverContent align="start" side="bottom" avoidCollisions={false} className="w-auto rounded-[1.5rem] p-0">
         {isRoundTrip ? (
           <Calendar
             mode="range"

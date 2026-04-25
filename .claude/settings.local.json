@@ -6,7 +6,8 @@
       "Bash(node *)",
       "Bash(npx tsc *)",
       "Bash(grep -rn \"SkyQuest\\\\|— SkyQuest\\\\|LOAD_MORE\\\\|PAGE_SIZE\\\\|per page\\\\|\\\\$35\\\\|\\\\$[0-9]\" src/pages/ src/components/)",
-      "Bash(npx prettier *)"
+      "Bash(npx prettier *)",
+      "Bash(xargs cat *)"
     ]
   }
 }
