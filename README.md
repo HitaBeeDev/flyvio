@@ -27,8 +27,6 @@ All airport and airline data comes from the [OpenFlights public dataset](https:/
 | Forms | React Hook Form + Zod v4 |
 | Animation | Framer Motion |
 | Icons | Lucide React |
-| Notifications | Sonner |
-| E2E testing | Playwright + axe-playwright |
 
 ---
 
