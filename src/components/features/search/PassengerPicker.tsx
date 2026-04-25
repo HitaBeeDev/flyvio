@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Minus, Plus, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,6 +80,7 @@ export function PassengerPicker({
   onValueChange,
   onCabinClassChange,
 }: PassengerPickerProps) {
+  const [open, setOpen] = useState(false);
   const totalPassengers = value.adults + value.children + value.infants;
 
   const updateCounter = (field: keyof PassengerCount, delta: 1 | -1) => {
@@ -92,7 +94,7 @@ export function PassengerPicker({
   };
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -108,7 +110,10 @@ export function PassengerPicker({
       </PopoverTrigger>
       <PopoverContent
         align="start"
-        className="w-[min(92vw,28rem)] rounded-[1.5rem] p-5"
+        side="bottom"
+        sideOffset={8}
+        collisionPadding={16}
+        className="max-h-[min(70vh,34rem)] w-[min(var(--radix-popover-trigger-width),32rem)] overflow-y-auto rounded-[1.5rem] border border-indigo-200/80 bg-white p-5 text-indigo-900 shadow-[0_24px_80px_rgba(30,27,75,0.16)] dark:border-indigo-800/80 dark:bg-indigo-950 dark:text-indigo-50"
       >
         <PopoverHeader className="mb-4">
           <PopoverTitle>Passengers & cabin</PopoverTitle>
@@ -174,9 +179,9 @@ export function PassengerPicker({
         </div>
 
         <div className="mt-5 flex justify-end">
-          <PopoverTrigger asChild>
-            <Button type="button">Done</Button>
-          </PopoverTrigger>
+          <Button type="button" onClick={() => setOpen(false)}>
+            Done
+          </Button>
         </div>
       </PopoverContent>
     </Popover>
