@@ -49,6 +49,12 @@ function Button({
     spinnerClassName?: string;
   }) {
   const Comp = asChild ? Slot.Root : "button";
+  const content = (
+    <>
+      {loading ? <Spinner className={spinnerClassName} size="sm" /> : null}
+      {children}
+    </>
+  );
 
   return (
     <Comp
@@ -60,8 +66,7 @@ function Button({
       disabled={disabled || loading}
       {...props}
     >
-      {loading ? <Spinner className={spinnerClassName} size="sm" /> : null}
-      {children}
+      {asChild ? children : content}
     </Comp>
   );
 }

@@ -193,7 +193,7 @@ export function FlightDetailContent({
           <AirlineInfo flight={flight} />
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 lg:sticky lg:top-28 lg:self-start">
           <FareBreakdown
             pricePerTraveler={flight.price}
             adults={adults}

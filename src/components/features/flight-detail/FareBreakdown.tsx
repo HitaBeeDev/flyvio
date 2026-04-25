@@ -16,7 +16,7 @@ export function FareBreakdown({
   const breakdown = getFareBreakdown(pricePerTraveler, adults, children);
 
   return (
-    <Card className="gap-0 border-indigo-200/80 bg-white/90 py-0 dark:border-indigo-800/80 dark:bg-indigo-950/80 lg:sticky lg:top-28">
+    <Card className="gap-0 border-indigo-200/80 bg-white/90 py-0 dark:border-indigo-800/80 dark:bg-indigo-950/80">
       <CardHeader className="border-b border-indigo-200/80 py-5 dark:border-indigo-800/80">
         <CardTitle className="text-2xl text-indigo-950 dark:text-indigo-50">
           Fare breakdown
