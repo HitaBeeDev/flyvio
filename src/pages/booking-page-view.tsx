@@ -28,18 +28,19 @@ export function BookingPageView({
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="space-y-6 pb-24 lg:pb-0">
-      <section className="space-y-3">
-        <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
+    <div className="space-y-8 pb-24 lg:pb-0">
+      <section>
+        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-accent">
           {BOOKING_COPY.pageEyebrow}
         </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
+        <h1 className="text-3xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
           {BOOKING_COPY.pageTitle}
         </h1>
-        <p className="text-sm text-indigo-500 dark:text-indigo-300">
+        <p className="mt-1 text-sm text-indigo-400 dark:text-indigo-400">
           {flight.outbound[0]!.departureAirport.iata} to{" "}
-          {flight.outbound[flight.outbound.length - 1]!.arrivalAirport.iata} ·{" "}
-          {travelerCount} travelers
+          {flight.outbound[flight.outbound.length - 1]!.arrivalAirport.iata}{" "}
+          <span className="mx-1 opacity-40">·</span>
+          {travelerCount} {travelerCount === 1 ? "traveler" : "travelers"}
         </p>
       </section>
 

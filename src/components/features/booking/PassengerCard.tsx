@@ -28,16 +28,16 @@ export function PassengerCard({
   const passengerErrors = errors.passengers?.[index];
 
   return (
-    <section className="rounded-[1.8rem] border border-indigo-200/80 bg-white/90 p-5 dark:border-indigo-800/80 dark:bg-indigo-950/80">
+    <section className="rounded-xl border border-indigo-200 bg-white p-5 dark:border-indigo-800 dark:bg-indigo-950">
       <div className="mb-5 flex items-center gap-3">
-        <div className="flex size-10 items-center justify-center rounded-full bg-accent/10 text-accent">
-          <UserRound className="size-5" />
+        <div className="flex size-9 items-center justify-center rounded-lg bg-indigo-100 text-accent dark:bg-indigo-900">
+          <UserRound className="size-4" />
         </div>
         <div>
-          <p className="text-lg font-semibold text-indigo-950 dark:text-indigo-50">
+          <p className="text-base font-semibold text-indigo-950 dark:text-indigo-50">
             {descriptor.label}
           </p>
-          <p className="text-sm text-indigo-500 dark:text-indigo-300">
+          <p className="text-xs text-indigo-500 dark:text-indigo-400">
             {descriptor.passengerType === "adult"
               ? BOOKING_COPY.passengers.adultTraveler
               : BOOKING_COPY.passengers.childTraveler}
@@ -100,7 +100,7 @@ export function PassengerCard({
         <div className="space-y-2 md:col-span-2">
           <label
             htmlFor={`${descriptor.key}-nationality`}
-            className="block text-sm font-medium text-indigo-700 dark:text-indigo-200"
+            className="block text-xs font-medium text-indigo-600 dark:text-indigo-400"
           >
             {BOOKING_COPY.passengers.nationality}
           </label>
@@ -117,7 +117,7 @@ export function PassengerCard({
                       : undefined
                   }
                   aria-invalid={Boolean(passengerErrors?.nationality)}
-                  className="h-12 w-full rounded-2xl border-indigo-200 bg-white px-4 text-left dark:border-indigo-800 dark:bg-indigo-950"
+                  className="h-12 w-full rounded-lg border-indigo-200 bg-white px-4 text-left dark:border-indigo-800 dark:bg-indigo-950"
                 >
                   <SelectValue
                     placeholder={BOOKING_COPY.passengers.nationalityPlaceholder}

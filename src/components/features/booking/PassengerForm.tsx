@@ -80,7 +80,7 @@ export function PassengerForm({ descriptors }: PassengerFormProps) {
       ))}
 
       <div className="flex justify-end">
-        <Button type="submit" className="rounded-2xl">
+        <Button type="submit" className="rounded-lg">
           {BOOKING_COPY.passengers.continueLabel}
         </Button>
       </div>

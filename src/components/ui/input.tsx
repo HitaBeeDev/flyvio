@@ -36,7 +36,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
       {label && labelMode === "top" ? (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-indigo-700 dark:text-indigo-200"
+          className="block text-xs font-medium text-indigo-600 dark:text-indigo-400"
         >
           {label}
         </label>
@@ -59,7 +59,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
               error ? errorId : helperText ? errorId : undefined
             }
             className={cn(
-              "peer h-12 w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-sm text-indigo-900 shadow-xs transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-indigo-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-indigo-950 dark:text-indigo-50",
+              "peer h-11 w-full min-w-0 rounded-lg border border-indigo-200 bg-white px-4 py-3 text-sm text-indigo-900 transition-[border-color,box-shadow,background-color] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-indigo-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-50",
               "focus-visible:border-indigo-500 focus-visible:ring-[3px] focus-visible:ring-indigo-500/20",
               "aria-invalid:border-rose-500 aria-invalid:ring-rose-500/20 dark:aria-invalid:ring-rose-500/20",
               leftIcon ? "pl-11" : "",
