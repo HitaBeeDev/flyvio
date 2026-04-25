@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { BOOKING_COPY } from "@/lib/constants";
 import type { BookingExtras } from "@/types";
 import {
-  EXTRA_BAGGAGE_PRICE,
   isSeatUnavailable,
   type PassengerDescriptor,
 } from "./booking-utils";

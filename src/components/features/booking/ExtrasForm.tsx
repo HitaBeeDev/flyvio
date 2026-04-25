@@ -32,7 +32,16 @@ export function ExtrasForm({ flight, passengers }: ExtrasFormProps) {
     defaultValues: extras,
     values: extras,
   });
-  const values = useWatch({ control });
+  const rawValues = useWatch({ control });
+  const values: BookingExtrasFormValues = {
+    extraBaggage: rawValues.extraBaggage ?? [],
+    selectedSeats: (rawValues.selectedSeats ?? []).map((s) => ({
+      passengerKey: s.passengerKey ?? "",
+      flightSegmentId: s.flightSegmentId ?? "",
+      seatCode: s.seatCode ?? "",
+      seatType: s.seatType ?? "middle",
+    })),
+  };
 
   const toggleBaggage = (passengerKey: string) => {
     setExtras({

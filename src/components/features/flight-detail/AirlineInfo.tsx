@@ -28,7 +28,6 @@ function AirlineMark({ name, logoUrl }: { name: string; logoUrl: string }) {
 }
 
 export function AirlineInfo({ flight }: { flight: Flight }) {
-  const onTimePerformance = getDeterministicPerformance(flight.airline.code);
   const fleetType = getFleetType(flight);
 
   return (
