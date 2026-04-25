@@ -72,7 +72,7 @@ export function Navbar() {
           </span>
           <span className="flex flex-col">
             <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-accent">
-              SkyQuest
+              Flyvio
             </span>
             <span className="font-serif text-xl text-indigo-950 dark:text-indigo-50">
               Flight Atelier

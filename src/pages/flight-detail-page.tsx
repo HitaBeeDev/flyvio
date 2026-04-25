@@ -39,7 +39,7 @@ export function FlightDetailPage() {
       return;
     }
 
-    document.title = `${flight.outbound[0]!.departureAirport.iata} → ${flight.outbound[flight.outbound.length - 1]!.arrivalAirport.iata} · ${flight.airline.name} — SkyQuest`;
+    document.title = `${flight.outbound[0]!.departureAirport.iata} → ${flight.outbound[flight.outbound.length - 1]!.arrivalAirport.iata} · ${flight.airline.name} — Flyvio`;
   }, [flight]);
 
   if (!flightId) {

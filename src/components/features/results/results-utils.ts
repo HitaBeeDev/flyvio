@@ -130,7 +130,7 @@ export function formatSearchPageTitle(params: SearchParams) {
   const origin = params.origin.toUpperCase();
   const destination = params.destination.toUpperCase();
 
-  return `${origin} → ${destination} · ${departure} — SkyQuest`;
+  return `${origin} → ${destination} · ${departure} — Flyvio`;
 }
 
 export function getPriceBounds(flights: Flight[]): [number, number] {

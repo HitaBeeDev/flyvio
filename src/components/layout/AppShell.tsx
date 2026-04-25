@@ -1,5 +1,4 @@
 import { useEffect, type ReactNode } from "react";
-import { Footer } from "@/components/layout/Footer";
 import { useUiStore } from "@/stores/uiStore";
 
 type AppShellProps = {
@@ -48,7 +47,6 @@ export function AppShell({ children }: AppShellProps) {
         <main id="main-content" className="flex-1 py-8">
           {children}
         </main>
-        <Footer />
       </div>
     </div>
   );

@@ -101,7 +101,7 @@ export function ExplorePage() {
   );
 
   useEffect(() => {
-    document.title = "Explore Destinations — SkyQuest";
+    document.title = "Explore Destinations — Flyvio";
   }, []);
 
   return (

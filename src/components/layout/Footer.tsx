@@ -8,7 +8,7 @@ export function Footer() {
       <div className="flex flex-col gap-4 text-sm text-indigo-700 dark:text-indigo-300 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-accent">
-            SkyQuest
+            Flyvio
           </p>
           <p className="mt-1 font-serif text-xl text-indigo-950 dark:text-indigo-50">
             Flight Atelier
@@ -38,7 +38,7 @@ export function Footer() {
           </a>
         </div>
 
-        <p>© {year} SkyQuest</p>
+        <p>© {year} Flyvio</p>
       </div>
     </footer>
   );

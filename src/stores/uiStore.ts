@@ -43,7 +43,7 @@ export const useUiStore = create<UiStore>()(
         })),
     }),
     {
-      name: "skyquest-ui",
+      name: "flyvio-ui",
       partialize: (state) => ({
         theme: state.theme,
         savedFlightIds: state.savedFlightIds,

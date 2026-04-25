@@ -31,7 +31,7 @@ export function HomePage() {
   const transition = shouldReduceMotion ? ZERO_DURATION : undefined;
 
   useEffect(() => {
-    document.title = "SkyQuest — Find Your Next Flight";
+    document.title = "Flyvio — Find Your Next Flight";
   }, []);
 
   return (
@@ -46,21 +46,21 @@ export function HomePage() {
               className="absolute -left-[8%] top-[-8%] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.24)_0%,_rgba(99,102,241,0.02)_68%,_transparent_74%)] blur-2xl"
               style={{
                 animation:
-                  "skyquest-mesh-drift 16s ease-in-out infinite alternate",
+                  "flyvio-mesh-drift 16s ease-in-out infinite alternate",
               }}
             />
             <div
               className="absolute right-[-10%] top-[12%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.16)_0%,_rgba(99,102,241,0.02)_66%,_transparent_74%)] blur-2xl"
               style={{
                 animation:
-                  "skyquest-mesh-drift 20s ease-in-out infinite alternate-reverse",
+                  "flyvio-mesh-drift 20s ease-in-out infinite alternate-reverse",
               }}
             />
             <div
               className="absolute bottom-[-14%] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(129,140,248,0.16)_0%,_rgba(129,140,248,0.02)_64%,_transparent_74%)] blur-2xl"
               style={{
                 animation:
-                  "skyquest-mesh-drift 18s ease-in-out infinite alternate",
+                  "flyvio-mesh-drift 18s ease-in-out infinite alternate",
               }}
             />
           </div>
