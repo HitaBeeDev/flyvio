@@ -2,6 +2,19 @@
 
 A flight search and booking app where users can search any route, browse results, view flight details, and complete a full booking flow from start to confirmation.
 
+<p align="center">
+  <img src="docs/assets/preview.png" alt="Flyvio app screenshot" width="800" />
+</p>
+
+---
+
+## Performance
+
+| Metric | Score |
+|---|---|
+| Lighthouse Performance | 99 |
+| Accessibility | 96 |
+| SEO | 100 |
 
 ---
 
