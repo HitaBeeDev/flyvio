@@ -19,7 +19,7 @@ type FilterSectionProps = PropsWithChildren<{ title: string }>;
 export function FilterSection({ title, children }: FilterSectionProps) {
   return (
     <section className="space-y-4">
-      <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-500 dark:text-indigo-400">
+      <h3 className="text-xs font-medium uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
         {title}
       </h3>
       {children}
@@ -34,14 +34,14 @@ export function FilterPanelHeader({ onReset }: { onReset: () => void }) {
         <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
           {FILTER_PANEL_COPY.eyebrow}
         </p>
-        <p className="mt-1 text-sm text-indigo-500 dark:text-indigo-400">
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
           {FILTER_PANEL_COPY.description}
         </p>
       </div>
       <button
         type="button"
         onClick={onReset}
-        className="inline-flex items-center gap-2 text-sm font-medium text-indigo-500 transition hover:text-accent dark:text-indigo-300"
+        className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-accent dark:text-slate-300"
       >
         <RotateCcw className="size-4" />
         {FILTER_PANEL_COPY.resetLabel}
@@ -71,7 +71,7 @@ export function RangeFilterSection({
 }: RangeFilterSectionProps) {
   return (
     <FilterSection title={title}>
-      <div className="rounded-2xl bg-indigo-50 px-4 py-3 text-sm font-medium text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200">
+      <div className="rounded-xl bg-slate-100 px-4 py-3 text-sm font-medium text-slate-800 dark:bg-slate-800 dark:text-slate-200">
         {valueLabel}
       </div>
       <Slider
@@ -98,7 +98,7 @@ export function StopsFilterSection({
         {STOP_OPTIONS.map((option) => (
           <label
             key={option.key}
-            className="flex items-center justify-between gap-3 rounded-2xl border border-indigo-200 px-3 py-2.5 text-sm dark:border-indigo-800"
+            className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 px-3 py-2.5 text-sm text-slate-700 dark:border-slate-800 dark:text-slate-200"
           >
             <span>{option.label}</span>
             <Checkbox
@@ -140,10 +140,10 @@ export function DepartureTimeFilterSection({
                 })
               }
               className={cn(
-                "rounded-2xl border px-3 py-3 text-left text-sm transition",
+                "rounded-xl border px-3 py-3 text-left text-sm transition",
                 active
-                  ? "border-accent bg-accent/10 text-accent"
-                  : "border-indigo-200 bg-white text-indigo-700 hover:border-indigo-300 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-300",
+                  ? "border-indigo-950 bg-indigo-950 text-white dark:border-indigo-100 dark:bg-indigo-100 dark:text-indigo-950"
+                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800",
               )}
             >
               {window.label}
@@ -166,12 +166,12 @@ export function AirlinesFilterSection({
 }) {
   return (
     <FilterSection title={FILTER_PANEL_COPY.sections.airlines}>
-      <ScrollArea className="h-52 rounded-2xl border border-indigo-200 px-3 dark:border-indigo-800">
+      <ScrollArea className="h-52 rounded-xl border border-slate-200 px-3 dark:border-slate-800">
         <div className="space-y-2 py-3">
           {airlines.map((airline) => (
             <label
               key={airline.code}
-              className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 text-sm text-indigo-700 hover:bg-indigo-50 dark:text-indigo-200 dark:hover:bg-indigo-900"
+              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
             >
               <div className="flex items-center gap-3">
                 <Checkbox
@@ -189,7 +189,7 @@ export function AirlinesFilterSection({
                 />
                 <span>{airline.name}</span>
               </div>
-              <span className="text-indigo-400">{airline.count}</span>
+              <span className="text-slate-400">{airline.count}</span>
             </label>
           ))}
         </div>

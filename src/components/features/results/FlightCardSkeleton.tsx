@@ -31,7 +31,7 @@ function ItinerarySkeletonRow() {
 export function FlightCardSkeleton() {
   return (
     <BaseFlightCard className="gap-0 py-0">
-      <div className="grid gap-6 p-6 lg:grid-cols-[220px_1fr_180px]">
+      <div className="grid gap-6 p-6 lg:grid-cols-[220px_minmax(0,1fr)_150px]">
         <div className="flex items-start gap-4">
           <Skeleton className="size-14 rounded-2xl" />
           <div className="space-y-2">
@@ -43,12 +43,13 @@ export function FlightCardSkeleton() {
 
         <div className="space-y-4 lg:pr-6">
           <ItinerarySkeletonRow />
-          <Separator className="bg-indigo-200/80 dark:bg-indigo-800/80" />
+          <Separator className="bg-slate-200 dark:bg-slate-800" />
           <ItinerarySkeletonRow />
         </div>
 
         <div className="flex flex-col justify-between gap-5 lg:items-end">
           <div className="space-y-2 lg:text-right">
+            <Skeleton className="ml-auto size-10 rounded-full" />
             <Skeleton variant="text" className="ml-auto w-12" />
             <Skeleton className="ml-auto h-9 w-24" />
             <Skeleton variant="text" className="ml-auto w-20" />

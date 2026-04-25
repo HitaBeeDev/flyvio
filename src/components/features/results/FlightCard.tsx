@@ -24,50 +24,51 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
     <motion.div variants={cardItem}>
       <BaseFlightCard
         className={cn(
-          "gap-0 border-indigo-200/90 bg-white/95 py-0 transition duration-300 hover:scale-[1.01] hover:border-accent/60 hover:shadow-[0_24px_70px_rgba(99,102,241,0.18)] dark:border-indigo-800/90 dark:bg-indigo-950/90",
+          "gap-0 border-slate-200 bg-white py-0 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700",
           className,
         )}
       >
-        <button
-          type="button"
-          onClick={() => toggleSavedFlightId(flight.id)}
-          aria-label={isSaved ? "Remove saved flight" : "Save flight"}
-          className="absolute right-5 top-5 inline-flex size-11 items-center justify-center rounded-full border border-indigo-200 bg-white/90 text-indigo-500 transition hover:border-accent hover:text-accent dark:border-indigo-800 dark:bg-indigo-950/80 dark:text-indigo-300"
-        >
-          {isSaved ? (
-            <BookmarkCheck className="size-4" />
-          ) : (
-            <Bookmark className="size-4" />
-          )}
-        </button>
-
-        <div className="grid gap-6 p-6 lg:grid-cols-[220px_1fr_180px]">
+        <div className="grid gap-6 p-6 lg:grid-cols-[220px_minmax(0,1fr)_150px]">
           <FlightCardHeader flight={flight} />
 
           <div className="space-y-4 lg:pr-6">
             <ItineraryRow label="Outbound" segments={flight.outbound} />
             {flight.isRoundTrip && flight.inbound ? (
               <>
-                <Separator className="bg-indigo-200/80 dark:bg-indigo-800/80" />
+                <Separator className="bg-slate-200 dark:bg-slate-800" />
                 <ItineraryRow label="Inbound" segments={flight.inbound} />
               </>
             ) : null}
           </div>
 
           <div className="flex flex-col justify-between gap-5 lg:items-end">
-            <div className="space-y-1 lg:text-right">
-              <p className="text-xs font-medium uppercase tracking-[0.24em] text-indigo-400">
-                Price
-              </p>
-              <p className="text-3xl font-semibold text-indigo-950 dark:text-indigo-50">
-                €{flight.price}
-              </p>
-              <p className="text-sm text-indigo-500 dark:text-indigo-300">
-                per person
-              </p>
+            <div className="flex w-full items-start justify-between gap-4 lg:block lg:space-y-4 lg:text-right">
+              <button
+                type="button"
+                onClick={() => toggleSavedFlightId(flight.id)}
+                aria-label={isSaved ? "Remove saved flight" : "Save flight"}
+                className="inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:border-accent hover:text-accent dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 lg:ml-auto"
+              >
+                {isSaved ? (
+                  <BookmarkCheck className="size-4" />
+                ) : (
+                  <Bookmark className="size-4" />
+                )}
+              </button>
+              <div className="space-y-1">
+                <p className="text-xs font-medium uppercase tracking-[0.24em] text-slate-400">
+                  Price
+                </p>
+                <p className="text-3xl font-semibold text-slate-950 dark:text-white">
+                  €{flight.price}
+                </p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  per person
+                </p>
+              </div>
             </div>
             <Button
-              className="w-full rounded-2xl lg:w-auto"
+              className="w-full rounded-xl lg:w-auto"
               onClick={() => onSelect?.(flight)}
             >
               Select

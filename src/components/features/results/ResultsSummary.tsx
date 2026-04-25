@@ -13,16 +13,16 @@ export function ResultsSummary({ params }: ResultsSummaryProps) {
   const navigate = useNavigate();
 
   return (
-    <section className="space-y-5 rounded-[2rem] border border-indigo-200/80 bg-white/90 p-6 shadow-[0_20px_70px_rgba(30,27,75,0.06)] backdrop-blur dark:border-indigo-800/80 dark:bg-indigo-950/80">
+    <section className="space-y-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="space-y-2">
           <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
             Search Results
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50 md:text-4xl">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-4xl">
             {formatRouteTitle(params)}
           </h1>
-          <p className="text-sm text-indigo-500 dark:text-indigo-300">
+          <p className="text-sm text-slate-600 dark:text-slate-300">
             {formatResultsMeta(params)}
           </p>
         </div>

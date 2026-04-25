@@ -85,7 +85,7 @@ function FlightCard({ className, ...props }: React.ComponentProps<"div">) {
     <Card
       data-slot="flight-card"
       className={cn(
-        "relative overflow-hidden rounded-[2rem] border-indigo-200/80 bg-white/95 dark:border-indigo-800/80 dark:bg-indigo-950/90",
+        "relative overflow-hidden rounded-3xl border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900",
         className,
       )}
       {...props}
