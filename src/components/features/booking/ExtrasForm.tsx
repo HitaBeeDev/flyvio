@@ -131,12 +131,12 @@ export function ExtrasForm({ flight, passengers }: ExtrasFormProps) {
         <Button
           type="button"
           variant="outline"
-          className="rounded-2xl"
+          className="rounded-lg"
           onClick={() => setStep(0)}
         >
           {BOOKING_COPY.extras.backLabel}
         </Button>
-        <Button type="submit" className="rounded-2xl">
+        <Button type="submit" className="rounded-lg">
           {BOOKING_COPY.extras.reviewLabel}
         </Button>
       </div>

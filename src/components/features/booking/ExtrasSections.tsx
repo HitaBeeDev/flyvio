@@ -23,31 +23,33 @@ export function BaggageSection({
   onToggle,
 }: BaggageSectionProps) {
   return (
-    <section className="rounded-[1.8rem] border border-indigo-200/80 bg-white/85 p-5 dark:border-indigo-800/80 dark:bg-indigo-950/75">
-      <div className="mb-5 flex items-center gap-3">
-        <Luggage className="size-5 text-accent" />
+    <section className="rounded-xl border border-indigo-200 bg-white p-5 dark:border-indigo-800 dark:bg-indigo-950">
+      <div className="mb-4 flex items-center gap-3">
+        <div className="flex size-9 items-center justify-center rounded-lg bg-indigo-100 text-accent dark:bg-indigo-900">
+          <Luggage className="size-4" />
+        </div>
         <div>
-          <p className="text-lg font-semibold text-indigo-950 dark:text-indigo-50">
+          <p className="text-base font-semibold text-indigo-950 dark:text-indigo-50">
             {BOOKING_COPY.extras.baggageTitle}
           </p>
-          <p className="text-sm text-indigo-500 dark:text-indigo-300">
+          <p className="text-xs text-indigo-500 dark:text-indigo-400">
             {BOOKING_COPY.extras.baggageDescription}
           </p>
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         {passengers.map((passenger) => (
           <label
             key={passenger.key}
-            className="flex items-center justify-between gap-4 rounded-[1.2rem] border border-indigo-200/80 px-4 py-3 dark:border-indigo-800/80"
+            className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-indigo-100 px-4 py-3 transition-colors hover:border-indigo-300 dark:border-indigo-800 dark:hover:border-indigo-600"
           >
             <div>
-              <p className="font-medium text-indigo-950 dark:text-indigo-50">
+              <p className="text-sm font-medium text-indigo-950 dark:text-indigo-50">
                 {passenger.label}
               </p>
-              <p className="text-sm text-indigo-500 dark:text-indigo-300">
-                Add 23kg bag - ${EXTRA_BAGGAGE_PRICE}
+              <p className="text-xs text-indigo-400 dark:text-indigo-500">
+                {BOOKING_COPY.extras.baggageLineItem}
               </p>
             </div>
             <Checkbox
@@ -86,7 +88,7 @@ function PassengerSeatGrid({
 >) {
   return (
     <div className="space-y-3">
-      <p className="text-sm font-medium text-indigo-700 dark:text-indigo-200">
+      <p className="text-xs font-medium text-indigo-500 dark:text-indigo-400">
         {passenger.label}
       </p>
       <div className="overflow-x-auto">
@@ -152,14 +154,16 @@ export function SeatSelectionSection({
   onToggleSeat,
 }: SeatSelectionSectionProps) {
   return (
-    <section className="rounded-[1.8rem] border border-indigo-200/80 bg-white/85 p-5 dark:border-indigo-800/80 dark:bg-indigo-950/75">
-      <div className="mb-5 flex items-center gap-3">
-        <Sofa className="size-5 text-accent" />
+    <section className="rounded-xl border border-indigo-200 bg-white p-5 dark:border-indigo-800 dark:bg-indigo-950">
+      <div className="mb-4 flex items-center gap-3">
+        <div className="flex size-9 items-center justify-center rounded-lg bg-indigo-100 text-accent dark:bg-indigo-900">
+          <Sofa className="size-4" />
+        </div>
         <div>
-          <p className="text-lg font-semibold text-indigo-950 dark:text-indigo-50">
+          <p className="text-base font-semibold text-indigo-950 dark:text-indigo-50">
             {segmentLabel} {BOOKING_COPY.extras.seatSelectionSuffix}
           </p>
-          <p className="text-sm text-indigo-500 dark:text-indigo-300">
+          <p className="text-xs text-indigo-500 dark:text-indigo-400">
             {departureIata} to {arrivalIata}
           </p>
         </div>
