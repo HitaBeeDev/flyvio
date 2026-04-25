@@ -3,14 +3,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import { SearchWidget } from "@/components/features/search/SearchWidget";
 import { DestinationCard } from "@/components/features/explore/DestinationCard";
 import { AppShell } from "@/components/layout/AppShell";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDestinations } from "@/hooks/useDestinations";
 import { slideUp, staggerContainer, ZERO_DURATION } from "@/lib/motion";
 
 function DestinationCardSkeleton() {
   return (
-    <div className="min-w-[18.5rem] overflow-hidden rounded-[1.9rem] border border-indigo-200/80 bg-white/90 shadow-[0_18px_50px_rgba(30,27,75,0.08)] dark:border-indigo-800/80 dark:bg-indigo-950/80 md:min-w-0">
+    <div className="min-w-[18.5rem] overflow-hidden rounded-xl border border-indigo-200 bg-white dark:border-indigo-800 dark:bg-indigo-950 md:min-w-0">
       <Skeleton className="aspect-[16/9] w-full rounded-none" />
       <div className="space-y-3 p-5">
         <div className="flex items-start justify-between gap-4">
@@ -37,7 +36,7 @@ export function HomePage() {
   return (
     <AppShell>
       <div>
-        <section className="flex items-center justify-center py-8 sm:py-12">
+        <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -46,15 +45,15 @@ export function HomePage() {
             className="mx-auto flex w-full max-w-5xl flex-col items-center text-center"
           >
             <motion.div variants={slideUp} transition={transition}>
-              <Badge className="border-indigo-200 bg-indigo-100 px-3 py-1 text-indigo-700 hover:bg-indigo-100 dark:border-indigo-700 dark:bg-indigo-900 dark:text-indigo-200 dark:hover:bg-indigo-900">
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
                 Flyvio
-              </Badge>
+              </p>
             </motion.div>
 
             <motion.h1
               variants={slideUp}
               transition={transition}
-              className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-indigo-950 sm:text-5xl md:text-6xl dark:text-indigo-50"
+              className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-indigo-950 sm:text-5xl md:text-6xl dark:text-indigo-50"
             >
               Find your next flight
             </motion.h1>
@@ -62,7 +61,7 @@ export function HomePage() {
             <motion.p
               variants={slideUp}
               transition={transition}
-              className="mt-4 max-w-2xl text-base leading-7 text-indigo-700 dark:text-indigo-200 sm:text-lg"
+              className="mt-5 max-w-xl text-xs text-indigo-400 dark:text-indigo-500"
             >
               Search hundreds of routes. No fees. No noise.
             </motion.p>
@@ -80,10 +79,10 @@ export function HomePage() {
           <section className="space-y-4 pb-8">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.28em] text-indigo-600 dark:text-indigo-300">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-accent">
                   Explore
                 </p>
-                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">
                   Popular destinations
                 </h2>
               </div>

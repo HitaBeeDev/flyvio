@@ -125,7 +125,7 @@ export function DatesField({
 }) {
   return (
     <div className="space-y-2">
-      <label className="block text-left text-sm font-medium text-indigo-900 dark:text-indigo-100">
+      <label className="block text-left text-xs font-medium text-indigo-500 dark:text-indigo-400">
         {SEARCH_WIDGET_COPY.labels.dates}
       </label>
       <DateRangePicker
@@ -158,7 +158,7 @@ export function TravelersField({
 }: SharedProps & { cabinClass: SearchFormValues["cabinClass"] }) {
   return (
     <div className="space-y-2">
-      <label className="block text-left text-sm font-medium text-indigo-900 dark:text-indigo-100">
+      <label className="block text-left text-xs font-medium text-indigo-500 dark:text-indigo-400">
         {SEARCH_WIDGET_COPY.labels.travelers}
       </label>
       <Controller
