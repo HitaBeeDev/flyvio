@@ -18,7 +18,7 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
     <motion.div variants={cardItem}>
       <BaseFlightCard
         className={cn(
-          "gap-0 rounded-2xl border-slate-200 bg-white py-0 shadow-sm shadow-slate-950/[0.03] transition duration-200 hover:border-slate-300 hover:shadow-md hover:shadow-slate-950/[0.05] dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700",
+          "gap-0 rounded-xl border-indigo-200 bg-white py-0 transition duration-200 hover:border-indigo-300 dark:border-indigo-800 dark:bg-indigo-950 dark:hover:border-indigo-700",
           className,
         )}
       >
@@ -29,18 +29,18 @@ export function FlightCard({ flight, onSelect, className }: FlightCardProps) {
             <ItineraryRow label="Outbound" segments={flight.outbound} />
             {flight.isRoundTrip && flight.inbound ? (
               <>
-                <Separator className="bg-slate-100 dark:bg-slate-800" />
+                <Separator className="bg-indigo-100 dark:bg-indigo-800" />
                 <ItineraryRow label="Inbound" segments={flight.inbound} />
               </>
             ) : null}
           </div>
 
-          <div className="flex items-center justify-between gap-4 border-t border-slate-100 pt-4 lg:flex-col lg:items-end lg:justify-between lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0 dark:border-slate-800">
+          <div className="flex items-center justify-between gap-4 border-t border-indigo-100 pt-4 lg:flex-col lg:items-end lg:justify-between lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0 dark:border-indigo-800">
             <div className="text-right">
-              <p className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-slate-50">
+              <p className="text-2xl font-semibold tracking-normal text-indigo-950 dark:text-indigo-50">
                 €{flight.price}
               </p>
-              <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-slate-400">
+              <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-indigo-400">
                 per traveler
               </p>
             </div>

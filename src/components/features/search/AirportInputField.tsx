@@ -37,7 +37,7 @@ export function AirportInputField({
   return (
     <div
       className={cn(
-        "flex h-12 items-center gap-3 rounded-2xl border bg-white px-4 shadow-xs transition-[border-color,box-shadow,background-color] focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-500/15 dark:bg-indigo-950",
+        "flex h-12 items-center gap-3 rounded-lg border bg-white px-4 shadow-xs transition-[border-color,box-shadow,background-color] focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-500/15 dark:bg-indigo-950",
         error ? "border-rose-500 ring-4 ring-rose-500/10" : "border-border/80",
       )}
     >

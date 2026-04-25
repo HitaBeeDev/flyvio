@@ -19,7 +19,7 @@ export function AirlineMark({
   const [imageFailed, setImageFailed] = useState(false);
 
   return (
-    <div className="flex size-10 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-[11px] font-semibold text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+    <div className="flex size-10 items-center justify-center overflow-hidden rounded-xl border border-indigo-200 bg-indigo-50 text-[11px] font-semibold text-indigo-500 dark:border-indigo-800 dark:bg-indigo-900 dark:text-indigo-300">
       {!imageFailed ? (
         <img
           src={logoUrl}
@@ -46,10 +46,10 @@ export function FlightCardHeader({ flight }: { flight: Flight }) {
         logoUrl={flight.airline.logoUrl}
       />
       <div className="min-w-0 space-y-2">
-        <p className="truncate text-sm font-semibold leading-5 text-slate-950 dark:text-slate-50">
+        <p className="truncate text-sm font-semibold leading-5 text-indigo-950 dark:text-indigo-50">
           {flight.airline.name}
         </p>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-indigo-500 dark:text-indigo-400">
           <span>{flight.cabinClass}</span>
           <span className="inline-flex items-center gap-1.5">
             <Luggage className="size-3.5" />
@@ -79,25 +79,25 @@ export function ItineraryRow({
 
   return (
     <div className="grid gap-2 md:grid-cols-[70px_minmax(0,1fr)] md:items-center">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo-400 dark:text-indigo-500">
         {label}
       </div>
       <div className="grid grid-cols-[58px_minmax(0,1fr)_58px] items-center gap-3 sm:grid-cols-[64px_minmax(96px,1fr)_64px]">
         <div className="min-w-0">
-          <p className="font-mono text-base font-semibold leading-none text-slate-950 dark:text-slate-50 sm:text-lg">
+          <p className="font-mono text-base font-semibold leading-none text-indigo-950 dark:text-indigo-50 sm:text-lg">
             {timeFormatter.format(new Date(departure.departureTime))}
           </p>
-          <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-xs font-medium text-indigo-500 dark:text-indigo-400">
             {departure.departureAirport.iata}
           </p>
         </div>
         <div className="min-w-0 space-y-2">
           <div className="flex items-center gap-3">
-            <span className="min-w-12 text-xs font-medium leading-tight text-slate-500 dark:text-slate-400">
+            <span className="min-w-12 text-xs font-medium leading-tight text-indigo-500 dark:text-indigo-400">
               {formatDuration(getJourneyDuration(segments))}
             </span>
-            <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
-            <ArrowRight className="size-4 text-slate-400" />
+            <div className="h-px flex-1 bg-indigo-200 dark:bg-indigo-800" />
+            <ArrowRight className="size-4 text-indigo-400" />
           </div>
           <Badge
             variant={stopBadge.variant}
@@ -107,10 +107,10 @@ export function ItineraryRow({
           </Badge>
         </div>
         <div className="min-w-0 md:text-right">
-          <p className="font-mono text-base font-semibold leading-none text-slate-950 dark:text-slate-50 sm:text-lg">
+          <p className="font-mono text-base font-semibold leading-none text-indigo-950 dark:text-indigo-50 sm:text-lg">
             {timeFormatter.format(new Date(arrival.arrivalTime))}
           </p>
-          <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-xs font-medium text-indigo-500 dark:text-indigo-400">
             {arrival.arrivalAirport.iata}
           </p>
         </div>

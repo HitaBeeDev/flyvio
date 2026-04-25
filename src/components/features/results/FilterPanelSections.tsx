@@ -19,7 +19,7 @@ type FilterSectionProps = PropsWithChildren<{ title: string }>;
 export function FilterSection({ title, children }: FilterSectionProps) {
   return (
     <section className="space-y-4">
-      <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+      <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-indigo-400 dark:text-indigo-500">
         {title}
       </h3>
       {children}
@@ -31,10 +31,10 @@ export function FilterPanelHeader({ onReset }: { onReset: () => void }) {
   return (
     <div className="flex items-center justify-between gap-4">
       <div>
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-indigo-400 dark:text-indigo-500">
           {FILTER_PANEL_COPY.eyebrow}
         </p>
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-1 text-xs text-indigo-400 dark:text-indigo-500">
           {FILTER_PANEL_COPY.description}
         </p>
       </div>
@@ -43,7 +43,7 @@ export function FilterPanelHeader({ onReset }: { onReset: () => void }) {
         onClick={onReset}
         aria-label={FILTER_PANEL_COPY.resetLabel}
         title={FILTER_PANEL_COPY.resetLabel}
-        className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-slate-900 dark:hover:text-slate-50"
+        className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200 bg-white text-indigo-400 transition hover:border-indigo-300 hover:text-indigo-700 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-500 dark:hover:border-indigo-700 dark:hover:text-indigo-300"
       >
         <RotateCcw className="size-4" />
       </button>
@@ -72,7 +72,7 @@ export function RangeFilterSection({
 }: RangeFilterSectionProps) {
   return (
     <FilterSection title={title}>
-      <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-950 dark:bg-slate-900 dark:text-slate-100">
+      <div className="rounded-lg bg-indigo-50 px-4 py-2.5 text-sm font-medium text-indigo-950 dark:bg-indigo-900 dark:text-indigo-100">
         {valueLabel}
       </div>
       <Slider
@@ -99,7 +99,7 @@ export function StopsFilterSection({
         {STOP_OPTIONS.map((option) => (
           <label
             key={option.key}
-            className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200"
+            className="flex items-center justify-between gap-3 rounded-lg border border-indigo-100 bg-white px-3 py-2.5 text-sm text-indigo-700 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-200"
           >
             <span>{option.label}</span>
             <Checkbox
@@ -141,10 +141,10 @@ export function DepartureTimeFilterSection({
                 })
               }
               className={cn(
-                "rounded-xl border px-3 py-3 text-left text-sm transition",
+                "rounded-lg border px-3 py-2.5 text-left text-sm transition",
                 active
-                  ? "border-slate-950 bg-slate-950 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-slate-950"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900",
+                  ? "border-accent bg-accent text-white"
+                  : "border-indigo-100 bg-white text-indigo-600 hover:border-indigo-300 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 dark:hover:bg-indigo-900",
               )}
             >
               {window.label}
@@ -167,12 +167,12 @@ export function AirlinesFilterSection({
 }) {
   return (
     <FilterSection title={FILTER_PANEL_COPY.sections.airlines}>
-      <ScrollArea className="h-52 rounded-xl border border-slate-200 bg-white px-3 dark:border-slate-800 dark:bg-slate-950">
+      <ScrollArea className="h-52 rounded-lg border border-indigo-100 bg-white px-3 dark:border-indigo-800 dark:bg-indigo-950">
         <div className="space-y-2 py-3">
           {airlines.map((airline) => (
             <label
               key={airline.code}
-              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900"
+              className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-indigo-700 hover:bg-indigo-50 dark:text-indigo-200 dark:hover:bg-indigo-900"
             >
               <div className="flex items-center gap-3">
                 <Checkbox
@@ -190,7 +190,7 @@ export function AirlinesFilterSection({
                 />
                 <span>{airline.name}</span>
               </div>
-              <span className="text-slate-400">{airline.count}</span>
+              <span className="text-indigo-400 dark:text-indigo-500">{airline.count}</span>
             </label>
           ))}
         </div>

@@ -141,7 +141,7 @@ export function SearchResultsSection({
                         count: visibleCount + 20,
                       })
                     }
-                  className="rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-950 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200"
+                  className="rounded-lg border border-indigo-200 bg-white px-5 py-2.5 text-sm font-medium text-indigo-600 transition hover:border-indigo-300 hover:text-indigo-900 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-300"
                   >
                     {SEARCH_PAGE_COPY.loadMoreLabel}
                   </button>

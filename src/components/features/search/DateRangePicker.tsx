@@ -44,7 +44,7 @@ export function DateRangePicker({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="h-12 w-full justify-between rounded-2xl px-4"
+          className="h-12 w-full justify-between rounded-lg px-4"
         >
           <span className="truncate">
             {formatWidgetDateLabel(departureDate, returnDate, isRoundTrip)}
@@ -52,7 +52,7 @@ export function DateRangePicker({
           <CalendarDays className="size-4 opacity-60" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start" side="bottom" avoidCollisions={false} className="w-auto rounded-[1.5rem] border border-indigo-200/80 bg-white p-0 shadow-[0_24px_80px_rgba(30,27,75,0.16)] dark:border-indigo-800/80 dark:bg-indigo-950">
+      <PopoverContent align="start" side="bottom" avoidCollisions={false} className="w-auto rounded-xl border border-indigo-200 bg-white p-0 shadow-lg dark:border-indigo-800 dark:bg-indigo-950">
         {isRoundTrip ? (
           <Calendar
             mode="range"

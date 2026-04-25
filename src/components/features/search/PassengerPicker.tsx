@@ -98,7 +98,7 @@ export function PassengerPicker({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="h-12 w-full justify-between rounded-2xl px-4"
+          className="h-12 w-full justify-between rounded-lg px-4"
         >
           <span className="flex items-center gap-2 truncate">
             <Users className="size-4 text-indigo-400" />
