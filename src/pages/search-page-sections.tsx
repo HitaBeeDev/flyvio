@@ -81,7 +81,7 @@ export function SearchResultsSection({
         </div>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-28">
+          <div className="sticky top-4">
             <FilterPanel
               filters={filters}
               onFiltersChange={setFilters}

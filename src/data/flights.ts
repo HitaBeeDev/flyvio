@@ -620,6 +620,8 @@ function buildItinerary(
   } satisfies Flight;
 }
 
+const SESSION_SALT = performance.timeOrigin.toString(36);
+
 export function generateFlightsForRoute(
   origin: string | Airport,
   destination: string | Airport,
@@ -635,7 +637,7 @@ export function generateFlightsForRoute(
   }
 
   const seed = xmur3(
-    `${resolvedOrigin.iata}:${resolvedDestination.iata}:${date}:${cabin}:${isRoundTrip}`,
+    `${resolvedOrigin.iata}:${resolvedDestination.iata}:${date}:${cabin}:${isRoundTrip}:${SESSION_SALT}`,
   )();
   const random = mulberry32(seed);
   const stopPattern = [
