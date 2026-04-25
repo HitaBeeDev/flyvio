@@ -24,7 +24,7 @@ export function DestinationCard({ destination }: DestinationCardProps) {
         });
         navigate(`/search?destination=${destination.iataCode}`);
       }}
-      className="group relative overflow-hidden rounded-[1.9rem] border border-indigo-200/80 text-left"
+      className="group relative w-[18.5rem] shrink-0 overflow-hidden rounded-3xl border border-indigo-200/80 text-left md:w-auto md:shrink"
     >
       <div className="aspect-[16/9] overflow-hidden bg-indigo-200 dark:bg-indigo-800">
         <img

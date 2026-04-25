@@ -123,7 +123,7 @@ export function SearchWidget({
   };
 
   return (
-    <Card className="gap-0 overflow-hidden rounded-3xl border-slate-200 bg-white p-0 shadow-none backdrop-blur-none dark:border-slate-800 dark:bg-slate-900">
+    <Card className="gap-0 overflow-hidden rounded-3xl border-indigo-200 bg-white p-0 shadow-[0_20px_60px_rgba(30,27,75,0.08)] backdrop-blur-none dark:border-indigo-800 dark:bg-indigo-900">
       {variant === "compact" ? (
         <button
           type="button"
@@ -166,7 +166,7 @@ export function SearchWidget({
                 type="submit"
                 size="lg"
                 loading={isSubmitting}
-                className="h-12 w-full rounded-xl shadow-none lg:w-44"
+                className="h-12 w-full rounded-2xl shadow-none lg:w-44"
               >
                 <Search className="size-4" />
                 {SEARCH_WIDGET_COPY.searchButton}

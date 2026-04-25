@@ -36,17 +36,17 @@ export function HomePage() {
 
   return (
     <AppShell>
-      <div className="-mt-8">
-        <section className="flex items-center justify-center py-16 sm:py-20">
+      <div>
+        <section className="flex items-center justify-center py-8 sm:py-12">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
             transition={transition}
-            className="mx-auto flex w-full max-w-4xl flex-col items-center text-center"
+            className="mx-auto flex w-full max-w-5xl flex-col items-center text-center"
           >
             <motion.div variants={slideUp} transition={transition}>
-              <Badge className="border-slate-200 bg-slate-50 px-3 py-1 text-indigo-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-200 dark:hover:bg-slate-800">
+              <Badge className="border-indigo-200 bg-indigo-100 px-3 py-1 text-indigo-700 hover:bg-indigo-100 dark:border-indigo-700 dark:bg-indigo-900 dark:text-indigo-200 dark:hover:bg-indigo-900">
                 Flyvio
               </Badge>
             </motion.div>
@@ -54,7 +54,7 @@ export function HomePage() {
             <motion.h1
               variants={slideUp}
               transition={transition}
-              className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl md:text-6xl dark:text-white"
+              className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-indigo-950 sm:text-5xl md:text-6xl dark:text-indigo-50"
             >
               Find your next flight
             </motion.h1>
@@ -62,14 +62,14 @@ export function HomePage() {
             <motion.p
               variants={slideUp}
               transition={transition}
-              className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg"
+              className="mt-4 max-w-2xl text-base leading-7 text-indigo-700 dark:text-indigo-200 sm:text-lg"
             >
               Search hundreds of routes. No fees. No noise.
             </motion.p>
             <motion.div
               variants={slideUp}
               transition={transition}
-              className="mt-9 w-full max-w-4xl"
+              className="mt-8 w-full max-w-5xl"
             >
               <SearchWidget />
             </motion.div>
@@ -77,10 +77,10 @@ export function HomePage() {
         </section>
 
         {!destinationsQuery.isError && (
-          <section className="space-y-4 -mt-3">
+          <section className="space-y-4 pb-8">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">
+                <p className="text-xs font-medium uppercase tracking-[0.28em] text-indigo-600 dark:text-indigo-300">
                   Explore
                 </p>
                 <h2 className="mt-2 text-3xl font-semibold tracking-tight text-indigo-950 dark:text-indigo-50">

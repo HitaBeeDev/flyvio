@@ -36,7 +36,7 @@ export function AppShell({ children }: AppShellProps) {
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-indigo-900 transition-colors dark:bg-slate-950 dark:text-indigo-50">
+    <div className="min-h-screen bg-indigo-50 text-indigo-950 transition-colors dark:bg-indigo-950 dark:text-indigo-50">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-indigo-950 focus:shadow-lg focus:ring-2 focus:ring-indigo-500"
@@ -44,7 +44,7 @@ export function AppShell({ children }: AppShellProps) {
         Skip to main content
       </a>
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-4 sm:px-6 lg:px-8">
-        <main id="main-content" className="flex-1 py-6">
+        <main id="main-content" className="flex-1 py-4 sm:py-6">
           {children}
         </main>
       </div>
