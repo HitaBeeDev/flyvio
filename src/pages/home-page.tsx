@@ -36,7 +36,7 @@ export function HomePage() {
 
   return (
     <AppShell>
-      <div className="space-y-8">
+      <div className="space-y-14">
         <section
           className="pb-5 pt-5 relative flex min-h-[calc(100vh-9rem)] items-center justify-center overflow-hidden rounded-[2.4rem] 
         border border-indigo-200/70 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_transparent_34%),linear-gradient(135deg,_rgba(255,255,255,0.95)_0%,_rgba(248,248,255,0.92)_52%,_rgba(238,242,255,0.92)_100%)] shadow-[0_40px_140px_rgba(30,27,75,0.12)] dark:border-indigo-800/60 dark:bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.22),_transparent_28%),linear-gradient(135deg,_rgba(30,27,75,0.98)_0%,_rgba(49,46,129,0.96)_56%,_rgba(30,27,75,0.98)_100%)] sm:px-10"
@@ -110,7 +110,7 @@ export function HomePage() {
         </section>
 
         {!destinationsQuery.isError && (
-          <section className="space-y-5">
+          <section className="space-y-5 mt-5">
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">

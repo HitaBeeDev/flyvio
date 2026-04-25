@@ -32,8 +32,7 @@ const curatedDestinations = [
   },
   {
     iataCode: "JFK",
-    imageUrl:
-      "https://images.unsplash.com/photo-1496588152823-e5c8d4c0a0de?auto=format&fit=crop&w=1400&q=80",
+    imageUrl: "/newyork.jpg",
     startingPrice: 429,
     tagline: "Skyline drama and impossible restaurant density.",
   },
