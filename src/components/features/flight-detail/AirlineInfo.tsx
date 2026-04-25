@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BriefcaseBusiness, CookingPot, Luggage, ShieldCheck } from "lucide-react";
 import type { Flight } from "@/types";
-import { getDeterministicPerformance, getFleetType, getMealLabel } from "./flight-detail-utils";
+import { getFleetType, getMealLabel } from "./flight-detail-utils";
 
 function AirlineMark({ name, logoUrl }: { name: string; logoUrl: string }) {
   const [imageFailed, setImageFailed] = useState(false);

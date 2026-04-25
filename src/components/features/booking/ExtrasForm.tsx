@@ -124,7 +124,6 @@ export function ExtrasForm({ flight, passengers }: ExtrasFormProps) {
         passengers.map((passenger) => (
           <SeatSelectionSection
             key={`${segment.key}-${passenger.key}`}
-            flight={flight}
             passenger={passenger}
             segmentKey={segment.key}
             segmentLabel={segment.label}
