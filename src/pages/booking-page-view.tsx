@@ -1,4 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { BOOKING_COPY } from "@/lib/constants";
 import { BookingReview } from "@/components/features/booking/BookingReview";
 import { ExtrasForm } from "@/components/features/booking/ExtrasForm";
@@ -29,6 +31,36 @@ export function BookingPageView({
 
   return (
     <div className="space-y-8 pb-24 lg:pb-0">
+      <nav aria-label="Breadcrumb">
+        <ol className="flex items-center gap-1 text-xs text-indigo-400 dark:text-indigo-500">
+          <li>
+            <Link
+              to="/"
+              className="transition-colors hover:text-indigo-600 dark:hover:text-indigo-300"
+            >
+              Home
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight className="size-3 opacity-50" />
+          </li>
+          <li>
+            <Link
+              to="/search"
+              className="transition-colors hover:text-indigo-600 dark:hover:text-indigo-300"
+            >
+              Search results
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight className="size-3 opacity-50" />
+          </li>
+          <li className="font-medium text-indigo-700 dark:text-indigo-300" aria-current="page">
+            Booking
+          </li>
+        </ol>
+      </nav>
+
       <section>
         <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-accent">
           {BOOKING_COPY.pageEyebrow}
