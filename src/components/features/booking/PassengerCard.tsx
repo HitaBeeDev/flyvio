@@ -52,6 +52,7 @@ export function PassengerCard({
           render={({ field }) => (
             <Input
               label={BOOKING_COPY.passengers.firstName}
+              placeholder={BOOKING_COPY.passengers.firstNamePlaceholder}
               value={field.value}
               onChange={field.onChange}
               error={passengerErrors?.firstName?.message}
@@ -64,6 +65,7 @@ export function PassengerCard({
           render={({ field }) => (
             <Input
               label={BOOKING_COPY.passengers.lastName}
+              placeholder={BOOKING_COPY.passengers.lastNamePlaceholder}
               value={field.value}
               onChange={field.onChange}
               error={passengerErrors?.lastName?.message}
@@ -89,6 +91,7 @@ export function PassengerCard({
           render={({ field }) => (
             <Input
               label={BOOKING_COPY.passengers.passportNumber}
+              placeholder={BOOKING_COPY.passengers.passportNumberPlaceholder}
               value={field.value}
               onChange={(event) =>
                 field.onChange(event.target.value.toUpperCase())
