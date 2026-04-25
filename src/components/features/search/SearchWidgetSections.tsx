@@ -51,25 +51,19 @@ export function TripToggle({
 }
 
 type RouteFieldsProps = SharedProps & {
-  isRoundTrip: boolean;
   origin: string;
   destination: string;
-  departureDate: string;
-  returnDate?: string;
 };
 
 export function RouteFields({
   control,
   errors,
-  isRoundTrip,
   origin,
   destination,
-  departureDate,
-  returnDate,
   setValue,
 }: RouteFieldsProps) {
   return (
-    <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr_1.1fr]">
+    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
       <Controller
         control={control}
         name="origin"
@@ -114,30 +108,44 @@ export function RouteFields({
           />
         )}
       />
+    </div>
+  );
+}
 
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-indigo-700 dark:text-indigo-200">
-          {SEARCH_WIDGET_COPY.labels.dates}
-        </label>
-        <DateRangePicker
-          departureDate={departureDate}
-          returnDate={returnDate}
-          isRoundTrip={isRoundTrip}
-          onChange={(nextDates) => {
-            setValue("departureDate", nextDates.departureDate, {
-              shouldValidate: true,
-            });
-            setValue("returnDate", nextDates.returnDate, {
-              shouldValidate: true,
-            });
-          }}
-        />
-        {errors.departureDate?.message || errors.returnDate?.message ? (
-          <p className="text-sm text-rose-600 dark:text-rose-400">
-            {errors.departureDate?.message ?? errors.returnDate?.message}
-          </p>
-        ) : null}
-      </div>
+export function DatesField({
+  errors,
+  isRoundTrip,
+  departureDate,
+  returnDate,
+  setValue,
+}: Pick<SharedProps, "errors" | "setValue"> & {
+  isRoundTrip: boolean;
+  departureDate: string;
+  returnDate?: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <label className="block text-left text-sm font-medium text-indigo-700 dark:text-indigo-200">
+        {SEARCH_WIDGET_COPY.labels.dates}
+      </label>
+      <DateRangePicker
+        departureDate={departureDate}
+        returnDate={returnDate}
+        isRoundTrip={isRoundTrip}
+        onChange={(nextDates) => {
+          setValue("departureDate", nextDates.departureDate, {
+            shouldValidate: true,
+          });
+          setValue("returnDate", nextDates.returnDate, {
+            shouldValidate: true,
+          });
+        }}
+      />
+      {errors.departureDate?.message || errors.returnDate?.message ? (
+        <p className="text-sm text-rose-600 dark:text-rose-400">
+          {errors.departureDate?.message ?? errors.returnDate?.message}
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import {
 } from "react-hook-form";
 import type { SearchFormValues } from "./search-schema";
 import {
+  DatesField,
   RouteFields,
   TravelersField,
   TripToggle,
@@ -39,15 +40,19 @@ export function SearchWidgetFields({
       <RouteFields
         control={control}
         errors={errors}
-        isRoundTrip={isRoundTrip}
         origin={origin}
         destination={destination}
-        departureDate={departureDate}
-        returnDate={returnDate}
         setValue={setValue}
       />
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_auto]">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <DatesField
+          errors={errors}
+          isRoundTrip={isRoundTrip}
+          departureDate={departureDate}
+          returnDate={returnDate}
+          setValue={setValue}
+        />
         <TravelersField
           control={control}
           errors={errors}

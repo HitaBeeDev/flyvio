@@ -36,7 +36,7 @@ export function HomePage() {
 
   return (
     <AppShell>
-      <div className="space-y-12">
+      <div className="-mt-8">
         <section className="flex items-center justify-center py-16 sm:py-20">
           <motion.div
             variants={staggerContainer}
@@ -46,9 +46,7 @@ export function HomePage() {
             className="mx-auto flex w-full max-w-4xl flex-col items-center text-center"
           >
             <motion.div variants={slideUp} transition={transition}>
-              <Badge
-                className="border-slate-200 bg-slate-50 px-3 py-1 text-indigo-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-200 dark:hover:bg-slate-800"
-              >
+              <Badge className="border-slate-200 bg-slate-50 px-3 py-1 text-indigo-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-200 dark:hover:bg-slate-800">
                 Flyvio
               </Badge>
             </motion.div>
@@ -79,7 +77,7 @@ export function HomePage() {
         </section>
 
         {!destinationsQuery.isError && (
-          <section className="space-y-5">
+          <section className="space-y-4 -mt-3">
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">

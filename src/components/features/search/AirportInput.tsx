@@ -80,7 +80,7 @@ export function AirportInput({
     if (
       !open &&
       trimmedQuery.length > 0 &&
-      AIRPORT_INPUT_COPY.focusKeys.includes(event.key)
+      (AIRPORT_INPUT_COPY.focusKeys as readonly string[]).includes(event.key)
     ) {
       setOpen(true);
       return;
@@ -123,7 +123,7 @@ export function AirportInput({
     <div className="space-y-2">
       <label
         htmlFor={inputId}
-        className="block text-sm font-medium text-indigo-700 dark:text-indigo-200"
+        className="block text-left text-sm font-medium text-indigo-700 dark:text-indigo-200"
       >
         {label}
       </label>
