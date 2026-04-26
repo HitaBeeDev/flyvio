@@ -1,6 +1,7 @@
 # Flyvio
 
-A flight search and booking app where users can search any route, browse results, view flight details, and complete a full booking flow from start to confirmation.
+ A flight search and booking app built with React 19, TypeScript 6, Vite 8, Tailwind CSS v4, shadcn/ui, React Router, Zustand,
+  TanStack Query, React Hook Form, Zod, Framer Motion, and Lucide React.
 
 <p align="center">
   <img src="docs/assets/preview.png" alt="Flyvio app screenshot" width="800" />
