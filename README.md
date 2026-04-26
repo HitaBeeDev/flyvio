@@ -13,8 +13,9 @@
 
 | Metric | Score |
 |---|---|
-| Lighthouse Performance | 99 |
+| Performance | 99 |
 | Accessibility | 96 |
+| Best Practices | 100 |
 | SEO | 100 |
 
 ---
